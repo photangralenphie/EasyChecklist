@@ -7,19 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD423E1528F6DFB6009070B2 /* MyComponentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD423E1428F6DFB6009070B2 /* MyComponentData.swift */; };
+		DD7BCBFC28F0B56E004AD443 /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7BCBFB28F0B56E004AD443 /* AddListView.swift */; };
+		DD9553A428F55E5200D1A9E3 /* MyColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9553A328F55E5200D1A9E3 /* MyColorPicker.swift */; };
+		DD9553A628F55E7A00D1A9E3 /* MyIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9553A528F55E7A00D1A9E3 /* MyIconPicker.swift */; };
 		DDA743D828F0873500681693 /* EasyChecklistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D728F0873500681693 /* EasyChecklistApp.swift */; };
-		DDA743DA28F0873500681693 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D928F0873500681693 /* ContentView.swift */; };
+		DDA743DA28F0873500681693 /* ListListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D928F0873500681693 /* ListListView.swift */; };
 		DDA743DC28F0873900681693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA743DB28F0873900681693 /* Assets.xcassets */; };
 		DDA743E028F0873A00681693 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA743DF28F0873A00681693 /* Preview Assets.xcassets */; };
+		DDBCED6A28F21FD400F3B22C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCED6928F21FD400F3B22C /* SettingsView.swift */; };
+		DDBCED6C28F2202100F3B22C /* DisplaymodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCED6B28F2202100F3B22C /* DisplaymodeView.swift */; };
+		DDBCED7128F2259C00F3B22C /* ColorToHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCED7028F2259C00F3B22C /* ColorToHex.swift */; };
+		DDFA2F022B78D7460037FC6D /* CustomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F012B78D7460037FC6D /* CustomList.swift */; };
+		DDFA2F042B78ECF30037FC6D /* ListEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F032B78ECF20037FC6D /* ListEntry.swift */; };
+		DDFA2F062B78EEB80037FC6D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F052B78EEB80037FC6D /* ListView.swift */; };
+		DDFA2F082B7920370037FC6D /* ListEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F072B7920370037FC6D /* ListEntryView.swift */; };
+		DDFB759728F8A7920006ACAC /* EditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB759628F8A7920006ACAC /* EditListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD423E1428F6DFB6009070B2 /* MyComponentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyComponentData.swift; sourceTree = "<group>"; };
+		DD7BCBFB28F0B56E004AD443 /* AddListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
+		DD9553A328F55E5200D1A9E3 /* MyColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColorPicker.swift; sourceTree = "<group>"; };
+		DD9553A528F55E7A00D1A9E3 /* MyIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIconPicker.swift; sourceTree = "<group>"; };
 		DDA743D428F0873500681693 /* EasyChecklist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyChecklist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA743D728F0873500681693 /* EasyChecklistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyChecklistApp.swift; sourceTree = "<group>"; };
-		DDA743D928F0873500681693 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DDA743D928F0873500681693 /* ListListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListListView.swift; sourceTree = "<group>"; };
 		DDA743DB28F0873900681693 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDA743DD28F0873900681693 /* EasyChecklist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyChecklist.entitlements; sourceTree = "<group>"; };
 		DDA743DF28F0873A00681693 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DDBCED6928F21FD400F3B22C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DDBCED6B28F2202100F3B22C /* DisplaymodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaymodeView.swift; sourceTree = "<group>"; };
+		DDBCED7028F2259C00F3B22C /* ColorToHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToHex.swift; sourceTree = "<group>"; };
+		DDFA2F012B78D7460037FC6D /* CustomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomList.swift; sourceTree = "<group>"; };
+		DDFA2F032B78ECF20037FC6D /* ListEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntry.swift; sourceTree = "<group>"; };
+		DDFA2F052B78EEB80037FC6D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		DDFA2F072B7920370037FC6D /* ListEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntryView.swift; sourceTree = "<group>"; };
+		DDFB759628F8A7920006ACAC /* EditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +57,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD9553A728F55E8C00D1A9E3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DD9553A528F55E7A00D1A9E3 /* MyIconPicker.swift */,
+				DD9553A328F55E5200D1A9E3 /* MyColorPicker.swift */,
+				DD423E1428F6DFB6009070B2 /* MyComponentData.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		DDA743CB28F0873500681693 = {
 			isa = PBXGroup;
 			children = (
@@ -52,8 +86,16 @@
 		DDA743D628F0873500681693 /* EasyChecklist */ = {
 			isa = PBXGroup;
 			children = (
+				DDFA2F002B78D7290037FC6D /* Model */,
 				DDA743D728F0873500681693 /* EasyChecklistApp.swift */,
-				DDA743D928F0873500681693 /* ContentView.swift */,
+				DDA743D928F0873500681693 /* ListListView.swift */,
+				DDFA2F052B78EEB80037FC6D /* ListView.swift */,
+				DDFA2F072B7920370037FC6D /* ListEntryView.swift */,
+				DD7BCBFB28F0B56E004AD443 /* AddListView.swift */,
+				DDFB759628F8A7920006ACAC /* EditListView.swift */,
+				DDBCED6E28F2203E00F3B22C /* Settings */,
+				DD9553A728F55E8C00D1A9E3 /* Components */,
+				DDBCED6F28F2256C00F3B22C /* Extensions */,
 				DDA743DB28F0873900681693 /* Assets.xcassets */,
 				DDA743DD28F0873900681693 /* EasyChecklist.entitlements */,
 				DDA743DE28F0873A00681693 /* Preview Content */,
@@ -67,6 +109,32 @@
 				DDA743DF28F0873A00681693 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DDBCED6E28F2203E00F3B22C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DDBCED6928F21FD400F3B22C /* SettingsView.swift */,
+				DDBCED6B28F2202100F3B22C /* DisplaymodeView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DDBCED6F28F2256C00F3B22C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DDBCED7028F2259C00F3B22C /* ColorToHex.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DDFA2F002B78D7290037FC6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDFA2F012B78D7460037FC6D /* CustomList.swift */,
+				DDFA2F032B78ECF20037FC6D /* ListEntry.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +207,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDA743DA28F0873500681693 /* ContentView.swift in Sources */,
+				DD9553A628F55E7A00D1A9E3 /* MyIconPicker.swift in Sources */,
+				DDFA2F082B7920370037FC6D /* ListEntryView.swift in Sources */,
+				DDFA2F062B78EEB80037FC6D /* ListView.swift in Sources */,
+				DD9553A428F55E5200D1A9E3 /* MyColorPicker.swift in Sources */,
+				DDFA2F022B78D7460037FC6D /* CustomList.swift in Sources */,
+				DDBCED6C28F2202100F3B22C /* DisplaymodeView.swift in Sources */,
+				DDBCED6A28F21FD400F3B22C /* SettingsView.swift in Sources */,
+				DDA743DA28F0873500681693 /* ListListView.swift in Sources */,
+				DDFB759728F8A7920006ACAC /* EditListView.swift in Sources */,
 				DDA743D828F0873500681693 /* EasyChecklistApp.swift in Sources */,
+				DDFA2F042B78ECF30037FC6D /* ListEntry.swift in Sources */,
+				DDBCED7128F2259C00F3B22C /* ColorToHex.swift in Sources */,
+				DD423E1528F6DFB6009070B2 /* MyComponentData.swift in Sources */,
+				DD7BCBFC28F0B56E004AD443 /* AddListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +349,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -277,17 +358,19 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photangralenphie.EasyChecklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,6 +390,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -315,17 +399,19 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photangralenphie.EasyChecklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
