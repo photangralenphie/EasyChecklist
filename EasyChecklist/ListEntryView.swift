@@ -11,12 +11,12 @@ struct ListEntryView: View {
     
     let listEntry: ListEntry
     
-    @AppStorage("strikeDoneEntries") private var strikePrivateEntries: Bool = true
+    @AppStorage("strikeCheckedEntries") private var strikeCheckedEntries: Bool = true
     
     var body: some View {
         Label {
             Text(listEntry.name)
-                .strikethrough(listEntry.checked && strikePrivateEntries)
+                .strikethrough(listEntry.checked && strikeCheckedEntries)
         } icon: {
             Image(systemName: listEntry.checked ? "checkmark.circle" : "circle")
         }

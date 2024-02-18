@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "inlinecolorpicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/photangralenphie/InlineColorPicker",
+      "state" : {
+        "branch" : "main",
+        "revision" : "59bfaa37a22b9e1b60ab13689e3a30c9d84c2bfb"
+      }
+    }
+  ],
+  "version" : 2
+}

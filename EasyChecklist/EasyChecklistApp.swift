@@ -7,18 +7,20 @@
 
 import SwiftUI
 import SwiftData
+import InlineColorPicker
+import ColorSchemeSwitcher
 
 @main
 struct EasyChecklistApp: App {
     
-    //Keeps CoreData Loaded for all views to use (initialize "DataController")
-    //@StateObject private var dataController = DataController()
+    @AppStorage("accentColorID") private var accentColorID: Int = 0
+    @AppStorage("colorScheme") private var colorScheme: PreferredColorScheme = .systemDefault
     
     var body: some Scene {
         WindowGroup {
-            ListListView()
-            // injects CoreData into environment
-            //.environment(\.managedObjectContext, dataController.container.viewContext)
+            ContentView()
+                .tint(GetColorByID(accentColorID))
+                .preferredColorScheme(colorScheme.mode())
         }
         .modelContainer(for: CustomList.self)
     }

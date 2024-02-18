@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
+import InlineColorPicker
 
 struct EditListView: View {
     @Environment(\.dismiss) var dismiss
-    
-    // List attributes for creation
-    let componentsData = MyComponentData()
     
     let list: CustomList
     
@@ -24,23 +22,17 @@ struct EditListView: View {
     var body: some View {
         NavigationStack{
             Form {
-                Section {
+                Section("Name") {
                     TextField("Name", text: $newListName)
                         .focused($listNameFocused)
-                } header: {
-                    Text("Name")
                 }
                 
-                Section {
-                    MyColorPicker(newColor: $newListColor)
-                } header: {
-                    Text("Accent Color")
+                Section("Accent Color") {
+                    InlineColorPicker(colorIndex: $newListColor, pickerStyle: .slim)
                 }
                 
-                Section {
-                    MyIconPicker(newIcon: $newListIcon, newColor: $newListColor)
-                } header: {
-                    Text("Icon")
+                Section("Icon") {
+                    IconPicker(newIcon: $newListIcon)
                 }
             }
             .navigationTitle("Add New List")
@@ -54,20 +46,11 @@ struct EditListView: View {
                 }
             }
                 
-            Button {
-                if (list.name != newListName || list.color != newListColor || list.image != newListIcon) {
-                    list.name = newListName
-                    list.color = newListColor
-                    list.image = newListIcon
-                    list.editDate = Date.now
-                    dismiss()
-                }
-            } label: {
-                Label("Save Changes", systemImage: componentsData.availibleIcons[newListIcon])
+            Button(action: editList) {
+                Label("Save Changes", systemImage: availibleIcons[newListIcon])
             }
             .buttonStyle(.bordered)
             .controlSize(.large)
-            .tint(Color(hex: componentsData.availibleColors[newListColor]))
             .padding(.bottom, 5)
             .disabled(newListName.isEmpty)
         }
@@ -76,6 +59,15 @@ struct EditListView: View {
             newListIcon = list.image
             newListColor = list.color
         }
-        .accentColor(Color(hex: componentsData.availibleColors[newListColor]))
+    }
+    
+    func editList() {
+        if (list.name != newListName || list.color != newListColor || list.image != newListIcon) {
+            list.name = newListName
+            list.color = newListColor
+            list.image = newListIcon
+            list.editDate = Date.now
+            dismiss()
+        }
     }
 }

@@ -7,92 +7,61 @@
 
 import SwiftUI
 import SwiftData
+import InlineColorPicker
 
 struct ListListView: View {
     
-    //@Environment(\.managedObjectContext) var moc
+    @Query private var lists: [CustomList]
     @Environment(\.modelContext) private var context
     
-    @AppStorage("accentColor") private var accentColor: String = "147efb"
-    let componentsData = MyComponentData()
-    
-    @Query(sort: \CustomList.name) private var lists: [CustomList]
-    @AppStorage("sortListsBy") private var sortListsBy: Int = 0   // 0 = alphabetial, 1 = newest, 2 = recently edited
-    
-    //For Sheet to create new List to edit List and to open Settings
-    @State private var newCustomList: Bool = false
+    @Binding private var selectedList: CustomList?
     @State private var editCustomList: Bool = false
-    @State private var showSettings: Bool = false
     
-    //Binding Selection of List to show in detail view
-    @State private var selectedList: CustomList?
+    
+    init(sortOrder: ListSort, isReverseSort: Bool, selectedList: Binding<CustomList?>) {
+        let sortDescriptors: [SortDescriptor<CustomList>] = switch sortOrder {
+        case .alphabetically:
+            [SortDescriptor(\CustomList.name, order: !isReverseSort ? .forward : .reverse)]
+        case .creationDate:
+            [SortDescriptor(\CustomList.creationDate, order: isReverseSort ? .forward : .reverse)]
+        case .modified:
+            [SortDescriptor(\CustomList.editDate, order: isReverseSort ? .forward : .reverse)]
+        }
+        
+        _lists = Query(sort: sortDescriptors)
+        _selectedList = selectedList
+    }
     
     var body: some View {
-        NavigationSplitView {
-            List(selection: $selectedList){
-                ForEach(lists) { list in
-                    NavigationLink(value: list) {
-                        Label {
-                            Text(list.name)
-                        } icon: {
-                            Image(systemName: componentsData.availibleIcons[list.image])
-                                .foregroundColor(Color(hex: componentsData.availibleColors[list.color]))
-                        }
-                    }
-                    .sheet(isPresented: $editCustomList) { EditListView(list: list) }
-                    .swipeActions(edge: .leading) {
-                        Button("Edit") { editCustomList.toggle() }
-                    }
-                    .contextMenu {
-                        Button {
-                            editCustomList.toggle()
-                        } label: {
-                            Label("Edit", systemImage: "slider.horizontal.3")
-                        }
-                        
-                        Button(role: .destructive){
-                            deleteListContextMenu(list)
-                        } label: {
-                            Label("Delete List", systemImage: "trash")
-                        }
+        List(selection: $selectedList){
+            ForEach(lists) { list in
+                NavigationLink(value: list) {
+                    Label {
+                        Text(list.name)
+                    } icon: {
+                        Image(systemName: availibleIcons[list.image])
+                            .foregroundStyle(GetColorByID(list.color))
                     }
                 }
-                .onDelete(perform: deleteList)
-            }
-            .toolbar{
-                ToolbarItemGroup(placement: .navigationBarLeading) {
+                .sheet(isPresented: $editCustomList) { EditListView(list: list) }
+                .swipeActions(edge: .leading) {
+                    Button("Edit") { editCustomList.toggle() }
+                }
+                .contextMenu {
                     Button {
-                        showSettings.toggle()
+                        editCustomList.toggle()
                     } label: {
-                        Image(systemName: "gear")
-                    }
-                }
-                
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    if !lists.isEmpty {
-                        EditButton()
+                        Label("Edit", systemImage: "slider.horizontal.3")
                     }
                     
-                    Button {
-                        newCustomList.toggle()
+                    Button(role: .destructive){
+                        deleteListContextMenu(list)
                     } label: {
-                        Image(systemName: "plus")
+                        Label("Delete List", systemImage: "trash")
                     }
                 }
             }
-            .sheet(isPresented: $newCustomList) {
-                AddListView()
-            }
-            .sheet(isPresented: $showSettings) {
-                SettingsView()
-            }
-            .navigationTitle("Checklists")
-        } detail: {
-            if let list = selectedList {
-                ListView(list: list)
-            } else {
-                ContentUnavailableView("Add a new List", image: "plus")
-            }
+            .onDelete(perform: deleteList)
         }
     }
     
