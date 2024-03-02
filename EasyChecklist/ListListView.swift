@@ -17,15 +17,25 @@ struct ListListView: View {
     @Binding private var selectedList: CustomList?
     @State private var editCustomList: Bool = false
     
+    @AppStorage("showListDetails") private var showListDetails: Bool = true
     
-    init(sortOrder: ListSort, isReverseSort: Bool, selectedList: Binding<CustomList?>) {
+    @State private var searchString: String = ""
+    var filteredLists: [CustomList] {
+        if searchString.isEmpty {
+            return lists
+        } else {
+            return lists.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }
+        }
+    }
+    
+    init(sortOrder: ListSort, isAscendingSort: Bool, selectedList: Binding<CustomList?>) {
         let sortDescriptors: [SortDescriptor<CustomList>] = switch sortOrder {
         case .alphabetically:
-            [SortDescriptor(\CustomList.name, order: !isReverseSort ? .forward : .reverse)]
+            [SortDescriptor(\CustomList.name, order: isAscendingSort ? .forward : .reverse)]
         case .creationDate:
-            [SortDescriptor(\CustomList.creationDate, order: isReverseSort ? .forward : .reverse)]
+            [SortDescriptor(\CustomList.creationDate, order: isAscendingSort ? .reverse : .forward)]
         case .modified:
-            [SortDescriptor(\CustomList.editDate, order: isReverseSort ? .forward : .reverse)]
+            [SortDescriptor(\CustomList.editDate, order: isAscendingSort ? .reverse : .forward)]
         }
         
         _lists = Query(sort: sortDescriptors)
@@ -34,14 +44,24 @@ struct ListListView: View {
     
     var body: some View {
         List(selection: $selectedList){
-            ForEach(lists) { list in
+            ForEach(filteredLists) { list in
                 NavigationLink(value: list) {
                     Label {
-                        Text(list.name)
+                        VStack(alignment: .leading) {
+                            Text(list.name)
+                            if showListDetails {
+                                if let listEntries = list.listEntries {
+                                    Text("^[\(listEntries.count) Entry](inflect: true) - \(getDoneItems(listEntries: listEntries)) Done - \(getToDoItems(listEntries: listEntries)) ToDo")
+                                        .font(.footnote)
+                                        .foregroundStyle(Color.secondary)
+                                }
+                            }
+                        }
                     } icon: {
                         Image(systemName: availibleIcons[list.image])
                             .foregroundStyle(GetColorByID(list.color))
                     }
+                    .labelStyle(CenteredImageLabelStyle())
                 }
                 .sheet(isPresented: $editCustomList) { EditListView(list: list) }
                 .swipeActions(edge: .leading) {
@@ -63,6 +83,12 @@ struct ListListView: View {
             }
             .onDelete(perform: deleteList)
         }
+        .searchable(text: $searchString)
+        .overlay {
+            if filteredLists.isEmpty {
+                ContentUnavailableView.search(text: searchString)
+            }
+        }
     }
     
     func deleteList(at indexSet: IndexSet) {
@@ -75,6 +101,25 @@ struct ListListView: View {
     func deleteListContextMenu(_ deleteList: CustomList) {
         withAnimation {
             context.delete(deleteList)
+        }
+    }
+    
+    func getDoneItems(listEntries: [ListEntry]) -> Int {
+        return listEntries.filter { $0.checked == true }.count
+    }
+    
+    func getToDoItems(listEntries: [ListEntry]) -> Int {
+        return listEntries.filter { $0.checked == false }.count
+    }
+}
+
+struct CenteredImageLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(alignment: .center) {
+            configuration.icon
+                .frame(width: 25)
+            configuration.title
+                .padding(.leading, 5)
         }
     }
 }

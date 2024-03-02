@@ -13,13 +13,15 @@ struct ContentView: View {
     @State private var newCustomList: Bool = false
     
     @AppStorage("sortOrder") private var sortOrder: ListSort = ListSort.modified
-    @AppStorage("isReverseSort") private var isReverseSort: Bool = false
+    @AppStorage("isAcendingSort") private var isAscendingSort: Bool = false
+    
+    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     
     @State private var selectedList: CustomList?
     
     var body: some View {
-        NavigationSplitView {
-            ListListView(sortOrder: sortOrder, isReverseSort: isReverseSort, selectedList: $selectedList)
+        NavigationSplitView(columnVisibility: .constant(.all)) {
+            ListListView(sortOrder: sortOrder, isAscendingSort: isAscendingSort, selectedList: $selectedList)
             .toolbar{
                 ToolbarItemGroup(placement: .topBarLeading) {
                     Button { 
@@ -31,7 +33,7 @@ struct ContentView: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Menu {
-                        Picker(selection: $sortOrder) {
+                        Picker(selection: $sortOrder.animation()) {
                             Label("Alphabetically", systemImage: "textformat.abc")
                                 .tag(ListSort.alphabetically)
                             Label("Newest", systemImage: "calendar")
@@ -42,8 +44,24 @@ struct ContentView: View {
                             Text("Sort")
                         }
                         
-                        Toggle(isOn: $isReverseSort) {
-                            Label("Reverse", systemImage: "arrow.up.arrow.down")
+                        ControlGroup("Order") {
+                            Button {
+                                withAnimation { isAscendingSort = true }
+                            } label: {
+                                Label(
+                                    title: { Text("Ascending") },
+                                    icon: { Image(isAscendingSort ? "arrow.up.badge.checkmark" : "arrow.up") }
+                                )
+                            }
+                            
+                            Button {
+                                withAnimation { isAscendingSort = false }
+                            } label: {
+                                Label(
+                                    title: { Text("Descending") },
+                                    icon: { Image(isAscendingSort ? "arrow.down" : "arrow.down.badge.checkmark") }
+                                )
+                            }
                         }
                     } label: {
                         Label("Sort by", systemImage: "arrow.up.arrow.down")
@@ -59,11 +77,13 @@ struct ContentView: View {
             .sheet(isPresented: $newCustomList) { AddListView() }
             .sheet(isPresented: $showSettings) { SettingsView() }
             .navigationTitle("Checklists")
+            .navigationSplitViewStyle(.balanced)
         } detail: {
             if let list = selectedList {
                 ListView(list: list)
             } else {
-                ContentUnavailableView("Add a new List", image: "plus")
+                ContentUnavailableView("No Checklists", image: "plus", description: Text("Get Started by adding a new Checklist with the plus button"))
+                //ContentUnavailableView("No Checklists", systemImage: "plus")
             }
         }
     }

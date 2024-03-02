@@ -17,7 +17,10 @@ struct SettingsView: View {
     @AppStorage("accentColorID") private var accentColorID: Int = 0
     @AppStorage("colorScheme") private var colorScheme: PreferredColorScheme = .systemDefault
     
-    // Items
+    // General
+    @AppStorage("showListDetails") private var showListDetails: Bool = true
+    
+    // List Entries
     @AppStorage("strikeCheckedEntries") private var strikeCheckedEntries: Bool = true
     @AppStorage("moveToBottom") private var moveToBottom: Bool = true
     
@@ -32,13 +35,22 @@ struct SettingsView: View {
                     ColorSchemeSwitcher(colorScheme: $colorScheme, showIcon: true, accentColor: GetColorByID(accentColorID))
                 }
                 
-                Section("Item"){
+                Section("General") {
+                    Toggle(isOn: $showListDetails.animation()) {
+                        Label("Show List Details", systemImage: showListDetails ? "tag" : "tag.slash")
+                            .contentTransition(.symbolEffect(.replace))
+                    }
+                }
+                
+                Section("List Entries"){
                     Toggle(isOn: $strikeCheckedEntries) {
                         Label("Strike Done Items", systemImage: "strikethrough")
+                            .symbolEffect(.bounce, value: strikeCheckedEntries)
                     }
                     
                     Toggle(isOn: $moveToBottom) {
                         Label("Move Checked Items to Bottom", systemImage: "checkmark.circle")
+                            .symbolEffect(.bounce, value: moveToBottom)
                     }
                 }
                 
