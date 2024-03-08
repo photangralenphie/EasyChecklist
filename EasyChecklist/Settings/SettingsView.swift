@@ -18,7 +18,7 @@ struct SettingsView: View {
     @AppStorage("colorScheme") private var colorScheme: PreferredColorScheme = .systemDefault
     
     // General
-    @AppStorage("showListDetails") private var showListDetails: Bool = true
+    @AppStorage("showExhaustiveListDetails") private var showExhaustiveListDetails: Bool = true
     
     // List Entries
     @AppStorage("strikeCheckedEntries") private var strikeCheckedEntries: Bool = true
@@ -36,8 +36,8 @@ struct SettingsView: View {
                 }
                 
                 Section("General") {
-                    Toggle(isOn: $showListDetails.animation()) {
-                        Label("Show List Details", systemImage: showListDetails ? "tag" : "tag.slash")
+                    Toggle(isOn: $showExhaustiveListDetails.animation()) {
+                        Label("Show Exhaustive List Details", systemImage: showExhaustiveListDetails ? "tag" : "tag.slash")
                             .contentTransition(.symbolEffect(.replace))
                     }
                 }

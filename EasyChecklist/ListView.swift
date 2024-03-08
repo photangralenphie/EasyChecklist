@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import PDFKit
 import InlineColorPicker
 import PrintingKit
 import TPPDF
+import UniformTypeIdentifiers
 
 struct ListView: View {
     
     // Init
     let list: CustomList
+    @Binding public var selectedList: CustomList?
     
     // Data
     @Environment(\.modelContext) private var context
@@ -23,6 +26,7 @@ struct ListView: View {
     @State private var newEntryName: String = ""
     @State private var searchString: String = ""
     @State private var isSearching: Bool = false
+    @State private var isEditing: Bool = false
     
     @Environment(\.horizontalSizeClass) private var sizeClass
     
@@ -64,6 +68,9 @@ struct ListView: View {
                 }
             }
         }
+        .toolbarRole(sizeClass==UserInterfaceSizeClass.compact ? .automatic : .editor)
+        .navigationTitle(Bindable(list).name)
+        .navigationBarTitleDisplayMode(.automatic)
         .toolbar(id: "listToolbar") {
             ToolbarItem(id: "search", placement: .primaryAction) {
                 if sizeClass == .compact {
@@ -74,6 +81,7 @@ struct ListView: View {
                     }
                 }
             }
+            
             ToolbarItem(id: "sort", placement: .secondaryAction) {
                 Picker(selection: .constant(0)) {
                     Label("Alphabetical", systemImage: "abc")
@@ -84,6 +92,7 @@ struct ListView: View {
                     Label("Sort", systemImage: "arrow.up.arrow.down")
                 }
             }
+            
             ToolbarItem(id: "edit", placement: .secondaryAction) {
                 Button(action: editList){
                     Label("Edit List", systemImage: "square.and.pencil")
@@ -91,31 +100,24 @@ struct ListView: View {
             }
 
             ToolbarItem(id: "share", placement: .secondaryAction) {
-                Button(action: shareList) {
-                    Label("Share", systemImage: "square.and.arrow.up")
-                }
+                ShareLink("Share", item: makePDF() ?? URL(fileURLWithPath: ""))
             }
+            
             ToolbarItem(id: "print", placement: .secondaryAction) {
                 Button(action: printList) {
                     Label("Print", systemImage: "printer")
                 }
             }
-            ToolbarItem(id: "pdf", placement: .secondaryAction) {
-                Button(action: exportPDF) {
-                    Label("Export PDF", systemImage: "doc")
-                }
-            }
+            
             ToolbarItem(id: "delete", placement: .secondaryAction) {
                 Button(role: .destructive, action: deleteList) {
                     Label("Delete List", systemImage: "trash")
                 }
             }
         }
-        .toolbarRole(.editor)
-        .navigationTitle(Bindable(list).name)
-        .searchable(text: $searchString, isPresented: $isSearching.animation(), placement: .toolbar)
-        .overlay{
-            if filteredListEntries.isEmpty && isSearching{
+        .searchable(text: $searchString, isPresented: $isSearching.animation(), placement: .toolbar, prompt: Text("Search \(list.name)"))
+        .overlay {
+            if filteredListEntries.isEmpty && isSearching {
                 ContentUnavailableView.search(text: searchString)
             }
             if let entries = list.listEntries {
@@ -149,6 +151,9 @@ struct ListView: View {
             }
         }
         .tint(GetColorByID(list.color))
+        .sheet(isPresented: $isEditing) {
+            EditListView(list: list)
+        }
     }
     
     func addNewEntry() {
@@ -160,24 +165,17 @@ struct ListView: View {
     }
     
     func editList() {
-        
+        isEditing.toggle()
     }
     
     func deleteList() {
-        
-    }
-    
-    func shareList() {
-        
+        context.delete(list)
+        selectedList = nil
     }
     
     func printList() {
         let printer = Printer()
         try? printer.print(.pdfFile(at: makePDF()))
-    }
-    
-    func exportPDF() {
-        
     }
     
     func makePDF() -> URL?{
@@ -212,7 +210,6 @@ struct ListView: View {
                 let emptyRow = table.rows.rows[i * 2 + 1]
                 emptyRow.content = [" ", " "]
                 emptyRow.allCellsStyle = PDFTableCellStyle(font: UIFont.systemFont(ofSize: 5))
-                
             }
             
             document.add(table: table)

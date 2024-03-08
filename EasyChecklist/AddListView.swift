@@ -10,6 +10,8 @@ import InlineColorPicker
 
 struct AddListView: View {
     
+    @Binding public var selectedList: CustomList?
+    
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) var dismiss
     
@@ -60,6 +62,7 @@ struct AddListView: View {
     func addNewList() {
         let newList = CustomList(name: newListName, color: newListColor, image: newListIcon)
         context.insert(newList)
+        selectedList = newList
         dismiss()
     }
 }

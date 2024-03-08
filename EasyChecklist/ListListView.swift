@@ -17,7 +17,7 @@ struct ListListView: View {
     @Binding private var selectedList: CustomList?
     @State private var editCustomList: Bool = false
     
-    @AppStorage("showListDetails") private var showListDetails: Bool = true
+    @AppStorage("showExhaustiveListDetails") private var showExhaustiveListDetails: Bool = true
     
     @State private var searchString: String = ""
     var filteredLists: [CustomList] {
@@ -48,8 +48,17 @@ struct ListListView: View {
                 NavigationLink(value: list) {
                     Label {
                         VStack(alignment: .leading) {
-                            Text(list.name)
-                            if showListDetails {
+                            HStack(alignment: .firstTextBaseline) {
+                                Text(list.name)
+                                Spacer()
+                                if !showExhaustiveListDetails {
+                                    if let listEntries = list.listEntries {
+                                        Text("\(getToDoItems(listEntries: listEntries))")
+                                            .foregroundStyle(Color.secondary)
+                                    }
+                                }
+                            }
+                            if showExhaustiveListDetails {
                                 if let listEntries = list.listEntries {
                                     Text("^[\(listEntries.count) Entry](inflect: true) - \(getDoneItems(listEntries: listEntries)) Done - \(getToDoItems(listEntries: listEntries)) ToDo")
                                         .font(.footnote)
