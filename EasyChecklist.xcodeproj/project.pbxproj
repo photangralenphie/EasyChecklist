@@ -9,40 +9,48 @@
 /* Begin PBXBuildFile section */
 		DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E492B93B1D20038F7A7 /* PrintingKit */; };
 		DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E4C2B93B5F10038F7A7 /* TPPDF */; };
+		DD0F758C2B9D0F2C00EC7E41 /* CreditManager in Frameworks */ = {isa = PBXBuildFile; productRef = DD0F758B2B9D0F2C00EC7E41 /* CreditManager */; };
 		DD1493CE2B82019500B7BF0A /* InlineColorPicker in Frameworks */ = {isa = PBXBuildFile; productRef = DD1493CD2B82019500B7BF0A /* InlineColorPicker */; };
 		DD3E5B082B8259DC0087F87F /* ColorSchemeSwitcher in Frameworks */ = {isa = PBXBuildFile; productRef = DD3E5B072B8259DC0087F87F /* ColorSchemeSwitcher */; };
-		DD7BCBFC28F0B56E004AD443 /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7BCBFB28F0B56E004AD443 /* AddListView.swift */; };
+		DD53C04E2C0A53150020DB61 /* TransferablePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C04D2C0A53150020DB61 /* TransferablePDF.swift */; };
+		DD53C0512C0A72100020DB61 /* LABiometryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C0502C0A72100020DB61 /* LABiometryType.swift */; };
+		DD53C0542C0A761D0020DB61 /* CenteredImageLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */; };
+		DD5D52772B9DBE750086B4D3 /* ListDetailEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */; };
 		DD9553A628F55E7A00D1A9E3 /* IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9553A528F55E7A00D1A9E3 /* IconPicker.swift */; };
 		DDA743D828F0873500681693 /* EasyChecklistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D728F0873500681693 /* EasyChecklistApp.swift */; };
-		DDA743DA28F0873500681693 /* ListListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D928F0873500681693 /* ListListView.swift */; };
+		DDA743DA28F0873500681693 /* ChecklistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D928F0873500681693 /* ChecklistCellView.swift */; };
 		DDA743DC28F0873900681693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA743DB28F0873900681693 /* Assets.xcassets */; };
 		DDA743E028F0873A00681693 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA743DF28F0873A00681693 /* Preview Assets.xcassets */; };
 		DDBCED6A28F21FD400F3B22C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCED6928F21FD400F3B22C /* SettingsView.swift */; };
+		DDDA1E432B9D018400E00524 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA1E422B9D018400E00524 /* CreditsView.swift */; };
 		DDFA2F022B78D7460037FC6D /* CustomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F012B78D7460037FC6D /* CustomList.swift */; };
 		DDFA2F042B78ECF30037FC6D /* ListEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F032B78ECF20037FC6D /* ListEntry.swift */; };
 		DDFA2F062B78EEB80037FC6D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F052B78EEB80037FC6D /* ListView.swift */; };
 		DDFA2F082B7920370037FC6D /* ListEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F072B7920370037FC6D /* ListEntryView.swift */; };
 		DDFA2F0A2B7FF4170037FC6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F092B7FF4170037FC6D /* ContentView.swift */; };
-		DDFB759728F8A7920006ACAC /* EditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB759628F8A7920006ACAC /* EditListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0F758A2B9D0F1700EC7E41 /* CreditManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CreditManager; path = ../CreditManager; sourceTree = "<group>"; };
 		DD3E5B052B824F5D0087F87F /* ColorSchemeSwitcher */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ColorSchemeSwitcher; path = ../ColorSchemeSwitcher; sourceTree = "<group>"; };
-		DD7BCBFB28F0B56E004AD443 /* AddListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
+		DD53C04D2C0A53150020DB61 /* TransferablePDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferablePDF.swift; sourceTree = "<group>"; };
+		DD53C0502C0A72100020DB61 /* LABiometryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LABiometryType.swift; sourceTree = "<group>"; };
+		DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredImageLabelStyle.swift; sourceTree = "<group>"; };
+		DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailEditor.swift; sourceTree = "<group>"; };
 		DD9553A528F55E7A00D1A9E3 /* IconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPicker.swift; sourceTree = "<group>"; };
 		DDA743D428F0873500681693 /* EasyChecklist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyChecklist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA743D728F0873500681693 /* EasyChecklistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyChecklistApp.swift; sourceTree = "<group>"; };
-		DDA743D928F0873500681693 /* ListListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListListView.swift; sourceTree = "<group>"; };
+		DDA743D928F0873500681693 /* ChecklistCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCellView.swift; sourceTree = "<group>"; };
 		DDA743DB28F0873900681693 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDA743DD28F0873900681693 /* EasyChecklist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyChecklist.entitlements; sourceTree = "<group>"; };
 		DDA743DF28F0873A00681693 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DDBCED6928F21FD400F3B22C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DDDA1E422B9D018400E00524 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		DDFA2F012B78D7460037FC6D /* CustomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomList.swift; sourceTree = "<group>"; };
 		DDFA2F032B78ECF20037FC6D /* ListEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntry.swift; sourceTree = "<group>"; };
 		DDFA2F052B78EEB80037FC6D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		DDFA2F072B7920370037FC6D /* ListEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntryView.swift; sourceTree = "<group>"; };
 		DDFA2F092B7FF4170037FC6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		DDFB759628F8A7920006ACAC /* EditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,7 @@
 				DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */,
 				DD1493CE2B82019500B7BF0A /* InlineColorPicker in Frameworks */,
 				DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */,
+				DD0F758C2B9D0F2C00EC7E41 /* CreditManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,13 +81,31 @@
 			children = (
 				DDBCED6928F21FD400F3B22C /* SettingsView.swift */,
 				DD9553A528F55E7A00D1A9E3 /* IconPicker.swift */,
+				DDDA1E422B9D018400E00524 /* CreditsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		DD53C04F2C0A71D50020DB61 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD53C0502C0A72100020DB61 /* LABiometryType.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DD53C0522C0A76010020DB61 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		DDA743CB28F0873500681693 = {
 			isa = PBXGroup;
 			children = (
+				DD0F758A2B9D0F1700EC7E41 /* CreditManager */,
 				DD3E5B052B824F5D0087F87F /* ColorSchemeSwitcher */,
 				DDA743D628F0873500681693 /* EasyChecklist */,
 				DDA743D528F0873500681693 /* Products */,
@@ -97,15 +124,16 @@
 		DDA743D628F0873500681693 /* EasyChecklist */ = {
 			isa = PBXGroup;
 			children = (
+				DD53C0522C0A76010020DB61 /* Styles */,
+				DD53C04F2C0A71D50020DB61 /* Extensions */,
 				DDFA2F002B78D7290037FC6D /* Model */,
 				DD3E5B092B82A3320087F87F /* Settings */,
 				DDA743D728F0873500681693 /* EasyChecklistApp.swift */,
 				DDFA2F092B7FF4170037FC6D /* ContentView.swift */,
-				DDA743D928F0873500681693 /* ListListView.swift */,
+				DDA743D928F0873500681693 /* ChecklistCellView.swift */,
 				DDFA2F052B78EEB80037FC6D /* ListView.swift */,
+				DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */,
 				DDFA2F072B7920370037FC6D /* ListEntryView.swift */,
-				DD7BCBFB28F0B56E004AD443 /* AddListView.swift */,
-				DDFB759628F8A7920006ACAC /* EditListView.swift */,
 				DDA743DB28F0873900681693 /* Assets.xcassets */,
 				DDA743DD28F0873900681693 /* EasyChecklist.entitlements */,
 				DDA743DE28F0873A00681693 /* Preview Content */,
@@ -126,6 +154,7 @@
 			children = (
 				DDFA2F012B78D7460037FC6D /* CustomList.swift */,
 				DDFA2F032B78ECF20037FC6D /* ListEntry.swift */,
+				DD53C04D2C0A53150020DB61 /* TransferablePDF.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,6 +180,7 @@
 				DD3E5B072B8259DC0087F87F /* ColorSchemeSwitcher */,
 				DD034E492B93B1D20038F7A7 /* PrintingKit */,
 				DD034E4C2B93B5F10038F7A7 /* TPPDF */,
+				DD0F758B2B9D0F2C00EC7E41 /* CreditManager */,
 			);
 			productName = EasyChecklist;
 			productReference = DDA743D428F0873500681693 /* EasyChecklist.app */;
@@ -216,12 +246,15 @@
 				DDFA2F062B78EEB80037FC6D /* ListView.swift in Sources */,
 				DDFA2F022B78D7460037FC6D /* CustomList.swift in Sources */,
 				DDBCED6A28F21FD400F3B22C /* SettingsView.swift in Sources */,
-				DDA743DA28F0873500681693 /* ListListView.swift in Sources */,
-				DDFB759728F8A7920006ACAC /* EditListView.swift in Sources */,
+				DDA743DA28F0873500681693 /* ChecklistCellView.swift in Sources */,
 				DDA743D828F0873500681693 /* EasyChecklistApp.swift in Sources */,
 				DDFA2F042B78ECF30037FC6D /* ListEntry.swift in Sources */,
+				DDDA1E432B9D018400E00524 /* CreditsView.swift in Sources */,
 				DDFA2F0A2B7FF4170037FC6D /* ContentView.swift in Sources */,
-				DD7BCBFC28F0B56E004AD443 /* AddListView.swift in Sources */,
+				DD5D52772B9DBE750086B4D3 /* ListDetailEditor.swift in Sources */,
+				DD53C04E2C0A53150020DB61 /* TransferablePDF.swift in Sources */,
+				DD53C0542C0A761D0020DB61 /* CenteredImageLabelStyle.swift in Sources */,
+				DD53C0512C0A72100020DB61 /* LABiometryType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +391,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow Biometrics for Authentication";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -400,6 +434,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow Biometrics for Authentication";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -487,6 +522,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD034E4B2B93B5F10038F7A7 /* XCRemoteSwiftPackageReference "TPPDF" */;
 			productName = TPPDF;
+		};
+		DD0F758B2B9D0F2C00EC7E41 /* CreditManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CreditManager;
 		};
 		DD1493CD2B82019500B7BF0A /* InlineColorPicker */ = {
 			isa = XCSwiftPackageProductDependency;

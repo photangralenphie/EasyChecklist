@@ -14,7 +14,6 @@ class ListEntry {
     var id: UUID
     var checked: Bool
     
-    
     init(name: String) {
         self.name = name
         self.id = UUID()

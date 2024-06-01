@@ -10,6 +10,7 @@ import SwiftUI
 struct ListEntryView: View {
     
     let listEntry: ListEntry
+    
     // Data
     @Environment(\.modelContext) private var context
     @State private var showRenameAlert: Bool = false
@@ -22,14 +23,15 @@ struct ListEntryView: View {
                 .strikethrough(listEntry.checked && strikeCheckedEntries)
         } icon: {
             Image(systemName: listEntry.checked ? "checkmark.circle" : "circle")
+                .contentTransition(.symbolEffect(.replace))
         }
         .contentShape(Rectangle())
         .sensoryFeedback(.success, trigger: listEntry.checked)
         .onTapGesture {
             withAnimation {
                 listEntry.checked.toggle()
+                listEntry.list?.editDate = Date.now
             }
-            listEntry.list?.editDate = Date.now
         }
         .onLongPressGesture { showRenameAlert.toggle() }
         .swipeActions(edge: .trailing) {

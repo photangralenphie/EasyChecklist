@@ -8,6 +8,7 @@
 import SwiftUI
 import InlineColorPicker
 import ColorSchemeSwitcher
+import LocalAuthentication
 
 struct SettingsView: View {
     
@@ -19,26 +20,34 @@ struct SettingsView: View {
     
     // General
     @AppStorage("showExhaustiveListDetails") private var showExhaustiveListDetails: Bool = true
-    
+    @AppStorage("useBiometricAuthentication") private var useBiometricAuthentication: Bool = false
+    let context = LAContext()
+
     // List Entries
     @AppStorage("strikeCheckedEntries") private var strikeCheckedEntries: Bool = true
     @AppStorage("moveToBottom") private var moveToBottom: Bool = true
     
     // Not Implemented Yet
     @AppStorage("useiCloudSync") private var useiCloudSync: Bool = false
-
+    
     var body: some View {
         NavigationStack{
             Form{
                 Section("Appearance"){
                     InlineColorPicker(colorIndex: $accentColorID, pickerStyle: .expanded)
-                    ColorSchemeSwitcher(colorScheme: $colorScheme, showIcon: true, accentColor: GetColorByID(accentColorID))
+                    ColorSchemeSwitcher(colorScheme: $colorScheme, showIcon: true)
                 }
                 
                 Section("General") {
                     Toggle(isOn: $showExhaustiveListDetails.animation()) {
                         Label("Show Exhaustive List Details", systemImage: showExhaustiveListDetails ? "tag" : "tag.slash")
                             .contentTransition(.symbolEffect(.replace))
+                    }
+                    
+                    if context.biometryType != .none {
+                        Toggle(isOn: $useBiometricAuthentication.animation()) {
+                            Label("Lock using \(context.biometryType.name)", systemImage: context.biometryType.systemName)
+                        }
                     }
                 }
                 
@@ -59,6 +68,13 @@ struct SettingsView: View {
                         Label("iCloud Sync", systemImage: "icloud")
                     }
                 }
+                
+                NavigationLink {
+                    CreditsView()
+                } label: {
+                    Label("Credits", systemImage: "c.circle")
+                }
+
             }
             .navigationTitle("Settings")
             .toolbar{

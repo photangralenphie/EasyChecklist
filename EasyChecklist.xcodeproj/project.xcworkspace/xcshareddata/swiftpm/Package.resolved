@@ -6,7 +6,7 @@
       "location" : "https://github.com/photangralenphie/InlineColorPicker",
       "state" : {
         "branch" : "main",
-        "revision" : "59bfaa37a22b9e1b60ab13689e3a30c9d84c2bfb"
+        "revision" : "d70396a58b80d66831ef362daa625724e1410fe5"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/danielsaidi/PrintingKit",
       "state" : {
-        "revision" : "af46045bbe854cbd9fb78344abfdc8365f353fa7",
-        "version" : "0.4.2"
+        "revision" : "36c6d121eefef73af44271b745a9793b8fca0c2e",
+        "version" : "0.5.2"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/techprimate/TPPDF",
       "state" : {
-        "revision" : "1955ebbc090a3fb2149fb53e703595c3146689af",
-        "version" : "2.4.1"
+        "revision" : "5075703da5afd1a84db094cd8abdcea2f9d42367",
+        "version" : "2.5.0"
       }
     }
   ],

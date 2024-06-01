@@ -5,8 +5,8 @@
 //  Created by Jonas Helmer on 11.02.24.
 //
 
+import Foundation
 import SwiftUI
-import PDFKit
 import InlineColorPicker
 import PrintingKit
 import TPPDF
@@ -20,6 +20,7 @@ struct ListView: View {
     
     // Data
     @Environment(\.modelContext) private var context
+    @State private var document: PDFDocument?
     
     // Functional
     @FocusState private var newEntryInFocus: Bool
@@ -27,6 +28,7 @@ struct ListView: View {
     @State private var searchString: String = ""
     @State private var isSearching: Bool = false
     @State private var isEditing: Bool = false
+    @State private var showBusyIndicator: Bool = false
     
     @Environment(\.horizontalSizeClass) private var sizeClass
     
@@ -34,31 +36,23 @@ struct ListView: View {
     @AppStorage("moveToBottom") private var moveToBottom: Bool = true
     
     var filteredListEntries: [ListEntry] {
-        if let entries = list.listEntries {
-            if searchString.isEmpty {
-                return entries
-            } else {
-                return entries.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }
-            }
-        } else {
-            return []
-        }
+        guard let entries = list.listEntries else { return [] }
+        return searchString.isEmpty ? entries : entries.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }
     }
+    
+    var filteredUncheckedItems: [ListEntry] { filteredListEntries.filter { !$0.checked } }
+    var filteredCheckedItems: [ListEntry] { filteredListEntries.filter{ $0.checked } }
     
     var body: some View {
         List {
             if moveToBottom {
-                ForEach(filteredListEntries) { listEntry in
-                    if !listEntry.checked {
-                        ListEntryView(listEntry: listEntry)
-                    }
+                ForEach(filteredUncheckedItems) { listEntry in
+                    ListEntryView(listEntry: listEntry)
                 }
-                if filteredListEntries.contains(where: \.checked) {
-                    Section("Completed", isExpanded: Bindable(list).isCompletedSectionExpanded) {
-                        ForEach(filteredListEntries) { listEntry in
-                            if listEntry.checked {
-                                ListEntryView(listEntry: listEntry)
-                            }
+                if !filteredCheckedItems.isEmpty {
+                    Section("Completed (\(filteredCheckedItems.count)", isExpanded: Bindable(list).isCompletedSectionExpanded) {
+                        ForEach(filteredCheckedItems) { listEntry in
+                            ListEntryView(listEntry: listEntry)
                         }
                     }
                 }
@@ -68,9 +62,10 @@ struct ListView: View {
                 }
             }
         }
+        .listStyle(.sidebar)
         .toolbarRole(sizeClass==UserInterfaceSizeClass.compact ? .automatic : .editor)
-        .navigationTitle(Bindable(list).name)
-        .navigationBarTitleDisplayMode(.automatic)
+        .navigationTitle(list.name)
+        .transition(AnyTransition.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .top)))
         .toolbar(id: "listToolbar") {
             ToolbarItem(id: "search", placement: .primaryAction) {
                 if sizeClass == .compact {
@@ -100,7 +95,7 @@ struct ListView: View {
             }
 
             ToolbarItem(id: "share", placement: .secondaryAction) {
-                ShareLink("Share", item: makePDF() ?? URL(fileURLWithPath: ""))
+                ShareLink(item: TransferablePDF(list: list), preview: SharePreview(list.name))
             }
             
             ToolbarItem(id: "print", placement: .secondaryAction) {
@@ -125,17 +120,32 @@ struct ListView: View {
                     ContentUnavailableView("No Entries", systemImage: "plus")
                 }
             }
+            if showBusyIndicator {
+                GroupBox {
+                    ProgressView()
+                } label: {
+                    Label("Generating PDF", systemImage: "doc")
+                }
+                .padding(0)
+                .contentShape(RoundedRectangle(cornerRadius: 10))
+                .frame(width: 200)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(GetColorByID(list.color))
+                )
+            }
         }
         .safeAreaInset(edge: .bottom) {
             if !isSearching {
                 HStack {
-                    TextField("Add an Item", text: $newEntryName)
+                    TextField("Add an Item", text: $newEntryName.animation())
                         .padding()
                         .padding(.trailing)
                         .background(Color(.tertiarySystemBackground).cornerRadius(10))
                         .focused($newEntryInFocus)
                         .onTapGesture { newEntryInFocus = true }
                         .onSubmit(addNewEntry)
+                        .submitLabel(.continue)
                     
                     Button(action: addNewEntry) {
                         Image(systemName: "plus")
@@ -148,18 +158,43 @@ struct ListView: View {
                 }
                 .padding()
                 .background(Color(.systemGroupedBackground))
+                .transition(.move(edge: .bottom))
+                .gesture(DragGesture(minimumDistance: 10).onEnded(tryDisableKeyboard))
             }
         }
-        .tint(GetColorByID(list.color))
         .sheet(isPresented: $isEditing) {
-            EditListView(list: list)
+            ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.image, listColor: list.color, action: saveEdits)
+        }
+        .tint(GetColorByID(list.color))
+    }
+    
+    func saveEdits(listName: String, listIcon: Int, listColor: Int) {
+        if (list.name != listName || list.color != listColor || list.image != listIcon) {
+            list.name = listName
+            list.color = listColor
+            list.image = listIcon
+            list.editDate = Date.now
+        }
+    }
+    
+    func tryDisableKeyboard(dragInfo: DragGesture.Value) {
+        if dragInfo.translation.height > 20 {
+            newEntryInFocus = false
         }
     }
     
     func addNewEntry() {
+        if newEntryName.isEmpty {
+            return
+        }
+        
         let newEntry = ListEntry(name: newEntryName)
-        newEntry.list = list
-        list.editDate = Date.now
+        
+        withAnimation {
+            newEntry.list = list
+            list.editDate = Date.now
+        }
+        
         newEntryName = ""
         newEntryInFocus = true
     }
@@ -169,55 +204,24 @@ struct ListView: View {
     }
     
     func deleteList() {
-        context.delete(list)
         selectedList = nil
+        context.delete(list)
     }
     
     func printList() {
-        let printer = Printer()
-        try? printer.print(.pdfFile(at: makePDF()))
-    }
-    
-    func makePDF() -> URL?{
-        let document = PDFDocument(format: .a4)
-        let title = NSMutableAttributedString(string: list.name, attributes: [
-            .font: UIFont.systemFont(ofSize: 28)
-        ])
-        document.add(attributedText: title)
-        document.addLineSeparator(style: .init())
-        document.add(space: 14)
-        if let entries = list.listEntries {
-            let table = PDFTable(rows: entries.count * 2, columns: 2)
-            let style = PDFTableStyleDefaults.none
-            style.contentStyle = PDFTableCellStyle(borders: PDFTableCellBorders.none)
-            style.columnHeaderCount = 0
-            style.footerCount = 0
-            
-            table.widths = [0.05, 0.95]
-            table.style = style
-            table.rows.allRowsAlignment = [.left, .left]
-            //let entriesSorted = entries.sorted { $0.name.prefix(1) < $1.name.prefix(1) }
-            //entries.sort { $0.name.prefix(1) < $1.name.prefix(1) }.indices.forEach { i in
-            entries.indices.forEach { i in
-                let image = UIImage(systemName: entries[i].checked ? "checkmark.circle" : "circle")
-                let text = NSMutableAttributedString(string: entries[i].name, attributes: [
-                    .font: UIFont.systemFont(ofSize: image?.size.height ?? 16)
-                ])
-                
-                let row = table.rows.rows[i * 2]
-                row.content = [image, text]
-                
-                let emptyRow = table.rows.rows[i * 2 + 1]
-                emptyRow.content = [" ", " "]
-                emptyRow.allCellsStyle = PDFTableCellStyle(font: UIFont.systemFont(ofSize: 5))
+        Task {
+            withAnimation {
+                showBusyIndicator = true
             }
             
-            document.add(table: table)
+            let printer = await Printer()
+            
+            // I added an overlay for this now I also want to see it.
+            sleep(1)
+            let pdf = TransferablePDF(list: list).makePDF()
+            
+            try? await printer.print(.pdfData(pdf))
+            showBusyIndicator = false
         }
-        
-        document.add(.footerCenter, text: "Created with EasyChecklist for iOS.")
-        
-        let generator = PDFGenerator(document: document)
-        return try? generator.generateURL(filename: "Example.pdf")
     }
 }

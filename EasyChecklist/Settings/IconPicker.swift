@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-import InlineColorPicker
 
 struct IconPicker: View {
     
     @Binding public var newIcon: Int
-    @AppStorage("accentColorID") private var accentColorID: Int = 0
-    @State private var selectedIcon: Int = 0
     
     private let iconCollums: [GridItem] = [
         GridItem(.flexible()),
@@ -30,11 +27,12 @@ struct IconPicker: View {
         LazyVGrid(columns: iconCollums) {
             ForEach(0..<availibleIcons.count, id: \.self) { iconIndex in
                 Image(systemName: availibleIcons[iconIndex])
-                    .foregroundColor(newIcon==iconIndex ? Color(GetColorByID(accentColorID)) : Color.primary)
+                    .foregroundColor(newIcon==iconIndex ? Color.accentColor : Color.primary)
                     .padding(.vertical, 8)
                     .onTapGesture { newIcon = iconIndex }
             }
         }
+        .sensoryFeedback(.selection, trigger: newIcon)
     }
 }
 
