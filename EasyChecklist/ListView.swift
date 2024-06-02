@@ -7,9 +7,9 @@
 
 import Foundation
 import SwiftUI
-import InlineColorPicker
-import PrintingKit
+import AwsomeSwiftyComponents
 import TPPDF
+import PrintingKit
 import UniformTypeIdentifiers
 
 struct ListView: View {
@@ -29,10 +29,12 @@ struct ListView: View {
     @State private var isSearching: Bool = false
     @State private var isEditing: Bool = false
     @State private var showBusyIndicator: Bool = false
+    @State private var showNoEntriesAlert: Bool = false
     
     @Environment(\.horizontalSizeClass) private var sizeClass
     
     // Settings
+    @AppStorage("accentColorID") private var accentColorID: Int = 0
     @AppStorage("moveToBottom") private var moveToBottom: Bool = true
     
     var filteredListEntries: [ListEntry] {
@@ -50,7 +52,7 @@ struct ListView: View {
                     ListEntryView(listEntry: listEntry)
                 }
                 if !filteredCheckedItems.isEmpty {
-                    Section("Completed (\(filteredCheckedItems.count)", isExpanded: Bindable(list).isCompletedSectionExpanded) {
+                    Section("Completed (\(filteredCheckedItems.count))", isExpanded: Bindable(list).isCompletedSectionExpanded) {
                         ForEach(filteredCheckedItems) { listEntry in
                             ListEntryView(listEntry: listEntry)
                         }
@@ -62,6 +64,7 @@ struct ListView: View {
                 }
             }
         }
+        .tint(GetColorByID(list.color))
         .listStyle(.sidebar)
         .toolbarRole(sizeClass==UserInterfaceSizeClass.compact ? .automatic : .editor)
         .navigationTitle(list.name)
@@ -93,9 +96,9 @@ struct ListView: View {
                     Label("Edit List", systemImage: "square.and.pencil")
                 }
             }
-
+            
             ToolbarItem(id: "share", placement: .secondaryAction) {
-                ShareLink(item: TransferablePDF(list: list), preview: SharePreview(list.name))
+                ShareLink(item: PdfMaker(list: list), preview: SharePreview(list.name))
             }
             
             ToolbarItem(id: "print", placement: .secondaryAction) {
@@ -165,7 +168,9 @@ struct ListView: View {
         .sheet(isPresented: $isEditing) {
             ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.image, listColor: list.color, action: saveEdits)
         }
-        .tint(GetColorByID(list.color))
+        .alert("No Entries to print in checklist.", isPresented: $showNoEntriesAlert) {
+            Button("OK") { }
+        }
     }
     
     func saveEdits(listName: String, listIcon: Int, listColor: Int) {
@@ -209,6 +214,13 @@ struct ListView: View {
     }
     
     func printList() {
+        guard let entries = list.listEntries else { return  }
+        
+        if entries.count <= 0 {
+            showNoEntriesAlert.toggle()
+            return
+        }
+        
         Task {
             withAnimation {
                 showBusyIndicator = true
@@ -217,8 +229,9 @@ struct ListView: View {
             let printer = await Printer()
             
             // I added an overlay for this now I also want to see it.
-            sleep(1)
-            let pdf = TransferablePDF(list: list).makePDF()
+            try await Task.sleep(for: .milliseconds(750 + Int.random(in: 0...500)))
+            
+            let pdf = PdfMaker(list: list).makePDF()
             
             try? await printer.print(.pdfData(pdf))
             showBusyIndicator = false

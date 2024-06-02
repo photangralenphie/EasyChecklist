@@ -7,8 +7,8 @@
 
 import SwiftUI
 import SwiftData
-import InlineColorPicker
 import LocalAuthentication
+import PrintingKit
 
 struct ContentView: View {
     
@@ -40,6 +40,11 @@ struct ContentView: View {
     
     @State private var searchString: String = ""
     
+    // Empty List printing
+    @State private var showEmptyPrintOptions: Bool = false
+    @State private var emptyPrintListName: String = ""
+    @State private var emptyPrintListNumEntries: Int?
+    
     @Environment(\.modelContext) private var context
     
     var filteredLists: [CustomList] {
@@ -51,6 +56,7 @@ struct ContentView: View {
             List(filteredLists, selection: $selectedList.animation()) { list in
                 ChecklistCellView(list: list)
             }
+            .tint(Color(UIColor.tertiarySystemBackground))
             .listSectionSpacing(10)
             .overlay {
                 if searchString.isEmpty && filteredLists.isEmpty {
@@ -71,7 +77,11 @@ struct ContentView: View {
                     Button("Settings", systemImage: "gear") { showSettings.toggle() }
                 }
                 
-                ToolbarItemGroup(placement: .primaryAction) {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Add List", systemImage: "plus") { newCustomList.toggle() }
+                }
+                
+                ToolbarItem(placement: .secondaryAction) {
                     Menu("Sort by", systemImage: "arrow.up.arrow.down") {
                         Picker(selection: $sortOrder.animation()) {
                             Label("Alphabetically", systemImage: "textformat.abc")
@@ -97,8 +107,14 @@ struct ContentView: View {
                             }
                         }
                     }
-                    
-                    Button("Add List", systemImage: "plus") { newCustomList.toggle() }
+                }
+                
+                ToolbarItem(placement: .secondaryAction) {
+                    Button {
+                        showEmptyPrintOptions.toggle()
+                    } label: {
+                        Label("Print Empty Cheklist", systemImage: "printer")
+                    }
                 }
             }
             .sheet(isPresented: $newCustomList) {
@@ -106,11 +122,21 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showSettings) { SettingsView() }
             .navigationTitle("Checklists")
+            .alert("Print Empty Checklist", isPresented: $showEmptyPrintOptions) {
+                TextField("Name", text: $emptyPrintListName)
+                TextField("Number Empty Items", value: $emptyPrintListNumEntries, format: .number)
+                    .keyboardType(.numberPad)
+                Button("Cancel", role: .cancel, action: resetEmptyPrintList)
+                Button("Print", action: printEmptyList)
+                    .disabled(emptyPrintListNumEntries == nil || emptyPrintListName == "")
+            }
         } detail: {
-            if let list = selectedList {
+            if lists.isEmpty {
+                ContentUnavailableView("No Checklists", image: "plus", description: Text("Get Started by adding a new Checklist with the plus button"))
+            } else if let list = selectedList {
                 ListView(list: list, selectedList: $selectedList)
             } else {
-                ContentUnavailableView("No Checklists", image: "plus", description: Text("Get Started by adding a new Checklist with the plus button"))
+                ContentUnavailableView("Nothing Selected", image: "filemenu.and.selection", description: Text("Select a Checklist in the Sidebar"))
             }
         }
         .searchable(text: $searchString)
@@ -120,5 +146,21 @@ struct ContentView: View {
         let newList = CustomList(name: listName, color: listColor, image: listIcon)
         context.insert(newList)
         selectedList = newList
+    }
+    
+    func printEmptyList() {
+        guard let num = emptyPrintListNumEntries else { return }
+        Task {
+            let printer = await Printer()
+            let pdf = PdfMaker(name: emptyPrintListName, numEmptyItems: num).makePDF()
+            try? await printer.print(.pdfData(pdf))
+        }
+        resetEmptyPrintList()
+    }
+    
+    func resetEmptyPrintList() {
+        emptyPrintListName = ""
+        emptyPrintListNumEntries = nil
+        showEmptyPrintOptions.toggle()
     }
 }

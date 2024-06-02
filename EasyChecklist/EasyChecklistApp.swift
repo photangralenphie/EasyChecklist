@@ -7,8 +7,7 @@
 
 import SwiftUI
 import SwiftData
-import InlineColorPicker
-import ColorSchemeSwitcher
+import AwsomeSwiftyComponents
 import LocalAuthentication
 
 @main
@@ -26,7 +25,7 @@ struct EasyChecklistApp: App {
     @Query private var lists: [CustomList]
     
     // Locking
-    @State private var isUnlocked: Bool = false
+    @State private var isUnlocked: Bool = true
     @AppStorage("useBiometricAuthentication") private var useBiometricAuthentication: Bool = false
     @Environment(\.scenePhase) var scenePhase
     let context = LAContext()
@@ -41,9 +40,11 @@ struct EasyChecklistApp: App {
                     .task { _ = hasBiometrics() }
             } else {
                 ContentUnavailableView {
-                    Label("Locked: \(String(describing: error?.code))", systemImage: "lock")
+                    Label("Locked", systemImage: "lock")
                 } actions: {
-                    Button("Try Again", action: authenticate)
+                    Button(action: authenticate) {
+                        Label("Unlock using \(context.biometryType.name)", systemImage: context.biometryType.systemName)
+                    }
                 }
             }
         }
@@ -56,29 +57,38 @@ struct EasyChecklistApp: App {
     }
     
     func authenticate() {
-        if hasBiometrics() {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "We need to unlock your data.") { success, _ in
-                if success {
-                    isUnlocked = true
-                } else {
-                    isUnlocked = false
-                }
+        if !hasBiometrics() {
+            return
+        }
+        
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "We need to unlock your data.") { success, _ in
+            if success {
+                isUnlocked = true
+            } else {
+                isUnlocked = false
             }
         }
     }
     
     func setLockedStateAfterScenePhaseChange(oldValue: ScenePhase, newValue:ScenePhase) {
+        isUnlocked = false
+        
+        if !useBiometricAuthentication {
+            isUnlocked = true
+            return
+        }
+        
         switch newValue {
             case .background:
                 isUnlocked = false
             case .inactive:
                 isUnlocked = false
             case .active:
-            if useBiometricAuthentication && oldValue != .active{
-                    authenticate()
-                } else {
-                    isUnlocked = true
-                }
+                if oldValue != .active{
+                        authenticate()
+                    } else {
+                        isUnlocked = true
+                    }
             @unknown default: break
         }
     }

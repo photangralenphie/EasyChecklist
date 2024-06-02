@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-import InlineColorPicker
+import AwsomeSwiftyComponents
 
 struct ChecklistCellView: View {
     
@@ -26,9 +26,9 @@ struct ChecklistCellView: View {
         return "\(numToDoItems)/\(listEntries.count)"
     }
     
-    var listExhaustiveDetailSubtitle: String {
+    var listExhaustiveDetailSubtitle: LocalizedStringKey {
         guard let listEntries = list.listEntries else { return "" }
-        return "^[\(listEntries.count) Entry](inflect: true) - \(numDoneItems) Done - \(numToDoItems) ToDo"
+        return "\(listEntries.count) Entry - \(numDoneItems) Done - \(numToDoItems) ToDo"
     }
     
     var numDoneItems: Int {
@@ -48,6 +48,7 @@ struct ChecklistCellView: View {
                     VStack(alignment: .leading) {
                         HStack(alignment: .firstTextBaseline) {
                             Text(list.name)
+                                .foregroundStyle(Color.primary)
                             Spacer()
                             if !showExhaustiveListDetails {
                                 Text(listDetailSubtitle)
@@ -55,9 +56,9 @@ struct ChecklistCellView: View {
                             }
                         }
                         if showExhaustiveListDetails {
-                                Text(listExhaustiveDetailSubtitle)
-                                    .font(.footnote)
-                                    .foregroundStyle(Color.secondary)
+                            Text(listExhaustiveDetailSubtitle)
+                                .font(.footnote)
+                                .foregroundStyle(Color.secondary)
                         }
                     }
                 } icon: {

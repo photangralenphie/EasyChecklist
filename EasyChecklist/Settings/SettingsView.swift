@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-import InlineColorPicker
-import ColorSchemeSwitcher
+import AwsomeSwiftyComponents
 import LocalAuthentication
 
 struct SettingsView: View {
@@ -42,11 +41,13 @@ struct SettingsView: View {
                     Toggle(isOn: $showExhaustiveListDetails.animation()) {
                         Label("Show Exhaustive List Details", systemImage: showExhaustiveListDetails ? "tag" : "tag.slash")
                             .contentTransition(.symbolEffect(.replace))
+                            .labelStyle(CenteredImageLabelStyle())
                     }
                     
                     if context.biometryType != .none {
                         Toggle(isOn: $useBiometricAuthentication.animation()) {
                             Label("Lock using \(context.biometryType.name)", systemImage: context.biometryType.systemName)
+                                .labelStyle(CenteredImageLabelStyle())
                         }
                     }
                 }
@@ -55,17 +56,20 @@ struct SettingsView: View {
                     Toggle(isOn: $strikeCheckedEntries) {
                         Label("Strike Done Items", systemImage: "strikethrough")
                             .symbolEffect(.bounce, value: strikeCheckedEntries)
+                            .labelStyle(CenteredImageLabelStyle())
                     }
                     
                     Toggle(isOn: $moveToBottom) {
                         Label("Move Checked Items to Bottom", systemImage: "checkmark.circle")
                             .symbolEffect(.bounce, value: moveToBottom)
+                            .labelStyle(CenteredImageLabelStyle())
                     }
                 }
                 
                 Section("Not Implemented Yet"){
                     Toggle(isOn: $useiCloudSync) {
                         Label("iCloud Sync", systemImage: "icloud")
+                            .labelStyle(CenteredImageLabelStyle())
                     }
                 }
                 
@@ -73,6 +77,7 @@ struct SettingsView: View {
                     CreditsView()
                 } label: {
                     Label("Credits", systemImage: "c.circle")
+                        .labelStyle(CenteredImageLabelStyle())
                 }
 
             }

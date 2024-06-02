@@ -1,12 +1,13 @@
 {
+  "originHash" : "905b916a1a762ea6b607c6cc1ad07bb891e3109d83588d67bcd046f9e72187fb",
   "pins" : [
     {
-      "identity" : "inlinecolorpicker",
+      "identity" : "awsomeswiftycomponents",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/photangralenphie/InlineColorPicker",
+      "location" : "https://github.com/photangralenphie/AwsomeSwiftyComponents",
       "state" : {
         "branch" : "main",
-        "revision" : "d70396a58b80d66831ef362daa625724e1410fe5"
+        "revision" : "e337d918d9ae9fd8943f52e0dafb69c736fcb5bb"
       }
     },
     {
@@ -28,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CreditManager
+import AwsomeSwiftyComponents
 
 struct CreditsView: View {
     var body: some View {

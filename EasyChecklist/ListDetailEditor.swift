@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import InlineColorPicker
+import AwsomeSwiftyComponents
 
 struct ListDetailEditor: View {
     
