@@ -19,6 +19,7 @@ struct ChecklistCellView: View {
     @State private var editCustomList: Bool = false
     
     // Settings
+    @AppStorage("accentColorID") private var accentColorID: Int = 0
     @AppStorage("showExhaustiveListDetails") private var showExhaustiveListDetails: Bool = true
     
     var listDetailSubtitle: String {
@@ -71,14 +72,14 @@ struct ChecklistCellView: View {
                 }
             }
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                Button("Delete", systemImage: "trash", action: deleteList)
+                Button("Delete", systemImage: "trash", role: .destructive, action: deleteList)
                     .tint(.red)
                 Button("Edit", systemImage: "rectangle.and.pencil.and.ellipsis") { editCustomList.toggle() }
+                    .tint(GetColorByID(accentColorID))
             }
             .contextMenu {
                 Button("Edit", systemImage: "rectangle.and.pencil.and.ellipsis") { editCustomList.toggle() }
-                Button("Delete", systemImage: "trash", action: deleteList)
-                    .tint(.red)
+                Button("Delete", systemImage: "trash", role: .destructive, action: deleteList)
             }
         }
     }

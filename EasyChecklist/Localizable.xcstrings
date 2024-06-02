@@ -290,6 +290,9 @@
     "Get Started by adding a new Checklist with the plus button" : {
 
     },
+    "Here you can set the language of EasyChecklist and manage permissions like to use Face-ID or Touch-ID." : {
+
+    },
     "iCloud Sync" : {
       "localizations" : {
         "de" : {
@@ -309,6 +312,9 @@
           }
         }
       }
+    },
+    "Language etc." : {
+
     },
     "List Entries" : {
       "localizations" : {
@@ -429,6 +435,9 @@
         }
       }
     },
+    "Open System Settings" : {
+
+    },
     "Order" : {
       "localizations" : {
         "de" : {
@@ -498,6 +507,9 @@
     "Select a Checklist in the Sidebar" : {
 
     },
+    "Setting your Accent Color to Primary will use white on Darkmode and black in Lightmode." : {
+
+    },
     "Settings" : {
       "localizations" : {
         "de" : {
@@ -544,17 +556,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erledigte Einträge durchstreichen"
-          }
-        }
-      }
-    },
-    "Try Again" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erneut Versuchen"
           }
         }
       }

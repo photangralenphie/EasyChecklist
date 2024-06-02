@@ -132,11 +132,11 @@ struct ContentView: View {
             }
         } detail: {
             if lists.isEmpty {
-                ContentUnavailableView("No Checklists", image: "plus", description: Text("Get Started by adding a new Checklist with the plus button"))
+                ContentUnavailableView("No Checklists", systemImage: "plus", description: Text("Get Started by adding a new Checklist with the plus button"))
             } else if let list = selectedList {
                 ListView(list: list, selectedList: $selectedList)
             } else {
-                ContentUnavailableView("Nothing Selected", image: "filemenu.and.selection", description: Text("Select a Checklist in the Sidebar"))
+                ContentUnavailableView("Nothing Selected", systemImage: "filemenu.and.selection", description: Text("Select a Checklist in the Sidebar"))
             }
         }
         .searchable(text: $searchString)

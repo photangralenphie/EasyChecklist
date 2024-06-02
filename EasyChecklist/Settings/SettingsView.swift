@@ -32,9 +32,13 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack{
             Form{
-                Section("Appearance"){
+                Section{
                     InlineColorPicker(colorIndex: $accentColorID, pickerStyle: .expanded)
                     ColorSchemeSwitcher(colorScheme: $colorScheme, showIcon: true)
+                } header: {
+                    Text("Appearance")
+                } footer: {
+                    Text("Setting your Accent Color to Primary will use white on Darkmode and black in Lightmode.")
                 }
                 
                 Section("General") {
@@ -65,6 +69,17 @@ struct SettingsView: View {
                             .labelStyle(CenteredImageLabelStyle())
                     }
                 }
+                Section {
+                    Button(action: openSystemSettings) {
+                        Label("Open System Settings", systemImage: "arrow.up.right.square")
+                            .labelStyle(CenteredImageLabelStyle())
+                    }
+                } header: {
+                    Text("Language etc.")
+                } footer: {
+                    Text("Here you can set the language of EasyChecklist and manage permissions like to use Face-ID or Touch-ID.")
+                }
+
                 
                 Section("Not Implemented Yet"){
                     Toggle(isOn: $useiCloudSync) {
@@ -89,5 +104,11 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(colorScheme.mode())
+    }
+    
+    func openSystemSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url)
+        }
     }
 }
