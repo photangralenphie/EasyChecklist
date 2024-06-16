@@ -31,20 +31,19 @@ struct ContentView: View {
         _lists = Query(sort: sortDescriptors, animation: .snappy)
     }
     
+    // Functional
+    @Environment(\.modelContext) private var context
+    @State private var selectedList: CustomList?
+    @State private var searchString: String = ""
+    
     // Sheets
     @State private var showSettings: Bool = false
     @State private var newCustomList: Bool = false
-    
-    @State private var selectedList: CustomList?
-    
-    @State private var searchString: String = ""
     
     // Empty List printing
     @State private var showEmptyPrintOptions: Bool = false
     @State private var emptyPrintListName: String = ""
     @State private var emptyPrintListNumEntries: Int?
-    
-    @Environment(\.modelContext) private var context
     
     var filteredLists: [CustomList] {
         searchString.isEmpty ? lists : lists.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }

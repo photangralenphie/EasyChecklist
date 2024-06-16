@@ -72,29 +72,21 @@ struct ListView: View {
         .toolbar(id: "listToolbar") {
             ToolbarItem(id: "search", placement: .primaryAction) {
                 if sizeClass == .compact {
-                    Button {
-                        isSearching.toggle()
-                    } label: {
-                        Label("Search", systemImage: "magnifyingglass")
-                    }
+                    Button("Search", systemImage: "magnifyingglass") { isSearching.toggle() }
                 }
             }
             
             ToolbarItem(id: "sort", placement: .secondaryAction) {
                 Picker(selection: .constant(0)) {
-                    Label("Alphabetical", systemImage: "abc")
-                        .tag(0)
-                    Label("Newest", systemImage: "clock")
-                        .tag(1)
+                    Label("Alphabetical", systemImage: "abc").tag(0)
+                    Label("Newest", systemImage: "clock").tag(1)
                 } label: {
                     Label("Sort", systemImage: "arrow.up.arrow.down")
                 }
             }
             
             ToolbarItem(id: "edit", placement: .secondaryAction) {
-                Button(action: editList){
-                    Label("Edit List", systemImage: "square.and.pencil")
-                }
+                Button("Edit List", systemImage: "square.and.pencil", action: editList)
             }
             
             ToolbarItem(id: "share", placement: .secondaryAction) {
@@ -102,15 +94,11 @@ struct ListView: View {
             }
             
             ToolbarItem(id: "print", placement: .secondaryAction) {
-                Button(action: printList) {
-                    Label("Print", systemImage: "printer")
-                }
+                Button("Print", systemImage: "printer", action: printList)
             }
             
             ToolbarItem(id: "delete", placement: .secondaryAction) {
-                Button(role: .destructive, action: deleteList) {
-                    Label("Delete List", systemImage: "trash")
-                }
+                Button("Delete List", systemImage: "trash", role: .destructive, action: deleteList)
             }
         }
         .searchable(text: $searchString, isPresented: $isSearching.animation(), placement: .toolbar, prompt: Text("Search \(list.name)"))
@@ -158,6 +146,7 @@ struct ListView: View {
                     }
                     .buttonStyle(.bordered)
                     .disabled(newEntryName.isEmpty)
+                    .tint(GetColorByID(list.color))
                 }
                 .padding()
                 .background(Color(.systemGroupedBackground))
