@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-import AwsomeSwiftyComponents
+import AwesomeSwiftyComponents
 import LocalAuthentication
 
 @main

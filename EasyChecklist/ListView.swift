@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import AwsomeSwiftyComponents
+import AwesomeSwiftyComponents
 import TPPDF
 import PrintingKit
 import UniformTypeIdentifiers

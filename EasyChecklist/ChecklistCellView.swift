@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-import AwsomeSwiftyComponents
+import AwesomeSwiftyComponents
 
 struct ChecklistCellView: View {
     

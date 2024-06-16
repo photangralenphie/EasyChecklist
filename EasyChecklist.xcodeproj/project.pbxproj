@@ -13,13 +13,12 @@
 		DD53C0512C0A72100020DB61 /* LABiometryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C0502C0A72100020DB61 /* LABiometryType.swift */; };
 		DD53C0542C0A761D0020DB61 /* CenteredImageLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */; };
 		DD53C0562C0B92770020DB61 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DD53C0552C0B92770020DB61 /* Localizable.xcstrings */; };
-		DD53C05A2C0C784A0020DB61 /* AwsomeSwiftyComponents in Frameworks */ = {isa = PBXBuildFile; productRef = DD53C0592C0C784A0020DB61 /* AwsomeSwiftyComponents */; };
 		DD5D52772B9DBE750086B4D3 /* ListDetailEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */; };
 		DD9553A628F55E7A00D1A9E3 /* IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9553A528F55E7A00D1A9E3 /* IconPicker.swift */; };
 		DDA743D828F0873500681693 /* EasyChecklistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D728F0873500681693 /* EasyChecklistApp.swift */; };
 		DDA743DA28F0873500681693 /* ChecklistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D928F0873500681693 /* ChecklistCellView.swift */; };
 		DDA743DC28F0873900681693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA743DB28F0873900681693 /* Assets.xcassets */; };
-		DDA743E028F0873A00681693 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA743DF28F0873A00681693 /* Preview Assets.xcassets */; };
+		DDB4C6D12C1F696700EA0600 /* AwesomeSwiftyComponents in Frameworks */ = {isa = PBXBuildFile; productRef = DDB4C6D02C1F696700EA0600 /* AwesomeSwiftyComponents */; };
 		DDBCED6A28F21FD400F3B22C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCED6928F21FD400F3B22C /* SettingsView.swift */; };
 		DDDA1E432B9D018400E00524 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA1E422B9D018400E00524 /* CreditsView.swift */; };
 		DDFA2F022B78D7460037FC6D /* CustomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F012B78D7460037FC6D /* CustomList.swift */; };
@@ -41,7 +40,6 @@
 		DDA743D928F0873500681693 /* ChecklistCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCellView.swift; sourceTree = "<group>"; };
 		DDA743DB28F0873900681693 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDA743DD28F0873900681693 /* EasyChecklist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyChecklist.entitlements; sourceTree = "<group>"; };
-		DDA743DF28F0873A00681693 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DDBCED6928F21FD400F3B22C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DDCDBBDA2C0C7FBF00093A4F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDDA1E422B9D018400E00524 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
@@ -58,7 +56,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */,
-				DD53C05A2C0C784A0020DB61 /* AwsomeSwiftyComponents in Frameworks */,
+				DDB4C6D12C1F696700EA0600 /* AwesomeSwiftyComponents in Frameworks */,
 				DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,18 +130,9 @@
 				DDA743DB28F0873900681693 /* Assets.xcassets */,
 				DD53C0552C0B92770020DB61 /* Localizable.xcstrings */,
 				DDA743DD28F0873900681693 /* EasyChecklist.entitlements */,
-				DDA743DE28F0873A00681693 /* Preview Content */,
 				DDCDBBDA2C0C7FBF00093A4F /* Info.plist */,
 			);
 			path = EasyChecklist;
-			sourceTree = "<group>";
-		};
-		DDA743DE28F0873A00681693 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				DDA743DF28F0873A00681693 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		DDFA2F002B78D7290037FC6D /* Model */ = {
@@ -175,7 +164,7 @@
 			packageProductDependencies = (
 				DD034E492B93B1D20038F7A7 /* PrintingKit */,
 				DD034E4C2B93B5F10038F7A7 /* TPPDF */,
-				DD53C0592C0C784A0020DB61 /* AwsomeSwiftyComponents */,
+				DDB4C6D02C1F696700EA0600 /* AwesomeSwiftyComponents */,
 			);
 			productName = EasyChecklist;
 			productReference = DDA743D428F0873500681693 /* EasyChecklist.app */;
@@ -225,7 +214,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDA743E028F0873A00681693 /* Preview Assets.xcassets in Resources */,
 				DDA743DC28F0873900681693 /* Assets.xcassets in Resources */,
 				DD53C0562C0B92770020DB61 /* Localizable.xcstrings in Resources */,
 			);
@@ -384,7 +372,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"EasyChecklist/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = ATQPB625XL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -429,7 +417,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"EasyChecklist/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = ATQPB625XL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -526,10 +514,10 @@
 			package = DD034E4B2B93B5F10038F7A7 /* XCRemoteSwiftPackageReference "TPPDF" */;
 			productName = TPPDF;
 		};
-		DD53C0592C0C784A0020DB61 /* AwsomeSwiftyComponents */ = {
+		DDB4C6D02C1F696700EA0600 /* AwesomeSwiftyComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DD53C0582C0C784A0020DB61 /* XCRemoteSwiftPackageReference "AwsomeSwiftyComponents" */;
-			productName = AwsomeSwiftyComponents;
+			productName = AwesomeSwiftyComponents;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

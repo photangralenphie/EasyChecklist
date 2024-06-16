@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AwsomeSwiftyComponents
+import AwesomeSwiftyComponents
 
 struct CenteredImageLabelStyle: LabelStyle {
     
