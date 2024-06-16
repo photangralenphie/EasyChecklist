@@ -118,7 +118,6 @@ struct ContentView: View {
             .sheet(isPresented: $newCustomList) {
                 ListDetailEditor(navigationTitle: "Add New List", buttonTitle: "Add New List", action: addNewList)
             }
-            .sheet(isPresented: $showSettings) { SettingsView() }
             .navigationTitle("Checklists")
             .alert("Print Empty Checklist", isPresented: $showEmptyPrintOptions) {
                 TextField("Name", text: $emptyPrintListName)
@@ -138,6 +137,11 @@ struct ContentView: View {
             }
         }
         .searchable(text: $searchString)
+        .inspector(isPresented: $showSettings) {
+            SettingsView(showSettings: $showSettings)
+                .presentationDetents([.large])
+                .presentationBackground(.ultraThinMaterial)
+        }
     }
     
     func addNewList(listName: String, listIcon: Int, listColor: Int) {
