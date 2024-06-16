@@ -13,6 +13,7 @@ class ListEntry {
     var name: String
     var id: UUID
     var checked: Bool
+    var dateAdded = Date.now
     
     init(name: String) {
         self.name = name

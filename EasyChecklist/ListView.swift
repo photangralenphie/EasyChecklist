@@ -15,7 +15,7 @@ import UniformTypeIdentifiers
 struct ListView: View {
     
     // Init
-    let list: CustomList
+    @Bindable public var list: CustomList
     @Binding public var selectedList: CustomList?
     
     // Data
@@ -39,7 +39,13 @@ struct ListView: View {
     
     var filteredListEntries: [ListEntry] {
         guard let entries = list.listEntries else { return [] }
-        return searchString.isEmpty ? entries : entries.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }
+        let filteredEntries = searchString.isEmpty ? entries : entries.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }
+        switch list.sortBy {
+            case .date:
+                return filteredEntries.sorted { $0.dateAdded > $1.dateAdded }
+            case .alphabetically:
+                return filteredEntries.sorted { $0.name < $1.name }
+        }
     }
     
     var filteredUncheckedItems: [ListEntry] { filteredListEntries.filter { !$0.checked } }
@@ -77,9 +83,11 @@ struct ListView: View {
             }
             
             ToolbarItem(id: "sort", placement: .secondaryAction) {
-                Picker(selection: .constant(0)) {
-                    Label("Alphabetical", systemImage: "abc").tag(0)
-                    Label("Newest", systemImage: "clock").tag(1)
+                Picker(selection: $list.sortBy.animation()) {
+                    Label("Alphabetical", systemImage: "abc")
+                        .tag(EntrySort.alphabetically)
+                    Label("Newest", systemImage: "clock")
+                        .tag(EntrySort.date)
                 } label: {
                     Label("Sort", systemImage: "arrow.up.arrow.down")
                 }
