@@ -326,19 +326,6 @@
         }
       }
     },
-    "Lock using %@" : {
-
-    },
-    "Locked" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verschlossen"
-          }
-        }
-      }
-    },
     "Modified" : {
       "localizations" : {
         "de" : {
@@ -559,9 +546,6 @@
           }
         }
       }
-    },
-    "Unlock using %@" : {
-
     }
   },
   "version" : "1.0"

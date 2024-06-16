@@ -7,7 +7,6 @@
 
 import SwiftUI
 import AwesomeSwiftyComponents
-import LocalAuthentication
 
 struct SettingsView: View {
     
@@ -19,8 +18,6 @@ struct SettingsView: View {
     
     // General
     @AppStorage("showExhaustiveListDetails") private var showExhaustiveListDetails: Bool = true
-    @AppStorage("useBiometricAuthentication") private var useBiometricAuthentication: Bool = false
-    let context = LAContext()
 
     // List Entries
     @AppStorage("strikeCheckedEntries") private var strikeCheckedEntries: Bool = true
@@ -46,13 +43,6 @@ struct SettingsView: View {
                         Label("Show Exhaustive List Details", systemImage: showExhaustiveListDetails ? "tag" : "tag.slash")
                             .contentTransition(.symbolEffect(.replace))
                             .labelStyle(CenteredImageLabelStyle())
-                    }
-                    
-                    if context.biometryType != .none {
-                        Toggle(isOn: $useBiometricAuthentication.animation()) {
-                            Label("Lock using \(context.biometryType.name)", systemImage: context.biometryType.systemName)
-                                .labelStyle(CenteredImageLabelStyle())
-                        }
                     }
                 }
                 

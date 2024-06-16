@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import LocalAuthentication
 import PrintingKit
 
 struct ContentView: View {

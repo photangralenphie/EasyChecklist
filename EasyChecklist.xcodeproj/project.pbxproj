@@ -10,7 +10,6 @@
 		DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E492B93B1D20038F7A7 /* PrintingKit */; };
 		DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E4C2B93B5F10038F7A7 /* TPPDF */; };
 		DD53C04E2C0A53150020DB61 /* PdfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C04D2C0A53150020DB61 /* PdfMaker.swift */; };
-		DD53C0512C0A72100020DB61 /* LABiometryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C0502C0A72100020DB61 /* LABiometryType.swift */; };
 		DD53C0542C0A761D0020DB61 /* CenteredImageLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */; };
 		DD53C0562C0B92770020DB61 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DD53C0552C0B92770020DB61 /* Localizable.xcstrings */; };
 		DD5D52772B9DBE750086B4D3 /* ListDetailEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		DD53C04D2C0A53150020DB61 /* PdfMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMaker.swift; sourceTree = "<group>"; };
-		DD53C0502C0A72100020DB61 /* LABiometryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LABiometryType.swift; sourceTree = "<group>"; };
 		DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredImageLabelStyle.swift; sourceTree = "<group>"; };
 		DD53C0552C0B92770020DB61 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailEditor.swift; sourceTree = "<group>"; };
@@ -81,14 +79,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		DD53C04F2C0A71D50020DB61 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				DD53C0502C0A72100020DB61 /* LABiometryType.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		DD53C0522C0A76010020DB61 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				DD53C0522C0A76010020DB61 /* Styles */,
-				DD53C04F2C0A71D50020DB61 /* Extensions */,
 				DDFA2F002B78D7290037FC6D /* Model */,
 				DD3E5B092B82A3320087F87F /* Settings */,
 				DDA743D728F0873500681693 /* EasyChecklistApp.swift */,
@@ -239,7 +228,6 @@
 				DD5D52772B9DBE750086B4D3 /* ListDetailEditor.swift in Sources */,
 				DD53C04E2C0A53150020DB61 /* PdfMaker.swift in Sources */,
 				DD53C0542C0A761D0020DB61 /* CenteredImageLabelStyle.swift in Sources */,
-				DD53C0512C0A72100020DB61 /* LABiometryType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
