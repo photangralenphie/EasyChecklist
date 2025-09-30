@@ -17,7 +17,7 @@ struct ListEntryView: View {
     @State private var showRenameAlert: Bool = false
     
     // Settings
-    @AppStorage("strikeCheckedEntries") private var strikeCheckedEntries: Bool = true
+	@AppStorage(PreferenceKeys.strikeCheckedEntries) private var strikeCheckedEntries: Bool = true
     
     var body: some View {
         Label(listEntry.name, systemImage: listEntry.checked ? "checkmark.circle" : "circle")

@@ -14,17 +14,14 @@ struct SettingsView: View {
 
     // Appearance
 	@AppStorage(PreferenceKeys.accentColorSchema) private var accentColorSchema: AvailableColors = .blue
-    @AppStorage("colorScheme") private var colorScheme: PreferredColorScheme = .systemDefault
+	@AppStorage(PreferenceKeys.colorScheme) private var colorScheme: PreferredColorScheme = .systemDefault
     
     // General
-    @AppStorage("showExhaustiveListDetails") private var showExhaustiveListDetails: Bool = true
+	@AppStorage(PreferenceKeys.showExhaustiveListDetails) private var showExhaustiveListDetails: Bool = true
 
     // List Entries
-    @AppStorage("strikeCheckedEntries") private var strikeCheckedEntries: Bool = true
-    @AppStorage("moveToBottom") private var moveToBottom: Bool = true
-    
-    // Not Implemented Yet
-    @AppStorage("useiCloudSync") private var useiCloudSync: Bool = false
+	@AppStorage(PreferenceKeys.strikeCheckedEntries) private var strikeCheckedEntries: Bool = true
+	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
     
     var body: some View {
         Form {

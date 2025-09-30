@@ -15,7 +15,7 @@ struct ChecklistCellView: View {
     public var list: CustomList
     
     // Settings
-    @AppStorage("showExhaustiveListDetails") private var showExhaustiveListDetails: Bool = true
+	@AppStorage(PreferenceKeys.showExhaustiveListDetails) private var showExhaustiveListDetails: Bool = true
     
     var listDetailSubtitle: String {
         return "\(numToDoItems)/\(list.listEntries?.count ?? 0)"

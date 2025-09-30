@@ -34,8 +34,7 @@ struct ListView: View {
     @Environment(\.horizontalSizeClass) private var sizeClass
     
     // Settings
-    @AppStorage("accentColorID") private var accentColorID: Int = 0
-    @AppStorage("moveToBottom") private var moveToBottom: Bool = true
+	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
     
     var filteredListEntries: [ListEntry] {
         guard let entries = list.listEntries else { return [] }
