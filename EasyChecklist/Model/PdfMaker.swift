@@ -8,6 +8,7 @@ import SwiftUI
 import TPPDF
 import CoreTransferable
 
+#if os(iOS)
 public class PdfMaker {
     
     init(list: CustomList) {
@@ -116,3 +117,4 @@ extension PdfMaker: Transferable {
         }
     }
 }
+#endif

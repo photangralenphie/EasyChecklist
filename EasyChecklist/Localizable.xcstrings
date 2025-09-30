@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "%lld Entry - %lld Done - %lld ToDo" : {
       "localizations" : {
         "de" : {
@@ -184,16 +181,6 @@
         }
       }
     },
-    "Credits" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Credits"
-          }
-        }
-      }
-    },
     "Delete" : {
       "localizations" : {
         "de" : {
@@ -285,7 +272,14 @@
       }
     },
     "Get started by adding a list with the button below." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beginne, mit dem Hinzufügen einer Liste mit dem unterem Button"
+          }
+        }
+      }
     },
     "Get Started by adding a new Checklist with the plus button" : {
 
@@ -294,6 +288,7 @@
 
     },
     "iCloud Sync" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -314,7 +309,14 @@
       }
     },
     "Language etc." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprache etc."
+          }
+        }
+      }
     },
     "List Entries" : {
       "localizations" : {
@@ -397,6 +399,7 @@
       }
     },
     "Not Implemented Yet" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -407,10 +410,24 @@
       }
     },
     "Nothing Selected" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nichts Ausgewählt"
+          }
+        }
+      }
     },
     "Number Empty Items" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl an leeren Einträgen"
+          }
+        }
+      }
     },
     "OK" : {
       "localizations" : {
@@ -423,7 +440,14 @@
       }
     },
     "Open System Settings" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungs-App öffnen"
+          }
+        }
+      }
     },
     "Order" : {
       "localizations" : {
@@ -446,10 +470,14 @@
       }
     },
     "Print Empty Checklist" : {
-
-    },
-    "Print Empty Cheklist" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leere Liste Drucken"
+          }
+        }
+      }
     },
     "Rename" : {
       "localizations" : {
@@ -492,7 +520,14 @@
       }
     },
     "Select a Checklist in the Sidebar" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wähle eine Checkliste in der Seitenleiste aus."
+          }
+        }
+      }
     },
     "Setting your Accent Color to Primary will use white on Darkmode and black in Lightmode." : {
 
@@ -543,6 +578,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erledigte Einträge durchstreichen"
+          }
+        }
+      }
+    },
+    "Theme Color" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farbthema"
           }
         }
       }

@@ -3,52 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E492B93B1D20038F7A7 /* PrintingKit */; };
 		DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E4C2B93B5F10038F7A7 /* TPPDF */; };
-		DD53C04E2C0A53150020DB61 /* PdfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C04D2C0A53150020DB61 /* PdfMaker.swift */; };
-		DD53C0542C0A761D0020DB61 /* CenteredImageLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */; };
-		DD53C0562C0B92770020DB61 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DD53C0552C0B92770020DB61 /* Localizable.xcstrings */; };
-		DD5D52772B9DBE750086B4D3 /* ListDetailEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */; };
-		DD9553A628F55E7A00D1A9E3 /* IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9553A528F55E7A00D1A9E3 /* IconPicker.swift */; };
-		DDA743D828F0873500681693 /* EasyChecklistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D728F0873500681693 /* EasyChecklistApp.swift */; };
-		DDA743DA28F0873500681693 /* ChecklistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA743D928F0873500681693 /* ChecklistCellView.swift */; };
-		DDA743DC28F0873900681693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA743DB28F0873900681693 /* Assets.xcassets */; };
-		DDB4C6D12C1F696700EA0600 /* AwesomeSwiftyComponents in Frameworks */ = {isa = PBXBuildFile; productRef = DDB4C6D02C1F696700EA0600 /* AwesomeSwiftyComponents */; };
-		DDB4C6D32C1F6F6100EA0600 /* ChecklistCellViewContextAndSwipeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4C6D22C1F6F6100EA0600 /* ChecklistCellViewContextAndSwipeActions.swift */; };
-		DDBCED6A28F21FD400F3B22C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCED6928F21FD400F3B22C /* SettingsView.swift */; };
-		DDDA1E432B9D018400E00524 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA1E422B9D018400E00524 /* CreditsView.swift */; };
-		DDFA2F022B78D7460037FC6D /* CustomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F012B78D7460037FC6D /* CustomList.swift */; };
-		DDFA2F042B78ECF30037FC6D /* ListEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F032B78ECF20037FC6D /* ListEntry.swift */; };
-		DDFA2F062B78EEB80037FC6D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F052B78EEB80037FC6D /* ListView.swift */; };
-		DDFA2F082B7920370037FC6D /* ListEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F072B7920370037FC6D /* ListEntryView.swift */; };
-		DDFA2F0A2B7FF4170037FC6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFA2F092B7FF4170037FC6D /* ContentView.swift */; };
+		DD4F2B972D4974B900C1E4E3 /* AwesomeSwiftyComponents in Frameworks */ = {isa = PBXBuildFile; productRef = DD4F2B962D4974B900C1E4E3 /* AwesomeSwiftyComponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DD53C04D2C0A53150020DB61 /* PdfMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMaker.swift; sourceTree = "<group>"; };
-		DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredImageLabelStyle.swift; sourceTree = "<group>"; };
-		DD53C0552C0B92770020DB61 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailEditor.swift; sourceTree = "<group>"; };
-		DD9553A528F55E7A00D1A9E3 /* IconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPicker.swift; sourceTree = "<group>"; };
 		DDA743D428F0873500681693 /* EasyChecklist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyChecklist.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DDA743D728F0873500681693 /* EasyChecklistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyChecklistApp.swift; sourceTree = "<group>"; };
-		DDA743D928F0873500681693 /* ChecklistCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCellView.swift; sourceTree = "<group>"; };
-		DDA743DB28F0873900681693 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DDA743DD28F0873900681693 /* EasyChecklist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyChecklist.entitlements; sourceTree = "<group>"; };
-		DDB4C6D22C1F6F6100EA0600 /* ChecklistCellViewContextAndSwipeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCellViewContextAndSwipeActions.swift; sourceTree = "<group>"; };
-		DDBCED6928F21FD400F3B22C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		DDCDBBDA2C0C7FBF00093A4F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDDA1E422B9D018400E00524 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
-		DDFA2F012B78D7460037FC6D /* CustomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomList.swift; sourceTree = "<group>"; };
-		DDFA2F032B78ECF20037FC6D /* ListEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntry.swift; sourceTree = "<group>"; };
-		DDFA2F052B78EEB80037FC6D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		DDFA2F072B7920370037FC6D /* ListEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntryView.swift; sourceTree = "<group>"; };
-		DDFA2F092B7FF4170037FC6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DDE79C282E8B193C009BCF69 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DDA743D328F0873500681693 /* EasyChecklist */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		DDE79C172E8B193C009BCF69 /* EasyChecklist */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DDE79C282E8B193C009BCF69 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = EasyChecklist; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DDA743D128F0873500681693 /* Frameworks */ = {
@@ -56,7 +36,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */,
-				DDB4C6D12C1F696700EA0600 /* AwesomeSwiftyComponents in Frameworks */,
+				DD4F2B972D4974B900C1E4E3 /* AwesomeSwiftyComponents in Frameworks */,
 				DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,37 +44,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DD3E5B062B8259DC0087F87F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DD3E5B092B82A3320087F87F /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				DDBCED6928F21FD400F3B22C /* SettingsView.swift */,
-				DD9553A528F55E7A00D1A9E3 /* IconPicker.swift */,
-				DDDA1E422B9D018400E00524 /* CreditsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		DD53C0522C0A76010020DB61 /* Styles */ = {
-			isa = PBXGroup;
-			children = (
-				DD53C0532C0A761D0020DB61 /* CenteredImageLabelStyle.swift */,
-			);
-			path = Styles;
-			sourceTree = "<group>";
-		};
 		DDA743CB28F0873500681693 = {
 			isa = PBXGroup;
 			children = (
-				DDA743D628F0873500681693 /* EasyChecklist */,
+				DDE79C172E8B193C009BCF69 /* EasyChecklist */,
 				DDA743D528F0873500681693 /* Products */,
-				DD3E5B062B8259DC0087F87F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,37 +58,6 @@
 				DDA743D428F0873500681693 /* EasyChecklist.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		DDA743D628F0873500681693 /* EasyChecklist */ = {
-			isa = PBXGroup;
-			children = (
-				DD53C0522C0A76010020DB61 /* Styles */,
-				DDFA2F002B78D7290037FC6D /* Model */,
-				DD3E5B092B82A3320087F87F /* Settings */,
-				DDA743D728F0873500681693 /* EasyChecklistApp.swift */,
-				DDFA2F092B7FF4170037FC6D /* ContentView.swift */,
-				DDA743D928F0873500681693 /* ChecklistCellView.swift */,
-				DDB4C6D22C1F6F6100EA0600 /* ChecklistCellViewContextAndSwipeActions.swift */,
-				DDFA2F052B78EEB80037FC6D /* ListView.swift */,
-				DD5D52762B9DBE750086B4D3 /* ListDetailEditor.swift */,
-				DDFA2F072B7920370037FC6D /* ListEntryView.swift */,
-				DDA743DB28F0873900681693 /* Assets.xcassets */,
-				DD53C0552C0B92770020DB61 /* Localizable.xcstrings */,
-				DDA743DD28F0873900681693 /* EasyChecklist.entitlements */,
-				DDCDBBDA2C0C7FBF00093A4F /* Info.plist */,
-			);
-			path = EasyChecklist;
-			sourceTree = "<group>";
-		};
-		DDFA2F002B78D7290037FC6D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				DDFA2F012B78D7460037FC6D /* CustomList.swift */,
-				DDFA2F032B78ECF20037FC6D /* ListEntry.swift */,
-				DD53C04D2C0A53150020DB61 /* PdfMaker.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,11 +75,14 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				DDE79C172E8B193C009BCF69 /* EasyChecklist */,
+			);
 			name = EasyChecklist;
 			packageProductDependencies = (
 				DD034E492B93B1D20038F7A7 /* PrintingKit */,
 				DD034E4C2B93B5F10038F7A7 /* TPPDF */,
-				DDB4C6D02C1F696700EA0600 /* AwesomeSwiftyComponents */,
+				DD4F2B962D4974B900C1E4E3 /* AwesomeSwiftyComponents */,
 			);
 			productName = EasyChecklist;
 			productReference = DDA743D428F0873500681693 /* EasyChecklist.app */;
@@ -190,7 +116,7 @@
 			packageReferences = (
 				DD034E482B93B1D20038F7A7 /* XCRemoteSwiftPackageReference "PrintingKit" */,
 				DD034E4B2B93B5F10038F7A7 /* XCRemoteSwiftPackageReference "TPPDF" */,
-				DD53C0582C0C784A0020DB61 /* XCRemoteSwiftPackageReference "AwsomeSwiftyComponents" */,
+				DD4F2B952D4974B900C1E4E3 /* XCLocalSwiftPackageReference "../AwesomeSwiftyComponents" */,
 			);
 			productRefGroup = DDA743D528F0873500681693 /* Products */;
 			projectDirPath = "";
@@ -206,8 +132,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDA743DC28F0873900681693 /* Assets.xcassets in Resources */,
-				DD53C0562C0B92770020DB61 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,20 +142,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDB4C6D32C1F6F6100EA0600 /* ChecklistCellViewContextAndSwipeActions.swift in Sources */,
-				DD9553A628F55E7A00D1A9E3 /* IconPicker.swift in Sources */,
-				DDFA2F082B7920370037FC6D /* ListEntryView.swift in Sources */,
-				DDFA2F062B78EEB80037FC6D /* ListView.swift in Sources */,
-				DDFA2F022B78D7460037FC6D /* CustomList.swift in Sources */,
-				DDBCED6A28F21FD400F3B22C /* SettingsView.swift in Sources */,
-				DDA743DA28F0873500681693 /* ChecklistCellView.swift in Sources */,
-				DDA743D828F0873500681693 /* EasyChecklistApp.swift in Sources */,
-				DDFA2F042B78ECF30037FC6D /* ListEntry.swift in Sources */,
-				DDDA1E432B9D018400E00524 /* CreditsView.swift in Sources */,
-				DDFA2F0A2B7FF4170037FC6D /* ContentView.swift in Sources */,
-				DD5D52772B9DBE750086B4D3 /* ListDetailEditor.swift in Sources */,
-				DD53C04E2C0A53150020DB61 /* PdfMaker.swift in Sources */,
-				DD53C0542C0A761D0020DB61 /* CenteredImageLabelStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +201,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -347,7 +257,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -360,14 +270,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = EasyChecklist/EasyChecklist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = ATQPB625XL;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = YES;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EasyChecklist/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -383,15 +306,22 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photangralenphie.EasyChecklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -405,14 +335,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = EasyChecklist/EasyChecklist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = ATQPB625XL;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = YES;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EasyChecklist/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -428,15 +371,22 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photangralenphie.EasyChecklist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -468,6 +418,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		DD4F2B952D4974B900C1E4E3 /* XCLocalSwiftPackageReference "../AwesomeSwiftyComponents" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../AwesomeSwiftyComponents;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		DD034E482B93B1D20038F7A7 /* XCRemoteSwiftPackageReference "PrintingKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -485,14 +442,6 @@
 				minimumVersion = 2.4.1;
 			};
 		};
-		DD53C0582C0C784A0020DB61 /* XCRemoteSwiftPackageReference "AwsomeSwiftyComponents" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/photangralenphie/AwsomeSwiftyComponents";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -506,9 +455,8 @@
 			package = DD034E4B2B93B5F10038F7A7 /* XCRemoteSwiftPackageReference "TPPDF" */;
 			productName = TPPDF;
 		};
-		DDB4C6D02C1F696700EA0600 /* AwesomeSwiftyComponents */ = {
+		DD4F2B962D4974B900C1E4E3 /* AwesomeSwiftyComponents */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD53C0582C0C784A0020DB61 /* XCRemoteSwiftPackageReference "AwsomeSwiftyComponents" */;
 			productName = AwesomeSwiftyComponents;
 		};
 /* End XCSwiftPackageProductDependency section */

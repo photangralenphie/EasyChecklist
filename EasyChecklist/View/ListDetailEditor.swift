@@ -19,10 +19,10 @@ struct ListDetailEditor: View {
     // State
     @State public var listName: String = ""
     @State public var listIcon: Int = 0
-    @State public var listColor: Int = 0
+    @State public var listColor: AvailableColors = .blue
     
     // Closure
-    let action: (_ listName: String, _ listIcon: Int, _ listColor: Int) -> Void
+    let action: (_ listName: String, _ listIcon: Int, _ listColor: AvailableColors) -> Void
     
     @FocusState private var listNameFocused: Bool
     
@@ -35,7 +35,7 @@ struct ListDetailEditor: View {
                 }
                 
                 Section("Accent Color") {
-                    InlineColorPicker(colorIndex: $listColor, pickerStyle: .slim)
+                    InlineColorPicker(selectedColor: $listColor, pickerStyle: .slim)
                 }
                 
                 Section("Icon") {
@@ -43,7 +43,9 @@ struct ListDetailEditor: View {
                 }
             }
             .navigationTitle(navigationTitle)
+			#if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+			#endif
             .toolbar{
                 ToolbarItemGroup(placement: .cancellationAction) {
                     Button("Cancel", role: .cancel) { dismiss() }
@@ -55,7 +57,7 @@ struct ListDetailEditor: View {
                 .padding(.bottom, 15)
                 .disabled(listName.isEmpty)
         }
-        .tint(GetColorByID(listColor))
+        .tint(listColor.SwiftUIColor)
     }
     
     func save() {

@@ -10,16 +10,15 @@ import SwiftData
 
 @Model
 class ListEntry {
-    var name: String
-    var id: UUID
-    var checked: Bool
+    var name: String = ""
+    var id: UUID = UUID()
+    var checked: Bool  = false
     var dateAdded = Date.now
     
     init(name: String) {
         self.name = name
-        self.id = UUID()
-        self.checked = false
     }
     
+	@Relationship(inverse: \CustomList.listEntries)
     var list: CustomList?
 }

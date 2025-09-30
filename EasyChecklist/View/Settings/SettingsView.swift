@@ -10,11 +10,10 @@ import AwesomeSwiftyComponents
 
 struct SettingsView: View {
     
-    @Binding public var showSettings: Bool
-    //@Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss
 
     // Appearance
-    @AppStorage("accentColorID") private var accentColorID: Int = 0
+	@AppStorage(PreferenceKeys.accentColorSchema) private var accentColorSchema: AvailableColors = .blue
     @AppStorage("colorScheme") private var colorScheme: PreferredColorScheme = .systemDefault
     
     // General
@@ -28,9 +27,9 @@ struct SettingsView: View {
     @AppStorage("useiCloudSync") private var useiCloudSync: Bool = false
     
     var body: some View {
-        Form{
+        Form {
             Section{
-                InlineColorPicker(colorIndex: $accentColorID, pickerStyle: .expanded)
+				InlineColorPicker(selectedColor: $accentColorSchema, pickerStyle: .expanded(systemImage: "paintbrush", description: "Theme Color"))
                 ColorSchemeSwitcher(colorScheme: $colorScheme, showIcon: true)
             } header: {
                 Text("Appearance")
@@ -59,6 +58,8 @@ struct SettingsView: View {
                         .labelStyle(CenteredImageLabelStyle())
                 }
             }
+						
+			#if os(iOS)
             Section {
                 Button(action: openSystemSettings) {
                     Label("Open System Settings", systemImage: "arrow.up.right.square")
@@ -70,37 +71,25 @@ struct SettingsView: View {
                 Text("Here you can set the language of EasyChecklist and manage permissions like to use Face-ID or Touch-ID.")
             }
 
-            
-            Section("Not Implemented Yet"){
-                Toggle(isOn: $useiCloudSync) {
-                    Label("iCloud Sync", systemImage: "icloud")
-                        .labelStyle(CenteredImageLabelStyle())
-                }
-            }
-            
-            NavigationLink {
-                CreditsView()
-            } label: {
-                Label("Credits", systemImage: "c.circle")
-                    .labelStyle(CenteredImageLabelStyle())
+			LinkedCreditManager(systemImage: "c.circle") {
+				LicenceLink(licence: .mit(name: "PrintingKit", author: "Daniel Saidi", year: "2023 - 2024"))
+				LicenceLink(licence: .mit(name: "TPPDF", author: "Philip Niedertscheider", year: "2016 - 2024"))
+			}
+			#endif
+        }
+        .toolbar {
+			ToolbarItem(placement: .confirmationAction) {
+                Button("Done") { dismiss() }
             }
         }
-        .toolbar{
-            ToolbarItem(placement: .principal) {
-                Text("Settings")
-                    .fontWeight(.bold)
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Done") { showSettings.toggle() }
-            }
-        }
-        .preferredColorScheme(colorScheme.mode())
+        .preferredColorScheme(colorScheme.mode)
     }
     
     func openSystemSettings() {
+		#if os(iOS)
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url)
         }
+		#endif
     }
 }

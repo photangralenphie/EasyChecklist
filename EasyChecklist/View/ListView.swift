@@ -70,11 +70,11 @@ struct ListView: View {
                 }
             }
         }
-        .tint(GetColorByID(list.color))
+        .tint(list.color.SwiftUIColor)
         .listStyle(.sidebar)
         .toolbarRole(sizeClass==UserInterfaceSizeClass.compact ? .automatic : .editor)
         .navigationTitle(list.name)
-        .transition(AnyTransition.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .top)))
+        .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .top)))
         .toolbar(id: "listToolbar") {
             ToolbarItem(id: "search", placement: .primaryAction) {
                 if sizeClass == .compact {
@@ -97,13 +97,15 @@ struct ListView: View {
                 Button("Edit List", systemImage: "square.and.pencil", action: editList)
             }
             
+			#if os(iOS)
             ToolbarItem(id: "share", placement: .secondaryAction) {
                 ShareLink(item: PdfMaker(list: list), preview: SharePreview(list.name))
             }
-            
+			
             ToolbarItem(id: "print", placement: .secondaryAction) {
                 Button("Print", systemImage: "printer", action: printList)
             }
+			#endif
             
             ToolbarItem(id: "delete", placement: .secondaryAction) {
                 Button("Delete List", systemImage: "trash", role: .destructive, action: deleteList)
@@ -130,7 +132,7 @@ struct ListView: View {
                 .frame(width: 200)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(GetColorByID(list.color))
+                        .stroke(list.color.SwiftUIColor)
                 )
             }
         }
@@ -140,7 +142,9 @@ struct ListView: View {
                     TextField("Add an Item", text: $newEntryName.animation())
                         .padding()
                         .padding(.trailing)
+						#if os(iOS)
                         .background(Color(.tertiarySystemBackground).cornerRadius(10))
+						#endif
                         .focused($newEntryInFocus)
                         .onTapGesture { newEntryInFocus = true }
                         .onSubmit(addNewEntry)
@@ -154,10 +158,12 @@ struct ListView: View {
                     }
                     .buttonStyle(.bordered)
                     .disabled(newEntryName.isEmpty)
-                    .tint(GetColorByID(list.color))
+                    .tint(list.color.SwiftUIColor)
                 }
                 .padding()
+				#if os(iOS)
                 .background(Color(.systemGroupedBackground))
+				#endif
                 .transition(.move(edge: .bottom))
                 .gesture(DragGesture(minimumDistance: 10).onEnded(tryDisableKeyboard))
             }
@@ -170,7 +176,7 @@ struct ListView: View {
         }
     }
     
-    func saveEdits(listName: String, listIcon: Int, listColor: Int) {
+    func saveEdits(listName: String, listIcon: Int, listColor: AvailableColors) {
         if (list.name != listName || list.color != listColor || list.image != listIcon) {
             list.name = listName
             list.color = listColor
@@ -210,6 +216,7 @@ struct ListView: View {
         context.delete(list)
     }
     
+	#if os(iOS)
     func printList() {
         guard let entries = list.listEntries else { return  }
         
@@ -223,15 +230,16 @@ struct ListView: View {
                 showBusyIndicator = true
             }
             
-            let printer = await Printer()
+            let printer = Printer()
             
             // I added an overlay for this now I also want to see it.
             try await Task.sleep(for: .milliseconds(750 + Int.random(in: 0...500)))
             
             let pdf = PdfMaker(list: list).makePDF()
             
-            try? await printer.print(.pdfData(pdf))
+            try? printer.print(.pdfData(pdf))
             showBusyIndicator = false
         }
     }
+	#endif
 }

@@ -1,22 +1,13 @@
 {
-  "originHash" : "905b916a1a762ea6b607c6cc1ad07bb891e3109d83588d67bcd046f9e72187fb",
+  "originHash" : "d00ed1aadf891c189caef20c282f99ec6ce84411a4155bf78fd71c53b72551ec",
   "pins" : [
-    {
-      "identity" : "awsomeswiftycomponents",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/photangralenphie/AwsomeSwiftyComponents",
-      "state" : {
-        "branch" : "main",
-        "revision" : "ab24f02864bbe177bf4cbc0f83ad91f6349c6950"
-      }
-    },
     {
       "identity" : "printingkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/danielsaidi/PrintingKit",
       "state" : {
-        "revision" : "36c6d121eefef73af44271b745a9793b8fca0c2e",
-        "version" : "0.5.2"
+        "revision" : "4a5e6d771fc9668e9619cba44173ddefad3a642e",
+        "version" : "0.7.1"
       }
     },
     {
@@ -24,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/techprimate/TPPDF",
       "state" : {
-        "revision" : "5075703da5afd1a84db094cd8abdcea2f9d42367",
-        "version" : "2.5.0"
+        "revision" : "975049c0e1022922580b7927e030901604024925",
+        "version" : "2.6.1"
       }
     }
   ],
