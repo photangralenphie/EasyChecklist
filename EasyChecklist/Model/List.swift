@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import AwesomeSwiftyComponents
+import SwiftUI
 
 @Model
 class CustomList {
@@ -29,6 +30,28 @@ class CustomList {
         self.image = image
         self.sortBy = sortBy
     }
+	
+	func addNewEntry(contents: String) {
+		if contents.isEmpty {
+			return
+		}
+		
+		let newEntry = ListEntry(name: contents)
+		
+		withAnimation {
+			newEntry.list = self
+			self.editDate = Date.now
+		}
+	}
+	
+	func updateList(listName: String, listIcon: Int, listColor: AvailableColors) {
+		if (self.name != listName || self.color != listColor || self.image != listIcon) {
+			self.name = listName
+			self.color = listColor
+			self.image = listIcon
+			self.editDate = Date.now
+		}
+	}
 }
 
 enum EntrySort: String, Codable {

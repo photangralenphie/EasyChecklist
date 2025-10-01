@@ -16,15 +16,13 @@ struct ListView: View {
     
     // Init
     @Bindable public var list: CustomList
-    @Binding public var selectedList: CustomList?
     
     // Data
     @Environment(\.modelContext) private var context
     @State private var document: PDFDocument?
     
     // Functional
-    @FocusState private var newEntryInFocus: Bool
-    @State private var newEntryName: String = ""
+	@State private var newEntryName: String = ""
     @State private var searchString: String = ""
     @State private var isSearching: Bool = false
     @State private var isEditing: Bool = false
@@ -32,6 +30,7 @@ struct ListView: View {
     @State private var showNoEntriesAlert: Bool = false
     
     @Environment(\.horizontalSizeClass) private var sizeClass
+	@Environment(\.dismiss) private var dismiss
     
     // Settings
 	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
@@ -69,11 +68,14 @@ struct ListView: View {
                 }
             }
         }
+		.scrollDismissesKeyboard(.immediately)
         .tint(list.color.SwiftUIColor)
         .listStyle(.sidebar)
         .toolbarRole(sizeClass==UserInterfaceSizeClass.compact ? .automatic : .editor)
         .navigationTitle(list.name)
-        .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .top)))
+		#if os(iOS)
+		.navigationBarTitleDisplayMode(.inline)
+		#endif
         .toolbar(id: "listToolbar") {
             ToolbarItem(id: "search", placement: .primaryAction) {
                 if sizeClass == .compact {
@@ -135,83 +137,75 @@ struct ListView: View {
                 )
             }
         }
-        .safeAreaInset(edge: .bottom) {
-            if !isSearching {
-                HStack {
-                    TextField("Add an Item", text: $newEntryName.animation())
-                        .padding()
-                        .padding(.trailing)
-						#if os(iOS)
-                        .background(Color(.tertiarySystemBackground).cornerRadius(10))
-						#endif
-                        .focused($newEntryInFocus)
-                        .onTapGesture { newEntryInFocus = true }
-                        .onSubmit(addNewEntry)
-                        .submitLabel(.continue)
-                    
-                    Button(action: addNewEntry) {
-                        Image(systemName: "plus")
-                            .padding(.horizontal, 2)
-                            .padding(.vertical, 4)
-                            .font(.headline)
-                    }
-                    .buttonStyle(.bordered)
-                    .disabled(newEntryName.isEmpty)
-                    .tint(list.color.SwiftUIColor)
-                }
-                .padding()
-				#if os(iOS)
-                .background(Color(.systemGroupedBackground))
-				#endif
-                .transition(.move(edge: .bottom))
-                .gesture(DragGesture(minimumDistance: 10).onEnded(tryDisableKeyboard))
-            }
-        }
+		#if os(macOS)
+		.safeAreaInset(edge: .bottom){
+//		.overlay(alignment: .bottom) {
+			HStack {
+				TextField("Add an Item", text: $newEntryName.animation())
+					.padding(.horizontal)
+					.onSubmit(addNewEntry)
+					.submitLabel(.continue)
+					.textFieldStyle(.plain)
+					.frame(height: 50)
+					.glassEffect()
+				
+				Image(systemName: "plus")
+					.onTapGesture { addNewEntry() }
+					.tint(list.color.SwiftUIColor)
+					.frame(width: 50, height: 50)
+					.clipShape(.circle)
+					.glassEffect(newEntryName.isEmpty ? .regular : .clear.tint(list.color.SwiftUIColor))
+//					.disabled()
+				
+//				Button("Add", systemImage: "plus", role: .confirm, action: addNewEntry)
+//					.labelStyle(.iconOnly)
+//					.tint(list.color.SwiftUIColor)
+//					.frame(height: 50)
+//					.buttonStyle(.glassProminent)
+//					.disabled(newEntryName.isEmpty)
+				
+			}
+//			.glassEffect()
+			.padding()
+		}
+		#else
+		.toolbar {
+			if !isSearching {
+				ToolbarItemGroup(placement: .bottomBar) {
+					TextField("Add an Item", text: $newEntryName.animation())
+						.padding(.horizontal)
+						.onSubmit(addNewEntry)
+						.submitLabel(.continue)
+					
+					Button("Add", systemImage: "plus", role: .confirm, action: addNewEntry)
+						.labelStyle(.iconOnly)
+						.tint(list.color.SwiftUIColor)
+						.buttonStyle(.glassProminent)
+						.disabled(newEntryName.isEmpty)
+				}
+			}
+		}
+		#endif
+		
         .sheet(isPresented: $isEditing) {
-            ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.image, listColor: list.color, action: saveEdits)
+			ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.image, listColor: list.color, action: list.updateList)
         }
         .alert("No Entries to print in checklist.", isPresented: $showNoEntriesAlert) {
             Button("OK") { }
         }
     }
-    
-    func saveEdits(listName: String, listIcon: Int, listColor: AvailableColors) {
-        if (list.name != listName || list.color != listColor || list.image != listIcon) {
-            list.name = listName
-            list.color = listColor
-            list.image = listIcon
-            list.editDate = Date.now
-        }
-    }
-    
-    func tryDisableKeyboard(dragInfo: DragGesture.Value) {
-        if dragInfo.translation.height > 20 {
-            newEntryInFocus = false
-        }
-    }
-    
-    func addNewEntry() {
-        if newEntryName.isEmpty {
-            return
-        }
-        
-        let newEntry = ListEntry(name: newEntryName)
-        
-        withAnimation {
-            newEntry.list = list
-            list.editDate = Date.now
-        }
-        
-        newEntryName = ""
-        newEntryInFocus = true
-    }
+	
+	func addNewEntry() {
+		list.addNewEntry(contents: newEntryName)
+		newEntryName = ""
+	}
     
     func editList() {
         isEditing.toggle()
     }
     
     func deleteList() {
-        selectedList = nil
+		dismiss()
         context.delete(list)
     }
     
@@ -241,4 +235,8 @@ struct ListView: View {
         }
     }
 	#endif
+}
+
+#Preview {
+	ListView(list: CustomList(name: "DevList", color: .orange, image: 0))
 }
