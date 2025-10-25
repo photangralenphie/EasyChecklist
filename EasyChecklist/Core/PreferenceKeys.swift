@@ -5,6 +5,7 @@
 //  Created by Jonas Helmer on 29.09.25.
 //
 
+@MainActor
 struct PreferenceKeys {
 	// Settings
 	public static var accentColorSchema: String = "accentColorSchema"

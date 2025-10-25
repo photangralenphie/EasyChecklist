@@ -9,7 +9,8 @@ import TPPDF
 import CoreTransferable
 
 #if os(iOS)
-public class PdfMaker {
+@MainActor
+public class PdfMaker: @preconcurrency Transferable {
     
     init(list: CustomList) {
         self.list = list
@@ -108,13 +109,13 @@ public class PdfMaker {
         
         return table
     }
-}
-
-extension PdfMaker: Transferable {
-    public static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(exportedContentType: .pdf) { pdfData in
-            pdfData.makePDF()
-        }
-    }
+	
+	public static var transferRepresentation: some TransferRepresentation {
+		DataRepresentation(exportedContentType: .pdf) { pdfData in
+			await MainActor.run {
+				pdfData.makePDF()
+			}
+		}
+	}
 }
 #endif
