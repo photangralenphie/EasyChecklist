@@ -128,16 +128,15 @@ struct ListView: View {
             if showBusyIndicator {
                 GroupBox {
                     ProgressView()
+						.tint(.primary)
                 } label: {
                     Label("Generating PDF", systemImage: "doc")
+						.foregroundStyle(list.color.SwiftUIColor)
                 }
                 .padding(0)
                 .contentShape(RoundedRectangle(cornerRadius: 10))
                 .frame(width: 200)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(list.color.SwiftUIColor)
-                )
+				.glassEffect(.regular, in: .rect(cornerRadius: 20, style: .continuous))
             }
         }
 		#if os(macOS)
@@ -226,14 +225,12 @@ struct ListView: View {
                 showBusyIndicator = true
             }
             
-            let printer = Printer()
-            
             // I added an overlay for this now I also want to see it.
             try await Task.sleep(for: .milliseconds(750 + Int.random(in: 0...500)))
             
             let pdf = PdfMaker(list: list).makePDF()
             
-            try? printer.print(.pdfData(pdf))
+			try? Printer.shared.printPdfData(pdf)
             showBusyIndicator = false
         }
     }

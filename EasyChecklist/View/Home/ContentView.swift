@@ -159,11 +159,8 @@ struct ContentView: View {
 	#if os(iOS)
     func printEmptyList() {
         guard let num = emptyPrintListNumEntries else { return }
-        Task {
-            let printer = Printer()
-            let pdf = PdfMaker(name: emptyPrintListName, numEmptyItems: num).makePDF()
-            try? printer.print(.pdfData(pdf))
-        }
+		let pdf = PdfMaker(name: emptyPrintListName, numEmptyItems: num).makePDF()
+		try? Printer.shared.printPdfData(pdf)
         resetEmptyPrintList()
     }
 	#endif
