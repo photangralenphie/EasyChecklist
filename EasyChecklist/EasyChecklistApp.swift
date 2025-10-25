@@ -34,11 +34,11 @@ struct EasyChecklistApp: App {
 		}
 	}()
 	  
-    init() {
-		#if os(iOS)
-        //UIExtensions.setNavigationBarFont(fontDesign: .rounded)
-		#endif
-    }
+//    init() {
+//		#if os(iOS)
+//        UIExtensions.setNavigationBarFont(fontDesign: .rounded)
+//		#endif
+//    }
     
     var body: some Scene {
         WindowGroup {

@@ -62,5 +62,9 @@ struct ChecklistCellView: View {
 		}
 		.swipeActions(edge: .trailing, allowsFullSwipe: false) { ChecklistCellViewContextAndSwipeActions(list: list) }
 		.contextMenu { ChecklistCellViewContextAndSwipeActions(list: list) }
+		.listRowBackground(
+			Capsule(style: .continuous)
+				.glassEffect(.clear.interactive())
+		)
     }
 }

@@ -34,6 +34,7 @@ struct ContentView: View {
     
     // Functional
     @Environment(\.modelContext) private var context
+	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var selectedList: CustomList?
     @State private var searchString: String = ""
     
@@ -45,6 +46,10 @@ struct ContentView: View {
     @State private var showEmptyPrintOptions: Bool = false
     @State private var emptyPrintListName: String = ""
     @State private var emptyPrintListNumEntries: Int?
+	
+	@Namespace private var transition
+	@AppStorage(PreferenceKeys.colorScheme) private var colorScheme: PreferredColorScheme = .systemDefault
+	@AppStorage(PreferenceKeys.accentColorSchema) private var accentColor: AvailableColors = .blue
     
     var filteredLists: [CustomList] {
         searchString.isEmpty ? lists : lists.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }
@@ -55,10 +60,15 @@ struct ContentView: View {
             List(filteredLists, selection: $selectedList) { list in
                 ChecklistCellView(list: list)
             }
+			.scrollContentBackground(.hidden)
+			.conditionalBackground(show: horizontalSizeClass == .compact) {
+				BackgroundGradientView(vm: .init(baseColor: accentColor))
+			}
 			#if os(iOS)
 			.listRowSpacing(LayoutConstants.listItemSpacing)
 			#endif
 			.navigationTitle("Checklists")
+			.toolbarTitleDisplayMode(.inlineLarge) // large on iPad, inlineLarge on iPhone
             .overlay {
                 if searchString.isEmpty && filteredLists.isEmpty {
                     ContentUnavailableView {
@@ -75,69 +85,78 @@ struct ContentView: View {
             }
             .toolbar {
 				#if os(iOS)
-				ToolbarItem(placement: .navigation) {
+				ToolbarItem(placement: horizontalSizeClass == .compact ? .secondaryAction : .bottomBar) {
+					Menu("Sort by", systemImage: "arrow.up.arrow.down") {
+						Picker(selection: $sortOrder.animation()) {
+							Label("Alphabetically", systemImage: "textformat.abc")
+								.tag(ListSort.alphabetically)
+							Label("Newest", systemImage: "calendar")
+								.tag(ListSort.creationDate)
+							Label("Modified", systemImage: "eraser.line.dashed.fill")
+								.tag(ListSort.modified)
+						} label: {
+							Text("Sort")
+						}
+						
+						ControlGroup("Order") {
+							Button {
+								withAnimation { isAscendingSort = true }
+							} label: {
+								Label("Ascending", image: isAscendingSort ? "arrow.up.badge.checkmark" : "arrow.up")
+							}
+							Button {
+								withAnimation { isAscendingSort = false }
+							} label: {
+								Label("Descending", image: isAscendingSort ? "arrow.down" : "arrow.down.badge.checkmark")
+							}
+						}
+					}
+				}
+				
+				ToolbarItem(placement: horizontalSizeClass == .compact ? .secondaryAction : .bottomBar) {
+					Button {
+						showEmptyPrintOptions.toggle()
+					} label: {
+						Label("Print Empty Checklist", systemImage: "printer")
+					}
+				}
+				
+				ToolbarItem(placement: horizontalSizeClass == .compact ? .secondaryAction : .bottomBar) {
 					Button("Settings", systemImage: "gear") { showSettings.toggle() }
+						.matchedTransitionSource(id: AnimationKeys.settings, in: transition)
+				}
+
+				ToolbarSpacer(.flexible, placement: .bottomBar)
+				
+				ToolbarItem(placement: .bottomBar) {
+                    Button("Create", systemImage: "plus") { newCustomList.toggle() }
+						.matchedTransitionSource(id: AnimationKeys.newList, in: transition)
 				}
 				#endif
-				
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Add List", systemImage: "plus") { newCustomList.toggle() }
-                }
-                
-                ToolbarItem(placement: .secondaryAction) {
-                    Menu("Sort by", systemImage: "arrow.up.arrow.down") {
-                        Picker(selection: $sortOrder.animation()) {
-                            Label("Alphabetically", systemImage: "textformat.abc")
-                                .tag(ListSort.alphabetically)
-                            Label("Newest", systemImage: "calendar")
-                                .tag(ListSort.creationDate)
-                            Label("Modified", systemImage: "eraser.line.dashed.fill")
-                                .tag(ListSort.modified)
-                        } label: {
-                            Text("Sort")
-                        }
-                        
-                        ControlGroup("Order") {
-                            Button {
-                                withAnimation { isAscendingSort = true }
-                            } label: {
-                                Label("Ascending", image: isAscendingSort ? "arrow.up.badge.checkmark" : "arrow.up")
-                            }
-                            Button {
-                                withAnimation { isAscendingSort = false }
-                            } label: {
-                                Label("Descending", image: isAscendingSort ? "arrow.down" : "arrow.down.badge.checkmark")
-                            }
-                        }
-                    }
-                }
-                
-                ToolbarItem(placement: .secondaryAction) {
-                    Button {
-                        showEmptyPrintOptions.toggle()
-                    } label: {
-                        Label("Print Empty Checklist", systemImage: "printer")
-                    }
-                }
             }
         } detail: {
             if lists.isEmpty {
                 ContentUnavailableView("No Checklists", systemImage: "plus", description: Text("Get Started by adding a new Checklist with the plus button"))
+					.background(BackgroundGradientView(vm: .init(baseColor: accentColor)))
             } else if let list = selectedList {
                 ListView(list: list)
             } else {
-                ContentUnavailableView("Nothing Selected", systemImage: "filemenu.and.selection", description: Text("Select a Checklist in the Sidebar"))
+				BackgroundGradientView(vm: .init(baseColor: accentColor))
+					.overlay {
+						ContentUnavailableView("Nothing Selected", systemImage: "filemenu.and.selection", description: Text("Select a Checklist in the Sidebar"))
+					}
             }
         }
 		.searchable(text: $searchString, placement: .sidebar)
 		.sheet(isPresented: $newCustomList) {
 			ListDetailEditor(navigationTitle: "Add New List", buttonTitle: "Add New List", action: addNewList)
+				.navigationTransition( .zoom(sourceID: AnimationKeys.newList, in: transition))
 		}
 		#if os(iOS)
         .inspector(isPresented: $showSettings) {
             SettingsView()
-                .presentationDetents([.large])
-                .presentationBackground(.ultraThinMaterial)
+				.navigationTransition(.zoom(sourceID: AnimationKeys.newList, in: transition))
+				.inspectorColumnWidth(500)
         }
 		.alert("Print Empty Checklist", isPresented: $showEmptyPrintOptions) {
 			TextField("Name", text: $emptyPrintListName)
