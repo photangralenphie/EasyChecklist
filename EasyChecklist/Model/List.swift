@@ -64,3 +64,22 @@ enum ListSort: String {
     case creationDate = "Creation Date"
     case modified = "Modified"
 }
+
+extension CustomList {
+	static var exampleList: CustomList {
+		let list = CustomList(name: "DevList", color: .orange, image: 0)
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		list.addNewEntry(contents: "Test")
+		
+		return list
+	}
+}

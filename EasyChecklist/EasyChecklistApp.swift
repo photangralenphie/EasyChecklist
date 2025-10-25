@@ -36,7 +36,7 @@ struct EasyChecklistApp: App {
 	  
     init() {
 		#if os(iOS)
-        UIExtensions.setNavigationBarFont(fontDesign: .rounded)
+        //UIExtensions.setNavigationBarFont(fontDesign: .rounded)
 		#endif
     }
     

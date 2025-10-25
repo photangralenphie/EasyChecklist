@@ -68,12 +68,15 @@ struct ListView: View {
                 }
             }
         }
+		.scrollContentBackground(.hidden)
+		.background(BackgroundGradientView(vm: .init(baseColor: list.color)).id(list.color))
 		.scrollDismissesKeyboard(.immediately)
         .tint(list.color.SwiftUIColor)
         .listStyle(.sidebar)
-        .toolbarRole(sizeClass==UserInterfaceSizeClass.compact ? .automatic : .editor)
+        .toolbarRole(sizeClass == UserInterfaceSizeClass.compact ? .automatic : .editor)
         .navigationTitle(list.name)
 		#if os(iOS)
+		.listRowSpacing(LayoutConstants.listItemSpacing)
 		.navigationBarTitleDisplayMode(.inline)
 		#endif
         .toolbar(id: "listToolbar") {
@@ -238,5 +241,7 @@ struct ListView: View {
 }
 
 #Preview {
-	ListView(list: CustomList(name: "DevList", color: .orange, image: 0))
+	NavigationStack {
+		ListView(list: CustomList.exampleList)
+	}
 }

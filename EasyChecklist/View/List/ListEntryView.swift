@@ -20,22 +20,26 @@ struct ListEntryView: View {
 	@AppStorage(PreferenceKeys.strikeCheckedEntries) private var strikeCheckedEntries: Bool = true
     
     var body: some View {
-        Label(listEntry.name, systemImage: listEntry.checked ? "checkmark.circle" : "circle")
-            .strikethrough(listEntry.checked && strikeCheckedEntries)
-            .contentTransition(.symbolEffect(.replace))
-            .contentShape(.rect)
-            .sensoryFeedback(.success, trigger: listEntry.checked)
-            .onTapGesture(perform: OnTapGesture)
-            .onLongPressGesture { showRenameAlert.toggle() }
-            .swipeActions(edge: .trailing) {
-                Button("Delete", systemImage: "trash", role: .destructive, action: DeleteListEntry)
-                    .tint(Color.red)
-                Button("Rename", systemImage: "rectangle.and.pencil.and.ellipsis") { showRenameAlert.toggle() }
-            }
-            .onChange(of: listEntry.name) { listEntry.list?.editDate = Date.now }
-            .alert("Rename", isPresented: $showRenameAlert) {
-                TextField("Entry", text: $listEntry.name)
-            }
+		Label(listEntry.name, systemImage: listEntry.checked ? "checkmark.circle" : "circle")
+			.strikethrough(listEntry.checked && strikeCheckedEntries)
+			.contentTransition(.symbolEffect(.replace))
+			.contentShape(.rect)
+			.listRowBackground(
+				Capsule(style: .continuous)
+					.glassEffect(.clear.interactive())
+			)
+			.sensoryFeedback(.success, trigger: listEntry.checked)
+			.onTapGesture(perform: OnTapGesture)
+			.onLongPressGesture { showRenameAlert.toggle() }
+			.swipeActions(edge: .trailing) {
+				Button("Delete", systemImage: "trash", role: .destructive, action: DeleteListEntry)
+					.tint(Color.red)
+				Button("Rename", systemImage: "rectangle.and.pencil.and.ellipsis") { showRenameAlert.toggle() }
+			}
+			.onChange(of: listEntry.name) { listEntry.list?.editDate = Date.now }
+			.alert("Rename", isPresented: $showRenameAlert) {
+				TextField("Entry", text: $listEntry.name)
+			}
     }
     
     func OnTapGesture() {
@@ -50,4 +54,10 @@ struct ListEntryView: View {
             context.delete(listEntry)
         }
     }
+}
+
+#Preview {
+	NavigationStack {
+		ListView(list: CustomList.exampleList)
+	}
 }

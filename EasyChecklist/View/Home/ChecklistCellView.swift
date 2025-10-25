@@ -58,7 +58,7 @@ struct ChecklistCellView: View {
 				Image(systemName: availibleIcons[list.image])
 					.foregroundStyle(list.color.SwiftUIColor)
 			}
-			.labelStyle(CenteredImageLabelStyle())
+			.labelStyle(.centeredImage)
 		}
 		.swipeActions(edge: .trailing, allowsFullSwipe: false) { ChecklistCellViewContextAndSwipeActions(list: list) }
 		.contextMenu { ChecklistCellViewContextAndSwipeActions(list: list) }

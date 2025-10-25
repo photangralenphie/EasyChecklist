@@ -56,7 +56,7 @@ struct ContentView: View {
                 ChecklistCellView(list: list)
             }
 			#if os(iOS)
-			.listRowSpacing(10)
+			.listRowSpacing(LayoutConstants.listItemSpacing)
 			#endif
 			.navigationTitle("Checklists")
             .overlay {
