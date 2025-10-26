@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/danielsaidi/PrintingKit",
       "state" : {
-        "revision" : "4a5e6d771fc9668e9619cba44173ddefad3a642e",
-        "version" : "0.7.1"
+        "revision" : "df6b723008b6bc8dbed0cd195edc71b9c89b096c",
+        "version" : "0.8.0"
       }
     },
     {
