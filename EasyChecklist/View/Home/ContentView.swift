@@ -16,8 +16,9 @@ struct ContentView: View {
     @Query private var lists: [CustomList]
     @Binding private var sortOrder: ListSort
     @Binding private var isAscendingSort: Bool
+	@Binding private var selectedList: CustomList?
     
-    init(sortOrder: Binding<ListSort>, isAscendingSort: Binding<Bool>) {
+    init(sortOrder: Binding<ListSort>, isAscendingSort: Binding<Bool>, selectedList: Binding<CustomList?>) {
         let sortDescriptors: [SortDescriptor<CustomList>] = switch sortOrder.wrappedValue {
         case .alphabetically:
             [SortDescriptor(\CustomList.name, order: isAscendingSort.wrappedValue ? .forward : .reverse)]
@@ -29,13 +30,15 @@ struct ContentView: View {
         
         _isAscendingSort = isAscendingSort
         _sortOrder = sortOrder
+		_selectedList = selectedList
+		
         _lists = Query(sort: sortDescriptors, animation: .snappy)
     }
     
     // Functional
     @Environment(\.modelContext) private var context
 	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @State private var selectedList: CustomList?
+	@AppStorage("selection") private var selection: String?
     @State private var searchString: String = ""
     
     // Sheets
@@ -57,7 +60,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationSplitView {
-            List(filteredLists, selection: $selectedList) { list in
+			List(filteredLists, selection: $selectedList) { list in
                 ChecklistCellView(list: list)
             }
 			.scrollContentBackground(.hidden)
@@ -150,12 +153,12 @@ struct ContentView: View {
 		.searchable(text: $searchString, placement: .sidebar)
 		.sheet(isPresented: $newCustomList) {
 			ListDetailEditor(navigationTitle: "Add New List", buttonTitle: "Add New List", action: addNewList)
-				.navigationTransition( .zoom(sourceID: AnimationKeys.newList, in: transition))
+				.navigationTransition(.zoom(sourceID: AnimationKeys.newList, in: transition))
 		}
 		#if os(iOS)
         .inspector(isPresented: $showSettings) {
             SettingsView()
-				.navigationTransition(.zoom(sourceID: AnimationKeys.newList, in: transition))
+				.navigationTransition(.zoom(sourceID: AnimationKeys.settings, in: transition))
 				.inspectorColumnWidth(500)
         }
 		.alert("Print Empty Checklist", isPresented: $showEmptyPrintOptions) {
@@ -189,4 +192,18 @@ struct ContentView: View {
         emptyPrintListNumEntries = nil
         showEmptyPrintOptions.toggle()
     }
+}
+
+#Preview {
+	@Previewable @State var selection: CustomList?
+	
+	let container: ModelContainer = {
+		let schema = Schema([ CustomList.self ])
+		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+		return try! ModelContainer(for: schema, configurations: [modelConfiguration])
+	}()
+	
+	ContentView(sortOrder: .constant(.alphabetically), isAscendingSort: .constant(false), selectedList: $selection)
+		.modelContainer(container)
+		.onAppear { container.mainContext.insert(CustomList.exampleList) }
 }

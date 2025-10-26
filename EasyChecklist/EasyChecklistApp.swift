@@ -19,9 +19,9 @@ struct EasyChecklistApp: App {
     // Sorting
 	@AppStorage(PreferenceKeys.sortOrder) private var sortOrder: ListSort = ListSort.modified
 	@AppStorage(PreferenceKeys.isAscendingSort) private var isAscendingSort: Bool = false
-    
-    // Data
-    @Query private var lists: [CustomList]
+	
+	@State private var selectedList: CustomList?
+	@AppStorage("selection") private var selection: String?
 	
 	var iCloudContainer: ModelContainer = {
 		let schema = Schema([ CustomList.self ])
@@ -42,9 +42,9 @@ struct EasyChecklistApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(sortOrder: $sortOrder, isAscendingSort: $isAscendingSort)
+			ContentView(sortOrder: $sortOrder, isAscendingSort: $isAscendingSort, selectedList: $selectedList)
                 .preferredColorScheme(colorScheme.mode)
-                .tint(accentColorSchema.SwiftUIColor)
+				.tint(selectedList?.color.SwiftUIColor ?? accentColorSchema.SwiftUIColor)
         }
 		.modelContainer(iCloudContainer)
 		
