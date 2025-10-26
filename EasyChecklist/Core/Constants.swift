@@ -16,6 +16,7 @@ struct LayoutConstants {
 struct AnimationKeys {
 	public static let settings = "settings"
 	public static let newList = "newList"
+	public static let editList = "editList"
 	
 	private init() {}
 }

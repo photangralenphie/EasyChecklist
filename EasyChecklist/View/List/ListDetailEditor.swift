@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AwesomeSwiftyComponents
+import SwiftUIIntrospect
 
 struct ListDetailEditor: View {
     
@@ -19,7 +20,10 @@ struct ListDetailEditor: View {
     // State
     @State public var listName: String = ""
     @State public var listIcon: Int = 0
-    @State public var listColor: AvailableColors = .blue
+	@State public var listColor: AvailableColors = {
+		let userColor = UserDefaults.standard.integer(forKey: PreferenceKeys.accentColorSchema)
+		return AvailableColors(rawValue: userColor) ?? .blue
+	}()
     
     // Closure
     let action: (_ listName: String, _ listIcon: Int, _ listColor: AvailableColors) -> Void
@@ -27,41 +31,58 @@ struct ListDetailEditor: View {
     @FocusState private var listNameFocused: Bool
     
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             Form {
                 Section("Name") {
                     TextField("Name", text: $listName)
                         .focused($listNameFocused)
+						.listGlassCell()
                 }
                 
                 Section("Accent Color") {
                     InlineColorPicker(selectedColor: $listColor, pickerStyle: .slim)
+						.listGlassCell()
                 }
                 
                 Section("Icon") {
                     IconPicker(newIcon: $listIcon)
+						.padding()
+						.listRowBackground(
+							Color.clear
+								.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 20, style: .continuous))
+						)
                 }
             }
             .navigationTitle(navigationTitle)
+			.formStyle(.grouped)
+			.scrollContentBackground(.hidden)
 			#if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
 			#endif
-            .toolbar{
-                ToolbarItemGroup(placement: .cancellationAction) {
-                    Button("Cancel", role: .cancel) { dismiss() }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", systemImage: "xmark", role: .cancel) { dismiss() }
                 }
+				
+				ToolbarItem(placement: .confirmationAction) {
+					Button(buttonTitle, systemImage: "checkmark", role: .confirm, action: save)
+						.disabled(listName.isEmpty)
+				}
             }
-            Button(buttonTitle, systemImage: availibleIcons[listIcon], action: save)
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .padding(.bottom, 15)
-                .disabled(listName.isEmpty)
         }
         .tint(listColor.SwiftUIColor)
+		.scrollContentBackground(.hidden)
+		.background(BackgroundGradientView(vm: BackgroundGradientVm(baseColor: listColor)))
     }
     
     func save() {
         action(listName, listIcon, listColor)
         dismiss()
     }
+}
+
+#Preview {
+	NavigationStack {
+		ListDetailEditor(navigationTitle: "Edit", buttonTitle: "Save") { _, _, _ in }
+	}
 }

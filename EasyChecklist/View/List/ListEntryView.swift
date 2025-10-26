@@ -24,10 +24,7 @@ struct ListEntryView: View {
 			.strikethrough(listEntry.checked && strikeCheckedEntries)
 			.contentTransition(.symbolEffect(.replace))
 			.contentShape(.rect)
-			.listRowBackground(
-				Capsule(style: .continuous)
-					.glassEffect(.clear.interactive())
-			)
+			.listGlassCell()
 			.sensoryFeedback(.success, trigger: listEntry.checked)
 			.onTapGesture(perform: OnTapGesture)
 			.onLongPressGesture { showRenameAlert.toggle() }

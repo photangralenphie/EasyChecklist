@@ -24,7 +24,6 @@ struct ListView: View {
     // Functional
 	@State private var newEntryName: String = ""
     @State private var searchString: String = ""
-    @State private var isSearching: Bool = false
     @State private var isEditing: Bool = false
     @State private var showBusyIndicator: Bool = false
     @State private var showNoEntriesAlert: Bool = false
@@ -32,6 +31,8 @@ struct ListView: View {
     @Environment(\.horizontalSizeClass) private var sizeClass
 	@Environment(\.dismiss) private var dismiss
     
+	@Namespace private var transition
+	
     // Settings
 	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
     
@@ -51,6 +52,7 @@ struct ListView: View {
     
     var body: some View {
         List {
+			
             if moveToBottom {
                 ForEach(filteredUncheckedItems) { listEntry in
                     ListEntryView(listEntry: listEntry)
@@ -74,18 +76,39 @@ struct ListView: View {
         .tint(list.color.SwiftUIColor)
         .listStyle(.sidebar)
         .toolbarRole(sizeClass == UserInterfaceSizeClass.compact ? .automatic : .editor)
-        .navigationTitle(list.name)
 		#if os(iOS)
 		.listRowSpacing(LayoutConstants.listItemSpacing)
 		.navigationBarTitleDisplayMode(.inline)
 		#endif
         .toolbar(id: "listToolbar") {
-            ToolbarItem(id: "search", placement: .primaryAction) {
-                if sizeClass == .compact {
-                    Button("Search", systemImage: "magnifyingglass") { isSearching.toggle() }
-                }
-            }
+//            ToolbarItem(id: "search", placement: .primaryAction) {
+//                if sizeClass == .compact {
+//                    Button("Search", systemImage: "magnifyingglass") { isSearching.toggle() }
+//                }
+//            }
             
+			ToolbarItem(id: "title", placement: .principal) {
+				Button {
+					editList()
+				} label: {
+					Label {
+						VStack {
+							Text(list.name)
+								.font(.callout.bold())
+							Text(list.creationDate.formatted())
+								.font(.system(size: 10))
+								.foregroundStyle(.secondary)
+						}
+					} icon: {
+						Image(systemName: availibleIcons[list.image])
+					}
+				}
+				.labelStyle(.centeredImage(tintIcon: false))
+				.matchedTransitionSource(id: AnimationKeys.editList, in: transition)
+				.buttonStyle(.glass)
+				.foregroundStyle(.primary)
+			}
+			
             ToolbarItem(id: "sort", placement: .secondaryAction) {
                 Picker(selection: $list.sortBy.animation()) {
                     Label("Alphabetical", systemImage: "abc")
@@ -115,16 +138,18 @@ struct ListView: View {
                 Button("Delete List", systemImage: "trash", role: .destructive, action: deleteList)
             }
         }
-        .searchable(text: $searchString, isPresented: $isSearching.animation(), placement: .toolbar, prompt: Text("Search \(list.name)"))
+        .searchable(text: $searchString, prompt: Text("Search \(list.name)"))
         .overlay {
-            if filteredListEntries.isEmpty && isSearching {
-                ContentUnavailableView.search(text: searchString)
-            }
-            if let entries = list.listEntries {
-                if entries.isEmpty && !isSearching {
-                    ContentUnavailableView("No Entries", systemImage: "plus")
-                }
-            }
+//            if filteredListEntries.isEmpty && isSearching {
+//                ContentUnavailableView.search(text: searchString)
+//            }
+			
+//            if let entries = list.listEntries {
+//                if entries.isEmpty && !isSearching {
+//                    ContentUnavailableView("No Entries", systemImage: "plus")
+//                }
+//            }
+			
             if showBusyIndicator {
                 GroupBox {
                     ProgressView()
@@ -140,7 +165,7 @@ struct ListView: View {
             }
         }
 		#if os(macOS)
-		.safeAreaInset(edge: .bottom){
+		.safeAreaBar(edge: .bottom){
 //		.overlay(alignment: .bottom) {
 			HStack {
 				TextField("Add an Item", text: $newEntryName.animation())
@@ -172,7 +197,7 @@ struct ListView: View {
 		}
 		#else
 		.toolbar {
-			if !isSearching {
+//			if !isSearching {
 				ToolbarItemGroup(placement: .bottomBar) {
 					TextField("Add an Item", text: $newEntryName.animation())
 						.padding(.horizontal)
@@ -185,12 +210,12 @@ struct ListView: View {
 						.buttonStyle(.glassProminent)
 						.disabled(newEntryName.isEmpty)
 				}
-			}
+//			}
 		}
 		#endif
-		
         .sheet(isPresented: $isEditing) {
 			ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.image, listColor: list.color, action: list.updateList)
+				.navigationTransition(.zoom(sourceID: AnimationKeys.editList, in: transition))
         }
         .alert("No Entries to print in checklist.", isPresented: $showNoEntriesAlert) {
             Button("OK") { }

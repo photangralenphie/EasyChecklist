@@ -60,11 +60,22 @@ struct ChecklistCellView: View {
 			}
 			.labelStyle(.centeredImage)
 		}
+		.listGlassCell()
 		.swipeActions(edge: .trailing, allowsFullSwipe: false) { ChecklistCellViewContextAndSwipeActions(list: list) }
 		.contextMenu { ChecklistCellViewContextAndSwipeActions(list: list) }
-		.listRowBackground(
-			Capsule(style: .continuous)
-				.glassEffect(.clear.interactive())
-		)
     }
+}
+
+#Preview {
+	@Previewable @State var selection: CustomList?
+	
+	let container: ModelContainer = {
+		let schema = Schema([ CustomList.self ])
+		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+		return try! ModelContainer(for: schema, configurations: [modelConfiguration])
+	}()
+	
+	ContentView(sortOrder: .constant(.alphabetically), isAscendingSort: .constant(false), selectedList: $selection)
+		.modelContainer(container)
+		.onAppear { container.mainContext.insert(CustomList.exampleList) }
 }
