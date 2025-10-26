@@ -100,7 +100,7 @@ struct ListView: View {
 								.foregroundStyle(.secondary)
 						}
 					} icon: {
-						Image(systemName: availibleIcons[list.image])
+						Image(systemName: list.icon)
 					}
 				}
 				.labelStyle(.centeredImage(tintIcon: false))
@@ -214,7 +214,7 @@ struct ListView: View {
 		}
 		#endif
         .sheet(isPresented: $isEditing) {
-			ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.image, listColor: list.color, action: list.updateList)
+			ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.icon, listColor: list.color, action: list.updateList)
 				.navigationTransition(.zoom(sourceID: AnimationKeys.editList, in: transition))
         }
         .alert("No Entries to print in checklist.", isPresented: $showNoEntriesAlert) {

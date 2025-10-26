@@ -23,7 +23,7 @@ struct ChecklistCellViewContextAndSwipeActions: View {
         Button("Edit", systemImage: "rectangle.and.pencil.and.ellipsis") { editCustomList.toggle() }
             .tint(list.color.SwiftUIColor)
             .sheet(isPresented: $editCustomList) {
-                ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.image, listColor: list.color, action: editListDetails)
+                ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.icon, listColor: list.color, action: editListDetails)
             }
     }
     
@@ -33,11 +33,11 @@ struct ChecklistCellViewContextAndSwipeActions: View {
         }
     }
     
-    func editListDetails(listName: String, listIcon: Int, listColor: AvailableColors) {
-        if (list.name != listName || list.color != listColor || list.image != listIcon) {
+    func editListDetails(listName: String, listIcon: String, listColor: AvailableColors) {
+        if (list.name != listName || list.color != listColor || list.icon != listIcon) {
             list.name = listName
             list.color = listColor
-            list.image = listIcon
+            list.icon = listIcon
             list.editDate = Date.now
         }
     }

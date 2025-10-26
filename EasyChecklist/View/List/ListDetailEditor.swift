@@ -19,14 +19,14 @@ struct ListDetailEditor: View {
     
     // State
     @State public var listName: String = ""
-    @State public var listIcon: Int = 0
+	@State public var listIcon: String = IconPicker.defaultIcon
 	@State public var listColor: AvailableColors = {
 		let userColor = UserDefaults.standard.integer(forKey: PreferenceKeys.accentColorSchema)
 		return AvailableColors(rawValue: userColor) ?? .blue
 	}()
     
     // Closure
-    let action: (_ listName: String, _ listIcon: Int, _ listColor: AvailableColors) -> Void
+    let action: (_ listName: String, _ listIcon: String, _ listColor: AvailableColors) -> Void
     
     @FocusState private var listNameFocused: Bool
     
@@ -45,7 +45,7 @@ struct ListDetailEditor: View {
                 }
                 
                 Section("Icon") {
-                    IconPicker(newIcon: $listIcon)
+					IconPicker(selectedIcon: $listIcon)
 						.padding()
 						.listRowBackground(
 							Color.clear

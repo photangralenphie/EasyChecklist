@@ -55,7 +55,7 @@ struct ChecklistCellView: View {
 					}
 				}
 			} icon: {
-				Image(systemName: availibleIcons[list.image])
+				Image(systemName: list.icon)
 					.foregroundStyle(list.color.SwiftUIColor)
 			}
 			.labelStyle(.centeredImage)

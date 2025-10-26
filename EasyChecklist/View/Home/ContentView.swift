@@ -172,8 +172,8 @@ struct ContentView: View {
 		#endif
     }
     
-    func addNewList(listName: String, listIcon: Int, listColor: AvailableColors) {
-        let newList = CustomList(name: listName, color: listColor, image: listIcon)
+    func addNewList(listName: String, listIcon: String, listColor: AvailableColors) {
+        let newList = CustomList(name: listName, color: listColor, icon: listIcon)
         context.insert(newList)
         selectedList = newList
     }

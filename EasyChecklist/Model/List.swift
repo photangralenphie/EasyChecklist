@@ -10,12 +10,13 @@ import SwiftData
 import AwesomeSwiftyComponents
 import SwiftUI
 
+//@MainActor
 @Model
 class CustomList {
     var name: String = ""
     var id = UUID()
 	var color: AvailableColors = AvailableColors.blue
-    var image: Int = 0
+	var icon: String = "checkmark"
 	var creationDate: Date = Date.now
 	var editDate: Date = Date.now
 	var sortBy: EntrySort = EntrySort.alphabetically
@@ -24,10 +25,10 @@ class CustomList {
     @Relationship(deleteRule: .cascade)
     var listEntries: [ListEntry]? = []
     
-    init(name: String, color: AvailableColors, image: Int, sortBy: EntrySort = .alphabetically) {
+    init(name: String, color: AvailableColors, icon: String, sortBy: EntrySort = .alphabetically) {
         self.name = name
         self.color = color
-        self.image = image
+		self.icon = icon
         self.sortBy = sortBy
     }
 	
@@ -44,11 +45,11 @@ class CustomList {
 		}
 	}
 	
-	func updateList(listName: String, listIcon: Int, listColor: AvailableColors) {
-		if (self.name != listName || self.color != listColor || self.image != listIcon) {
+	func updateList(listName: String, listIcon: String, listColor: AvailableColors) {
+		if (self.name != listName || self.color != listColor || self.icon != listIcon) {
 			self.name = listName
 			self.color = listColor
-			self.image = listIcon
+			self.icon = listIcon
 			self.editDate = Date.now
 		}
 	}
@@ -67,7 +68,7 @@ enum ListSort: String {
 
 extension CustomList {
 	static var exampleList: CustomList {
-		let list = CustomList(name: "DevList", color: .orange, image: 0)
+		let list = CustomList(name: "DevList", color: .orange, icon: "checkmark")
 		list.addNewEntry(contents: "Test")
 		list.addNewEntry(contents: "Test")
 		list.addNewEntry(contents: "Test")
