@@ -22,12 +22,15 @@ struct SettingsView: View {
     // List Entries
 	@AppStorage(PreferenceKeys.strikeCheckedEntries) private var strikeCheckedEntries: Bool = true
 	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
+	
+	private var vm = BackgroundGradientVm()
     
     var body: some View {
 		NavigationStack {
 			Form {
 				Section{
 					InlineColorPicker(selectedColor: $accentColorSchema, pickerStyle: .expanded(systemImage: "paintbrush", description: "Theme Color"))
+						.onChange(of: accentColorSchema) { setBackground() }
 					ColorSchemeSwitcher(colorScheme: $colorScheme, showIcon: true)
 				} header: {
 					Text("Appearance")
@@ -88,8 +91,13 @@ struct SettingsView: View {
 			.preferredColorScheme(colorScheme.mode)
 			.scrollContentBackground(.hidden)
 		}
+		.onAppear { setBackground() }
     }
     
+	func setBackground() {
+		vm.setBackgroundColor(baseColor: accentColorSchema)
+	}
+	
     func openSystemSettings() {
 		#if os(iOS)
         if let url = URL(string: UIApplication.openSettingsURLString) {

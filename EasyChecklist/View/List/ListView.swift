@@ -8,72 +8,44 @@
 import Foundation
 import SwiftUI
 import AwesomeSwiftyComponents
-import TPPDF
-import PrintingKit
-import UniformTypeIdentifiers
 
 struct ListView: View {
     
-    // Init
-    @Bindable public var list: CustomList
-    
     // Data
-    @Environment(\.modelContext) private var context
-    @State private var document: PDFDocument?
-    
+	@Environment(HomeVm.self) private var homeVm
+	@Environment(ListVm.self) private var vm
+
     // Functional
-	@State private var newEntryName: String = ""
-    @State private var searchString: String = ""
-    @State private var isEditing: Bool = false
-    @State private var showBusyIndicator: Bool = false
-    @State private var showNoEntriesAlert: Bool = false
-    
-    @Environment(\.horizontalSizeClass) private var sizeClass
-	@Environment(\.dismiss) private var dismiss
-    
 	@Namespace private var transition
-	
+	@Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    
     // Settings
 	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
     
-    var filteredListEntries: [ListEntry] {
-        guard let entries = list.listEntries else { return [] }
-        let filteredEntries = searchString.isEmpty ? entries : entries.filter{ $0.name.localizedCaseInsensitiveContains(searchString) }
-        switch list.sortBy {
-            case .date:
-                return filteredEntries.sorted { $0.dateAdded > $1.dateAdded }
-            case .alphabetically:
-                return filteredEntries.sorted { $0.name < $1.name }
-        }
-    }
-    
-    var filteredUncheckedItems: [ListEntry] { filteredListEntries.filter { !$0.checked } }
-    var filteredCheckedItems: [ListEntry] { filteredListEntries.filter{ $0.checked } }
-    
     var body: some View {
         List {
-			
             if moveToBottom {
-                ForEach(filteredUncheckedItems) { listEntry in
+				ForEach(vm.filteredUncheckedItems) { listEntry in
                     ListEntryView(listEntry: listEntry)
                 }
-                if !filteredCheckedItems.isEmpty {
-                    Section("Completed (\(filteredCheckedItems.count))", isExpanded: Bindable(list).isCompletedSectionExpanded) {
-                        ForEach(filteredCheckedItems) { listEntry in
+				if !vm.filteredCheckedItems.isEmpty {
+					Section("Completed (\(vm.filteredCheckedItems.count))", isExpanded: Bindable(vm.list).isCompletedSectionExpanded) {
+						ForEach(vm.filteredCheckedItems) { listEntry in
                             ListEntryView(listEntry: listEntry)
                         }
                     }
                 }
             } else {
-                ForEach(filteredListEntries) { listEntry in
+				ForEach(vm.filteredListEntries) { listEntry in
                     ListEntryView(listEntry: listEntry)
                 }
             }
         }
 		.scrollContentBackground(.hidden)
-		.background(BackgroundGradientView(vm: .init(baseColor: list.color)).id(list.color))
+		.background(BackgroundGradientView(vm: homeVm.backgroundVm))
 		.scrollDismissesKeyboard(.immediately)
-        .tint(list.color.SwiftUIColor)
+		.tint(vm.list.color.SwiftUIColor)
         .listStyle(.sidebar)
         .toolbarRole(sizeClass == UserInterfaceSizeClass.compact ? .automatic : .editor)
 		#if os(iOS)
@@ -88,29 +60,27 @@ struct ListView: View {
 //            }
             
 			ToolbarItem(id: "title", placement: .principal) {
-				Button {
-					editList()
-				} label: {
+				Button { vm.editList() } label: {
 					Label {
 						VStack {
-							Text(list.name)
+							Text(vm.list.name)
 								.font(.callout.bold())
-							Text(list.creationDate.formatted())
+							Text(vm.list.creationDate.formatted())
 								.font(.system(size: 10))
 								.foregroundStyle(.secondary)
 						}
 					} icon: {
-						Image(systemName: list.icon)
+						Image(systemName: vm.list.icon)
 					}
+					.labelStyle(.centeredImage(tintIcon: false))
+//					.foregroundStyle(.primary)
+					.matchedTransitionSource(id: AnimationKeys.editList, in: transition)
 				}
-				.labelStyle(.centeredImage(tintIcon: false))
-				.matchedTransitionSource(id: AnimationKeys.editList, in: transition)
 				.buttonStyle(.glass)
-				.foregroundStyle(.primary)
 			}
 			
             ToolbarItem(id: "sort", placement: .secondaryAction) {
-                Picker(selection: $list.sortBy.animation()) {
+				Picker(selection: Bindable(vm.list).sortBy.animation()) {
                     Label("Alphabetical", systemImage: "abc")
                         .tag(EntrySort.alphabetically)
                     Label("Newest", systemImage: "clock")
@@ -121,16 +91,16 @@ struct ListView: View {
             }
             
             ToolbarItem(id: "edit", placement: .secondaryAction) {
-                Button("Edit List", systemImage: "square.and.pencil", action: editList)
+				Button("Edit List", systemImage: "square.and.pencil", action: vm.editList)
             }
             
 			#if os(iOS)
             ToolbarItem(id: "share", placement: .secondaryAction) {
-                ShareLink(item: PdfMaker(list: list), preview: SharePreview(list.name))
+				ShareLink(item: PdfMaker(list: vm.list), preview: SharePreview(vm.list.name))
             }
 			
             ToolbarItem(id: "print", placement: .secondaryAction) {
-                Button("Print", systemImage: "printer", action: printList)
+				Button("Print", systemImage: "printer", action: vm.printList)
             }
 			#endif
             
@@ -138,7 +108,7 @@ struct ListView: View {
                 Button("Delete List", systemImage: "trash", role: .destructive, action: deleteList)
             }
         }
-        .searchable(text: $searchString, prompt: Text("Search \(list.name)"))
+		.searchable(text: Bindable(vm).searchString, prompt: Text("Search \(vm.list.name)"))
         .overlay {
 //            if filteredListEntries.isEmpty && isSearching {
 //                ContentUnavailableView.search(text: searchString)
@@ -150,13 +120,13 @@ struct ListView: View {
 //                }
 //            }
 			
-            if showBusyIndicator {
+			if vm.showBusyIndicator {
                 GroupBox {
                     ProgressView()
 						.tint(.primary)
                 } label: {
                     Label("Generating PDF", systemImage: "doc")
-						.foregroundStyle(list.color.SwiftUIColor)
+						.foregroundStyle(vm.list.color.SwiftUIColor)
                 }
                 .padding(0)
                 .contentShape(RoundedRectangle(cornerRadius: 10))
@@ -199,71 +169,45 @@ struct ListView: View {
 		.toolbar {
 //			if !isSearching {
 				ToolbarItemGroup(placement: .bottomBar) {
-					TextField("Add an Item", text: $newEntryName.animation())
+					TextField("Add an Item", text: Bindable(vm).newEntryName.animation())
 						.padding(.horizontal)
-						.onSubmit(addNewEntry)
+						.onSubmit(vm.addNewEntry)
 						.submitLabel(.continue)
 					
-					Button("Add", systemImage: "plus", role: .confirm, action: addNewEntry)
+					Button("Add", systemImage: "plus", role: .confirm, action: vm.addNewEntry)
 						.labelStyle(.iconOnly)
-						.tint(list.color.SwiftUIColor)
+						.tint(vm.list.color.SwiftUIColor)
 						.buttonStyle(.glassProminent)
-						.disabled(newEntryName.isEmpty)
+						.disabled(vm.newEntryName.isEmpty)
 				}
 //			}
 		}
 		#endif
-        .sheet(isPresented: $isEditing) {
-			ListDetailEditor(navigationTitle: "Edit List", buttonTitle: "Save Changes", listName: list.name, listIcon: list.icon, listColor: list.color, action: list.updateList)
+		.sheet(isPresented: Bindable(vm).isEditing) {
+			ListDetailEditor(list: vm.list)
+				#if os(iOS)
 				.navigationTransition(.zoom(sourceID: AnimationKeys.editList, in: transition))
+				#endif
         }
-        .alert("No Entries to print in checklist.", isPresented: $showNoEntriesAlert) {
+		.alert("No Entries to print in checklist.", isPresented: Bindable(vm).showNoEntriesAlert) {
             Button("OK") { }
         }
     }
 	
-	func addNewEntry() {
-		list.addNewEntry(contents: newEntryName)
-		newEntryName = ""
-	}
-    
-    func editList() {
-        isEditing.toggle()
-    }
-    
-    func deleteList() {
+	func deleteList() {
 		dismiss()
-        context.delete(list)
-    }
-    
-	#if os(iOS)
-    func printList() {
-        guard let entries = list.listEntries else { return  }
-        
-        if entries.count <= 0 {
-            showNoEntriesAlert.toggle()
-            return
-        }
-        
-        Task {
-            withAnimation {
-                showBusyIndicator = true
-            }
-            
-            // I added an overlay for this now I also want to see it.
-            try await Task.sleep(for: .milliseconds(750 + Int.random(in: 0...500)))
-            
-            let pdf = PdfMaker(list: list).makePDF()
-            
-			try? Printer.shared.printPdfData(pdf)
-            showBusyIndicator = false
-        }
-    }
-	#endif
+		homeVm.deleteList(vm.list)
+	}
 }
 
 #Preview {
+	@Previewable @State var vm = HomeVm()
 	NavigationStack {
-		ListView(list: CustomList.exampleList)
+		ListView()
+			.onAppear {
+				vm.backgroundVm.setBackgroundColor(baseColor: CustomList.exampleList.color)
+			}
+			.environment(vm)
+			.environment(ListVm(list: CustomList.exampleList))
 	}
 }

@@ -11,20 +11,8 @@ struct IconPicker: View {
     
 	@Binding public var selectedIcon: String
     
-    private let iconColumns: [GridItem] = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-	
 	@Namespace private var namespace
-	
+	private let iconColumns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 9)
 	private let availableIcons = ["checklist", "checkmark", "pencil", "trash", "folder", "tray", "doc", "calendar", "book", "books.vertical", "bookmark", "graduationcap", "ticket", "paperclip", "link", "person", "exclamationmark.triangle", "play", "music.note", "star", "flag", "location", "bell", "bolt", "camera", "phone", "envelope", "cart", "pianokeys", "hammer", "wrench", "screwdriver", "printer", "suitcase", "house", "mappin", "map", "tv", "airplane", "guitars", "leaf", "film", "lightbulb", "list.bullet", "questionmark", "exclamationmark", "exclamationmark.2", "exclamationmark.3", "chevron.left.forwardslash.chevron.right", "curlybraces", "slider.horizontal.3", "dollarsign.circle", "eurosign.square", "sterlingsign.square"]
     
     var body: some View {
@@ -53,15 +41,14 @@ struct IconPicker: View {
 			}
 		}
     }
-	
-	public static let defaultIcon: String = "checklist"
 }
 
 #Preview {
-	@Previewable @State var selectedIcon: String = IconPicker.defaultIcon
+	@Previewable @State var selectedIcon: String = SystemDefaults.defaultIcon
 	NavigationStack {
 		Form {
 			IconPicker(selectedIcon: $selectedIcon)
 		}
+		.formStyle(.grouped)
 	}
 }

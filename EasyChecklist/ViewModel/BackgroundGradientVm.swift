@@ -24,9 +24,15 @@ class BackgroundGradientVm {
 	private var seeds: [PointSeed] = []
 	private var startDate = Date()
 	
-	init(baseColor: AvailableColors) {
-		self.colors = Self.getColors(baseColor: baseColor)
+	init() {
 		self.seeds = Self.getSeed(basePoints: basePoints)
+		self.colors = Self.getColors(baseColor: SystemDefaults.accentColor)
+	}
+	
+	public func setBackgroundColor(baseColor: AvailableColors) {
+		withAnimation {
+			self.colors = Self.getColors(baseColor: baseColor)
+		}
 	}
 	
 	public func points(at time: Date) -> [SIMD2<Float>] {

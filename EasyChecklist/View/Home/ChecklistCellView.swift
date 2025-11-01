@@ -67,15 +67,11 @@ struct ChecklistCellView: View {
 }
 
 #Preview {
-	@Previewable @State var selection: CustomList?
-	
-	let container: ModelContainer = {
-		let schema = Schema([ CustomList.self ])
-		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-		return try! ModelContainer(for: schema, configurations: [modelConfiguration])
-	}()
-	
-	ContentView(sortOrder: .constant(.alphabetically), isAscendingSort: .constant(false), selectedList: $selection)
-		.modelContainer(container)
-		.onAppear { container.mainContext.insert(CustomList.exampleList) }
+	@Previewable @State var vm = HomeVm()
+	HomeView()
+		.environment(vm)
+		.onAppear {
+			vm.addList(.exampleList)
+			vm.fetchLists()
+		}
 }

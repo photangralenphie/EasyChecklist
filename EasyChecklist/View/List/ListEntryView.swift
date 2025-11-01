@@ -26,10 +26,10 @@ struct ListEntryView: View {
 			.contentShape(.rect)
 			.listGlassCell()
 			.sensoryFeedback(.success, trigger: listEntry.checked)
-			.onTapGesture(perform: OnTapGesture)
+			.onTapGesture(perform: onTapGesture)
 			.onLongPressGesture { showRenameAlert.toggle() }
 			.swipeActions(edge: .trailing) {
-				Button("Delete", systemImage: "trash", role: .destructive, action: DeleteListEntry)
+				Button("Delete", systemImage: "trash", role: .destructive, action: deleteListEntry)
 					.tint(Color.red)
 				Button("Rename", systemImage: "rectangle.and.pencil.and.ellipsis") { showRenameAlert.toggle() }
 			}
@@ -39,22 +39,22 @@ struct ListEntryView: View {
 			}
     }
     
-    func OnTapGesture() {
+    func onTapGesture() {
         withAnimation {
             listEntry.checked.toggle()
             listEntry.list?.editDate = Date.now
         }
     }
     
-    func DeleteListEntry() {
-        withAnimation {
-            context.delete(listEntry)
-        }
+    func deleteListEntry() {
+		DataService.shared.deleteListEntry(listEntry)
     }
 }
 
 #Preview {
 	NavigationStack {
-		ListView(list: CustomList.exampleList)
+		ListView()
+			.environment(HomeVm())
+			.environment(ListVm(list: CustomList.exampleList))
 	}
 }

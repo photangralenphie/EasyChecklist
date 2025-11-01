@@ -16,23 +16,9 @@ struct EasyChecklistApp: App {
 	@AppStorage(PreferenceKeys.accentColorSchema) private var accentColorSchema: AvailableColors = .blue
 	@AppStorage(PreferenceKeys.colorScheme) private var colorScheme: PreferredColorScheme = .systemDefault
     
-    // Sorting
-	@AppStorage(PreferenceKeys.sortOrder) private var sortOrder: ListSort = ListSort.modified
-	@AppStorage(PreferenceKeys.isAscendingSort) private var isAscendingSort: Bool = false
-	
-	@State private var selectedList: CustomList?
-	@AppStorage("selection") private var selection: String?
-	
-	var iCloudContainer: ModelContainer = {
-		let schema = Schema([ CustomList.self ])
-		let modelConfiguration = ModelConfiguration(schema: schema, cloudKitDatabase: .automatic)
-		
-		do {
-			return try ModelContainer(for: schema, configurations: [modelConfiguration])
-		} catch {
-			fatalError("Could not create ModelContainer: \(error.localizedDescription)")
-		}
-	}()
+	// ViewModels
+	@State private var vm = HomeVm()
+	@State private var backgroundGradientVm = BackgroundGradientVm()
 	  
 //    init() {
 //		#if os(iOS)
@@ -42,11 +28,15 @@ struct EasyChecklistApp: App {
     
     var body: some Scene {
         WindowGroup {
-			ContentView(sortOrder: $sortOrder, isAscendingSort: $isAscendingSort, selectedList: $selectedList)
+			HomeView()
                 .preferredColorScheme(colorScheme.mode)
-				.tint(selectedList?.color.SwiftUIColor ?? accentColorSchema.SwiftUIColor)
+				.tint(vm.selectedList?.color.SwiftUIColor ?? accentColorSchema.SwiftUIColor)
+				.environment(vm)
+				.onAppear {
+					vm.fetchLists()
+					vm.backgroundVm.setBackgroundColor(baseColor: accentColorSchema)
+				}
         }
-		.modelContainer(iCloudContainer)
 		
 		#if os(macOS)
 		Settings {
@@ -54,4 +44,14 @@ struct EasyChecklistApp: App {
 		}
 		#endif
     }
+}
+
+#Preview {
+	@Previewable @State var vm = HomeVm()
+	HomeView()
+		.environment(vm)
+		.onAppear {
+			vm.fetchLists()
+			vm.addList(.exampleList)
+		}
 }
