@@ -11,25 +11,25 @@ import AwesomeSwiftyComponents
 
 struct HomeView: View {
 
-	@Environment(HomeVm.self) private var vm
+	@Environment(HomeVm.self) private var vm;
 	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
 	@Namespace private var transition
 	
 	@AppStorage(PreferenceKeys.colorScheme) private var colorScheme: PreferredColorScheme = .systemDefault
 	@AppStorage(PreferenceKeys.accentColorSchema) private var accentColor: AvailableColors = .blue
-    
+	
     var body: some View {
-        NavigationSplitView {
+        NavigationSplitView() {
 			List(vm.lists, selection: Bindable(vm).selectedList) { list in
                 ChecklistCellView(list: list)
             }
-			.onChange(of: vm.selectedList) {
-				vm.backgroundVm.setBackgroundColor(baseColor: vm.selectedList?.color ?? accentColor)
-			}
+			.onChange(of: vm.selectedList) { vm.backgroundVm.setBackgroundColor(vm.selectedList?.color ?? accentColor, reason: .selection) }
 			.scrollContentBackground(.hidden)
-			.conditionalBackground(show: horizontalSizeClass == .compact) {
-				BackgroundGradientView(vm: vm.backgroundVm)
+			.background {
+				if horizontalSizeClass == .compact {
+					BackgroundGradientView(vm: vm.backgroundVm)
+				}
 			}
 			#if os(iOS)
 			.listRowSpacing(LayoutConstants.listItemSpacing)
@@ -50,7 +50,7 @@ struct HomeView: View {
 					ContentUnavailableView.search(text: vm.searchString)
                 }
             }
-            .toolbar { MainToolbar(transition: transition)}
+            .toolbar { MainToolbar(transition: transition) }
         } detail: {
 			if vm.lists.isEmpty {
                 ContentUnavailableView("No Checklists", systemImage: "plus", description: Text("Get Started by adding a new Checklist with the plus button"))
@@ -59,10 +59,7 @@ struct HomeView: View {
                 ListView()
 					.environment(ListVm(list: list))
             } else {
-				BackgroundGradientView(vm: vm.backgroundVm)
-					.overlay {
-						ContentUnavailableView("Nothing Selected", systemImage: "filemenu.and.selection", description: Text("Select a Checklist in the Sidebar"))
-					}
+				ContentUnavailableView("Nothing Selected", systemImage: "filemenu.and.selection", description: Text("Select a Checklist in the Sidebar"))
             }
         }
 		.searchable(text: Bindable(vm).searchString, placement: .sidebar)
@@ -82,6 +79,8 @@ struct HomeView: View {
 			PrintEmptyChecklistConfigurationView()
 		}
 		#endif
+		.tint(vm.selectedList?.color.SwiftUIColor ?? accentColor.SwiftUIColor)
+		.environment(vm)
     }
 }
 

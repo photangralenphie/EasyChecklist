@@ -11,32 +11,30 @@ import AwesomeSwiftyComponents
 
 @main
 struct EasyChecklistApp: App {
-    
-    // Appearance
-	@AppStorage(PreferenceKeys.accentColorSchema) private var accentColorSchema: AvailableColors = .blue
-	@AppStorage(PreferenceKeys.colorScheme) private var colorScheme: PreferredColorScheme = .systemDefault
-    
-	// ViewModels
+	
+	// ViewModel
 	@State private var vm = HomeVm()
-	@State private var backgroundGradientVm = BackgroundGradientVm()
+    
+	// Appearance
+	@AppStorage(PreferenceKeys.accentColorSchema) private var accentColor: AvailableColors = .blue
+	@AppStorage(PreferenceKeys.colorScheme) private var colorScheme: PreferredColorScheme = .systemDefault
 	  
-//    init() {
-//		#if os(iOS)
-//        UIExtensions.setNavigationBarFont(fontDesign: .rounded)
-//		#endif
-//    }
+    init() {
+		#if os(iOS)
+        UIExtensions.setNavigationBarFont(fontDesign: .rounded)
+		#endif
+		
+		vm.fetchLists()
+		vm.backgroundVm.setBackgroundColor(accentColor, reason: .appear)
+    }
     
     var body: some Scene {
         WindowGroup {
 			HomeView()
                 .preferredColorScheme(colorScheme.mode)
-				.tint(vm.selectedList?.color.SwiftUIColor ?? accentColorSchema.SwiftUIColor)
 				.environment(vm)
-				.onAppear {
-					vm.fetchLists()
-					vm.backgroundVm.setBackgroundColor(baseColor: accentColorSchema)
-				}
         }
+
 		
 		#if os(macOS)
 		Settings {

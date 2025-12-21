@@ -15,7 +15,6 @@ struct ListDetailEditor: View {
 	@FocusState private var listNameFocused: Bool
 	
 	@State private var vm: any ListDetailEditorVm
-	@State private var backgroundVm = BackgroundGradientVm()
 	
 	init(list: CustomList? = nil) {
 		if let list {
@@ -67,15 +66,13 @@ struct ListDetailEditor: View {
         }
 		.tint(vm.listColor.SwiftUIColor)
 		.scrollContentBackground(.hidden)
-		.background(BackgroundGradientView(vm: backgroundVm))
+		.background(BackgroundGradientView(vm: homeVm.backgroundVm))
 		.onAppear(perform: updateBackground)
 		.onChange(of: vm.listColor, updateBackground)
     }
 	
 	private func updateBackground() {
-		withAnimation {
-			backgroundVm.setBackgroundColor(baseColor: vm.listColor)
-		}
+		homeVm.backgroundVm.setBackgroundColor(vm.listColor, reason: .listUpdate)
 	}
 	
 	private func save() {
@@ -89,6 +86,5 @@ struct ListDetailEditor: View {
 	NavigationStack {
 		ListDetailEditor(list: CustomList.exampleList)
 			.environment(vm)
-	
 	}
 }

@@ -13,9 +13,13 @@ import AwesomeSwiftyComponents
 @Observable
 class HomeVm {
 	
+	@ObservationIgnored
 	private var dataService = DataService.shared
 	
+	@ObservationIgnored
 	private(set) var allLists: [CustomList] = []
+	
+	@ObservationIgnored
 	private(set) var backgroundVm = BackgroundGradientVm()
 	
 	var selectedList: CustomList?

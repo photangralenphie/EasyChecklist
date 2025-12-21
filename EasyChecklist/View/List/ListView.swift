@@ -17,6 +17,7 @@ struct ListView: View {
 
     // Functional
 	@Namespace private var transition
+	@FocusState private var isAddTextFieldFocused: Bool
 	@Environment(\.dismiss) private var dismiss
     @Environment(\.horizontalSizeClass) private var sizeClass
     
@@ -47,24 +48,20 @@ struct ListView: View {
 		.scrollDismissesKeyboard(.immediately)
 		.tint(vm.list.color.SwiftUIColor)
         .listStyle(.sidebar)
-        .toolbarRole(sizeClass == UserInterfaceSizeClass.compact ? .automatic : .editor)
+		.toolbarRole(sizeClass == .compact ? .automatic : .editor)
 		#if os(iOS)
 		.listRowSpacing(LayoutConstants.listItemSpacing)
 		.navigationBarTitleDisplayMode(.inline)
 		#endif
         .toolbar(id: "listToolbar") {
-//            ToolbarItem(id: "search", placement: .primaryAction) {
-//                if sizeClass == .compact {
-//                    Button("Search", systemImage: "magnifyingglass") { isSearching.toggle() }
-//                }
-//            }
-            
 			ToolbarItem(id: "title", placement: .principal) {
 				Button { vm.editList() } label: {
 					Label {
 						VStack {
 							Text(vm.list.name)
-								.font(.callout.bold())
+								.font(.callout)
+								.fontDesign(.rounded)
+								.bold()
 							Text(vm.list.creationDate.formatted())
 								.font(.system(size: 10))
 								.foregroundStyle(.secondary)
@@ -73,9 +70,9 @@ struct ListView: View {
 						Image(systemName: vm.list.icon)
 					}
 					.labelStyle(.centeredImage(tintIcon: false))
-//					.foregroundStyle(.primary)
 					.matchedTransitionSource(id: AnimationKeys.editList, in: transition)
 				}
+				.foregroundStyle(.primary)
 				.buttonStyle(.glass)
 			}
 			
@@ -103,22 +100,28 @@ struct ListView: View {
 				Button("Print", systemImage: "printer", action: vm.printList)
             }
 			#endif
-            
+			
             ToolbarItem(id: "delete", placement: .secondaryAction) {
                 Button("Delete List", systemImage: "trash", role: .destructive, action: deleteList)
+					.tint(.red)
             }
-        }
-		.searchable(text: Bindable(vm).searchString, prompt: Text("Search \(vm.list.name)"))
+		}
+		.searchable(text: Bindable(vm).searchString, isPresented: Bindable(vm).isSearching, prompt: Text("Search \(vm.list.name)"))
         .overlay {
-//            if filteredListEntries.isEmpty && isSearching {
-//                ContentUnavailableView.search(text: searchString)
-//            }
+			if vm.filteredListEntries.isEmpty && vm.isSearching {
+				ContentUnavailableView.search(text: vm.searchString)
+            }
 			
-//            if let entries = list.listEntries {
-//                if entries.isEmpty && !isSearching {
-//                    ContentUnavailableView("No Entries", systemImage: "plus")
-//                }
-//            }
+			if let entries = vm.list.listEntries {
+				if entries.isEmpty && !vm.isSearching {
+					ContentUnavailableView {
+						Label("No Entries", systemImage: "plus")
+					} actions: {
+						Button("Add an Item") { isAddTextFieldFocused = true }
+							.buttonStyle(.bordered)
+					}
+                }
+            }
 			
 			if vm.showBusyIndicator {
                 GroupBox {
@@ -136,7 +139,6 @@ struct ListView: View {
         }
 		#if os(macOS)
 		.safeAreaBar(edge: .bottom){
-//		.overlay(alignment: .bottom) {
 			HStack {
 				TextField("Add an Item", text: $newEntryName.animation())
 					.padding(.horizontal)
@@ -152,24 +154,15 @@ struct ListView: View {
 					.frame(width: 50, height: 50)
 					.clipShape(.circle)
 					.glassEffect(newEntryName.isEmpty ? .regular : .clear.tint(list.color.SwiftUIColor))
-//					.disabled()
-				
-//				Button("Add", systemImage: "plus", role: .confirm, action: addNewEntry)
-//					.labelStyle(.iconOnly)
-//					.tint(list.color.SwiftUIColor)
-//					.frame(height: 50)
-//					.buttonStyle(.glassProminent)
-//					.disabled(newEntryName.isEmpty)
-				
 			}
-//			.glassEffect()
 			.padding()
 		}
 		#else
 		.toolbar {
-//			if !isSearching {
+			if !vm.isSearching {
 				ToolbarItemGroup(placement: .bottomBar) {
 					TextField("Add an Item", text: Bindable(vm).newEntryName.animation())
+						.focused($isAddTextFieldFocused)
 						.padding(.horizontal)
 						.onSubmit(vm.addNewEntry)
 						.submitLabel(.continue)
@@ -180,7 +173,7 @@ struct ListView: View {
 						.buttonStyle(.glassProminent)
 						.disabled(vm.newEntryName.isEmpty)
 				}
-//			}
+			}
 		}
 		#endif
 		.sheet(isPresented: Bindable(vm).isEditing) {
@@ -205,7 +198,7 @@ struct ListView: View {
 	NavigationStack {
 		ListView()
 			.onAppear {
-				vm.backgroundVm.setBackgroundColor(baseColor: CustomList.exampleList.color)
+				vm.backgroundVm.setBackgroundColor(CustomList.exampleList.color, reason: .preview)
 			}
 			.environment(vm)
 			.environment(ListVm(list: CustomList.exampleList))

@@ -18,11 +18,11 @@ struct ChecklistCellView: View {
 	@AppStorage(PreferenceKeys.showExhaustiveListDetails) private var showExhaustiveListDetails: Bool = true
     
     var listDetailSubtitle: String {
-        return "\(numToDoItems)/\(list.listEntries?.count ?? 0)"
+        return "\(numDoneItems)/\(list.listEntries?.count ?? 0)"
     }
     
     var listExhaustiveDetailSubtitle: LocalizedStringKey {
-        return "\(list.listEntries?.count ?? 0) Entry - \(numDoneItems) Done - \(numToDoItems) ToDo"
+        return "\(list.listEntries?.count ?? 0) - \(numDoneItems) Done - \(numToDoItems) ToDo"
     }
     
     var numDoneItems: Int {

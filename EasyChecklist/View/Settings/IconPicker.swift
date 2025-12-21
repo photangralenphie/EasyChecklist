@@ -19,7 +19,7 @@ struct IconPicker: View {
 		NavigationStack {
 			ZStack {
 				Color.clear
-					.glassEffect(.clear.interactive().tint(.accentColor), in: .circle)
+					.glassEffect(.clear.tint(.accentColor), in: .circle)
 					.matchedGeometryEffect(id: selectedIcon, in: namespace, isSource: false)
 				
 				LazyVGrid(columns: iconColumns) {

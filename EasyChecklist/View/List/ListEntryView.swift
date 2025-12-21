@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AwesomeSwiftyComponents
 
 struct ListEntryView: View {
     

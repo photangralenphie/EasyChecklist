@@ -12,11 +12,10 @@ struct MainToolbar: ToolbarContent {
 	let transition: Namespace.ID
 	
 	@Environment(HomeVm.self) private var vm
-	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
 	
     var body: some ToolbarContent {
 		#if os(iOS)
-		ToolbarItem(placement: horizontalSizeClass == .compact ? .secondaryAction : .bottomBar) {
+		ToolbarItemGroup(placement: .bottomBar) {
 			Menu("Sort by", systemImage: "arrow.up.arrow.down") {
 				Picker(selection: Bindable(vm).sortOrder.animation()) {
 					Label("Alphabetically", systemImage: "textformat.abc")
@@ -42,19 +41,19 @@ struct MainToolbar: ToolbarContent {
 					}
 				}
 			}
-		}
-
-		ToolbarItem(placement: horizontalSizeClass == .compact ? .secondaryAction : .bottomBar) {
+			
 			Button("Print Empty Checklist", systemImage: "printer") {
 				vm.showEmptyPrintOptions.toggle()
 			}
 		}
 
-		ToolbarItem(placement: horizontalSizeClass == .compact ? .secondaryAction : .bottomBar) {
+		ToolbarSpacer(.fixed)
+		
+		ToolbarItem(placement: .bottomBar) {
 			Button("Settings", systemImage: "gear") { vm.showSettings.toggle() }
 				.matchedTransitionSource(id: AnimationKeys.settings, in: transition)
 		}
-
+		
 		ToolbarSpacer(.flexible, placement: .bottomBar)
 
 		ToolbarItem(placement: .bottomBar) {
@@ -63,4 +62,14 @@ struct MainToolbar: ToolbarContent {
 		}
 		#endif
     }
+}
+
+#Preview {
+	@Previewable @State var vm = HomeVm()
+	HomeView()
+		.environment(vm)
+		.onAppear {
+			vm.fetchLists()
+			vm.addList(.exampleList)
+		}
 }

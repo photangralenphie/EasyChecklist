@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld Entry - %lld Done - %lld ToDo" : {
+    "%lld - %lld Done - %lld ToDo" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -17,13 +17,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg Eintrag"
+                      "value" : "Eintrag"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg Einträge"
+                      "value" : "Einträge"
                     }
                   }
                 }
@@ -33,8 +33,8 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%#@arg1@ Entry - %2$lld Done - %3$lld ToDo"
+            "state" : "needs_review",
+            "value" : "%#@arg1@ - %2$lld Done - %3$lld ToDo"
           },
           "substitutions" : {
             "arg1" : {
@@ -45,7 +45,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : " %arg Entry"
+                      "value" : "%arg Entry"
                     }
                   },
                   "other" : {
@@ -72,7 +72,14 @@
       }
     },
     "Add" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        }
+      }
     },
     "Add a List" : {
       "localizations" : {
@@ -100,16 +107,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Liste hinzufügen"
-          }
-        }
-      }
-    },
-    "Add New List" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neue Liste hinzufügen"
           }
         }
       }
@@ -180,6 +177,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erledigt (%lld)"
+          }
+        }
+      }
+    },
+    "Create" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstellen"
           }
         }
       }
@@ -290,17 +297,6 @@
     "Here you can set the language of EasyChecklist and manage permissions like to use Face-ID or Touch-ID." : {
 
     },
-    "iCloud Sync" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud Sync"
-          }
-        }
-      }
-    },
     "Icon" : {
       "localizations" : {
         "de" : {
@@ -361,6 +357,16 @@
         }
       }
     },
+    "New List" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Liste"
+          }
+        }
+      }
+    },
     "Newest" : {
       "localizations" : {
         "de" : {
@@ -397,17 +403,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keine Einträge zum drucken in er Checkliste."
-          }
-        }
-      }
-    },
-    "Not Implemented Yet" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noch nicht implementiert"
           }
         }
       }
@@ -492,22 +487,12 @@
         }
       }
     },
-    "Save Changes" : {
+    "Save" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Änderungen Speichern"
-          }
-        }
-      }
-    },
-    "Search" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suche"
+            "value" : "Speichern"
           }
         }
       }

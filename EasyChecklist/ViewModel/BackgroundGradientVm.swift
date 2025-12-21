@@ -8,11 +8,20 @@
 import SwiftUI
 import AwesomeSwiftyComponents
 
+enum BackgroundChangeReason {
+	case appear
+	case selection
+	case listUpdate
+	case accentColorChange
+	case preview
+}
+
 @Observable
 class BackgroundGradientVm {
 	
 	private(set) var colors: Array<Color> = []
 
+	@ObservationIgnored
 	private let basePoints: [SIMD2<Float>] = [
 		.init(0.00, 0.00), .init(0.25, 0.00), .init(0.50, 0.00), .init(0.75, 0.00), .init(1.00, 0.00),
 		.init(0.00, 0.25), .init(0.25, 0.25), .init(0.50, 0.25), .init(0.75, 0.25), .init(1.00, 0.25),
@@ -20,8 +29,11 @@ class BackgroundGradientVm {
 		.init(0.00, 0.75), .init(0.25, 0.75), .init(0.50, 0.75), .init(0.75, 0.75), .init(1.00, 0.75),
 		.init(0.00, 1.00), .init(0.25, 1.00), .init(0.50, 1.00), .init(0.75, 1.00), .init(1.00, 1.00)
 	]
+	@ObservationIgnored
 	private let amplitude: Float = 0.15
+	@ObservationIgnored
 	private var seeds: [PointSeed] = []
+	@ObservationIgnored
 	private var startDate = Date()
 	
 	init() {
@@ -29,7 +41,22 @@ class BackgroundGradientVm {
 		self.colors = Self.getColors(baseColor: SystemDefaults.accentColor)
 	}
 	
-	public func setBackgroundColor(baseColor: AvailableColors) {
+	public func setBackgroundColor(_ baseColor: AvailableColors, reason: BackgroundChangeReason) {
+		switch reason {
+			case .selection:
+				fallthrough
+			case .accentColorChange:
+				fallthrough
+			case .appear:
+				fallthrough
+			case .listUpdate:
+				fallthrough
+			case .preview :
+				setBackgroundColor(baseColor: baseColor)
+		}
+	}
+	
+	private func setBackgroundColor(baseColor: AvailableColors) {
 		withAnimation {
 			self.colors = Self.getColors(baseColor: baseColor)
 		}

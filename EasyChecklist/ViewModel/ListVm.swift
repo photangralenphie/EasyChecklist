@@ -12,11 +12,16 @@ import PrintingKit
 @MainActor
 @Observable
 class ListVm {
+	@ObservationIgnored
 	let list: CustomList
 	
+	@ObservationIgnored
 	var document: PDFDocument?
 	var newEntryName: String = ""
+	
+	var isSearching: Bool = false
 	var searchString: String = ""
+	
 	var isEditing: Bool = false
 	var showBusyIndicator: Bool = false
 	var showNoEntriesAlert: Bool = false

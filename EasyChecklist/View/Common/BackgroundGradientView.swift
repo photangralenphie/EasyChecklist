@@ -34,5 +34,5 @@ struct BackgroundGradientView: View {
 #Preview {
 	let vm = BackgroundGradientVm()
 	BackgroundGradientView(vm: vm)
-		.onAppear { vm.setBackgroundColor(baseColor: .blue)}
+		.onAppear { vm.setBackgroundColor(.blue, reason: .preview)}
 }

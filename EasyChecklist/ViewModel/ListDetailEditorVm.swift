@@ -22,7 +22,9 @@ protocol ListDetailEditorVm: Observable {
 
 @Observable
 class CreateListDetailEditorVm: ListDetailEditorVm {
+	@ObservationIgnored
 	var navigationTitle: LocalizedStringKey = "New List"
+	@ObservationIgnored
 	var buttonTitle: LocalizedStringKey = "Create"
 	
 	var listName: String = ""
@@ -39,10 +41,12 @@ class CreateListDetailEditorVm: ListDetailEditorVm {
 
 @Observable
 class EditListDetailEditorVm: ListDetailEditorVm {
-	
+	@ObservationIgnored
 	private var list: CustomList
 	
+	@ObservationIgnored
 	var navigationTitle: LocalizedStringKey = "Edit List"
+	@ObservationIgnored
 	var buttonTitle: LocalizedStringKey = "Save"
 	
 	var listName: String
@@ -63,6 +67,10 @@ class EditListDetailEditorVm: ListDetailEditorVm {
 			list.color = listColor
 			list.icon = listIcon
 			list.editDate = Date.now
+		}
+		
+		if homeVm.selectedList == list {
+			homeVm.backgroundVm.setBackgroundColor(list.color, reason: .selection)
 		}
 	}
 }
