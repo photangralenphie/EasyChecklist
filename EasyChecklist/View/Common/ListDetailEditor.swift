@@ -34,7 +34,7 @@ struct ListDetailEditor: View {
                 }
                 
                 Section("Accent Color") {
-					InlineColorPicker(selectedColor: $vm.listColor, pickerStyle: .slim)
+					InlineColorPicker(selectedColor: $vm.listColor)
 						.listGlassCell()
                 }
                 

@@ -1,6 +1,15 @@
 {
-  "originHash" : "d00ed1aadf891c189caef20c282f99ec6ce84411a4155bf78fd71c53b72551ec",
+  "originHash" : "78430f08181b9c71df49b4955fd317982907485968f00e333072d2a38749cf84",
   "pins" : [
+    {
+      "identity" : "awesomeswiftycomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/photangralenphie/AwesomeSwiftyComponents",
+      "state" : {
+        "revision" : "cf3efbac6d89bdce76155c17f228af6f0f9c7286",
+        "version" : "2.0.0"
+      }
+    },
     {
       "identity" : "printingkit",
       "kind" : "remoteSourceControl",

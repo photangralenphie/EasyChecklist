@@ -29,7 +29,7 @@ struct SettingsView: View {
 		NavigationStack {
 			Form {
 				Section {
-					InlineColorPicker(selectedColor: $accentColorSchema, pickerStyle: .expanded(systemImage: "paintbrush", description: "Theme Color"))
+					InlineColorPicker(selectedColor: $accentColorSchema, description: "Theme Color", systemImage: "paintbrush")
 						.listGlassCell(in: .rect())
 						.onChange(of: accentColorSchema) { setBackground() }
 					ColorSchemeSwitcher(colorScheme: $colorScheme, showIcon: true)

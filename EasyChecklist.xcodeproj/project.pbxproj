@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E492B93B1D20038F7A7 /* PrintingKit */; };
 		DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */ = {isa = PBXBuildFile; productRef = DD034E4C2B93B5F10038F7A7 /* TPPDF */; };
-		DD4F2B972D4974B900C1E4E3 /* AwesomeSwiftyComponents in Frameworks */ = {isa = PBXBuildFile; productRef = DD4F2B962D4974B900C1E4E3 /* AwesomeSwiftyComponents */; };
+		DDF5B0102F1BB03700F88CC7 /* AwesomeSwiftyComponents in Frameworks */ = {isa = PBXBuildFile; productRef = DDF5B00F2F1BB03700F88CC7 /* AwesomeSwiftyComponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +36,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD034E4A2B93B1D20038F7A7 /* PrintingKit in Frameworks */,
-				DD4F2B972D4974B900C1E4E3 /* AwesomeSwiftyComponents in Frameworks */,
+				DDF5B0102F1BB03700F88CC7 /* AwesomeSwiftyComponents in Frameworks */,
 				DD034E4D2B93B5F10038F7A7 /* TPPDF in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,7 +82,7 @@
 			packageProductDependencies = (
 				DD034E492B93B1D20038F7A7 /* PrintingKit */,
 				DD034E4C2B93B5F10038F7A7 /* TPPDF */,
-				DD4F2B962D4974B900C1E4E3 /* AwesomeSwiftyComponents */,
+				DDF5B00F2F1BB03700F88CC7 /* AwesomeSwiftyComponents */,
 			);
 			productName = EasyChecklist;
 			productReference = DDA743D428F0873500681693 /* EasyChecklist.app */;
@@ -116,7 +116,7 @@
 			packageReferences = (
 				DD034E482B93B1D20038F7A7 /* XCRemoteSwiftPackageReference "PrintingKit" */,
 				DD034E4B2B93B5F10038F7A7 /* XCRemoteSwiftPackageReference "TPPDF" */,
-				DD4F2B952D4974B900C1E4E3 /* XCLocalSwiftPackageReference "../AwesomeSwiftyComponents" */,
+				DDF5B00E2F1BB03700F88CC7 /* XCRemoteSwiftPackageReference "AwesomeSwiftyComponents" */,
 			);
 			productRefGroup = DDA743D528F0873500681693 /* Products */;
 			projectDirPath = "";
@@ -422,13 +422,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		DD4F2B952D4974B900C1E4E3 /* XCLocalSwiftPackageReference "../AwesomeSwiftyComponents" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../AwesomeSwiftyComponents;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		DD034E482B93B1D20038F7A7 /* XCRemoteSwiftPackageReference "PrintingKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -446,6 +439,14 @@
 				minimumVersion = 2.4.1;
 			};
 		};
+		DDF5B00E2F1BB03700F88CC7 /* XCRemoteSwiftPackageReference "AwesomeSwiftyComponents" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/photangralenphie/AwesomeSwiftyComponents";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -459,8 +460,9 @@
 			package = DD034E4B2B93B5F10038F7A7 /* XCRemoteSwiftPackageReference "TPPDF" */;
 			productName = TPPDF;
 		};
-		DD4F2B962D4974B900C1E4E3 /* AwesomeSwiftyComponents */ = {
+		DDF5B00F2F1BB03700F88CC7 /* AwesomeSwiftyComponents */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = DDF5B00E2F1BB03700F88CC7 /* XCRemoteSwiftPackageReference "AwesomeSwiftyComponents" */;
 			productName = AwesomeSwiftyComponents;
 		};
 /* End XCSwiftPackageProductDependency section */
