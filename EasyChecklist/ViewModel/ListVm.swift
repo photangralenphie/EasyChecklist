@@ -82,4 +82,16 @@ class ListVm {
 		}
 	}
 	#endif
+	
+	func checkAll() {
+		withAnimation {
+			list.listEntries?.forEach { $0.checked = true }
+		}
+	}
+
+	func uncheckAll() {
+		withAnimation {
+			list.listEntries?.forEach { $0.checked = false }
+		}
+	}
 }

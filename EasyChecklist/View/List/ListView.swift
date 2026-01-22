@@ -23,6 +23,7 @@ struct ListView: View {
     
     // Settings
 	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
+	@AppStorage(PreferenceKeys.duplicateAvoidance) private var duplicateAvoidance: Bool = true
     
     var body: some View {
         List {
@@ -103,6 +104,14 @@ struct ListView: View {
                 Button(role: .destructive, action: deleteList)
 					.tint(.red)
             }
+			
+			ToolbarItem(id: "check", placement: .secondaryAction) {
+				ControlGroup {
+					Button("Check all", systemImage: "checkmark.circle", action: vm.checkAll)
+					Button("Uncheck all", systemImage: "circle", action: vm.uncheckAll)
+				}
+				.controlGroupStyle(.menu)
+			}
 		}
 		.searchable(text: Bindable(vm).searchString, isPresented: Bindable(vm).isSearching, prompt: Text("Search \(vm.list.name)"))
         .overlay {
