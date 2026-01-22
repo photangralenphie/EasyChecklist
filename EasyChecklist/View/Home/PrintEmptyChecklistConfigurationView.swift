@@ -19,7 +19,7 @@ struct PrintEmptyChecklistConfigurationView: View {
 		TextField("Name", text: $emptyPrintListName)
 		TextField("Number Empty Items", value: $emptyPrintListNumEntries, format: .number)
 			.keyboardType(.numberPad)
-		Button("Cancel", role: .cancel, action: resetEmptyPrintList)
+		Button(role: .cancel, action: resetEmptyPrintList)
 		Button("Print", action: printEmptyList)
 			.disabled(emptyPrintListNumEntries == nil || emptyPrintListName == "")
     }

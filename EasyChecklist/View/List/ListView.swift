@@ -100,7 +100,7 @@ struct ListView: View {
 			#endif
 			
             ToolbarItem(id: "delete", placement: .secondaryAction) {
-                Button("Delete List", systemImage: "trash", role: .destructive, action: deleteList)
+                Button(role: .destructive, action: deleteList)
 					.tint(.red)
             }
 		}

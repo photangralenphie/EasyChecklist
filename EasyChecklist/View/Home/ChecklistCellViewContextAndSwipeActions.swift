@@ -18,8 +18,9 @@ struct ChecklistCellViewContextAndSwipeActions: View {
     @State private var editCustomList: Bool = false
     
     var body: some View {
-        Button("Delete", systemImage: "trash", role: .destructive, action: deleteList)
+        Button(role: .destructive, action: deleteList)
             .tint(.red)
+		
         Button("Edit", systemImage: "rectangle.and.pencil.and.ellipsis") { editCustomList.toggle() }
 			.tint(Color.accentColor)
             .sheet(isPresented: $editCustomList) {

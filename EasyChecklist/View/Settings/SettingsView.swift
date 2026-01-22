@@ -98,7 +98,7 @@ struct SettingsView: View {
 			.toolbarTitleDisplayMode(.inlineLarge)
 			.toolbar {
 				ToolbarItem(placement: .confirmationAction) {
-					Button("Done", systemImage: "checkmark") { homeVm.showSettings = false /*dismiss()*/ }
+					Button(role: .close) { homeVm.showSettings = false /*dismiss()*/ }
 						.labelStyle(.iconOnly)
 						.buttonStyle(.glassProminent)
 				}

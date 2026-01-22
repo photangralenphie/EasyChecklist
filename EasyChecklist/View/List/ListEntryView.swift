@@ -30,7 +30,7 @@ struct ListEntryView: View {
 			.onTapGesture(perform: onTapGesture)
 			.onLongPressGesture { showRenameAlert.toggle() }
 			.swipeActions(edge: .trailing) {
-				Button("Delete", systemImage: "trash", role: .destructive, action: deleteListEntry)
+				Button(role: .destructive, action: deleteListEntry)
 					.tint(Color.red)
 				Button("Rename", systemImage: "rectangle.and.pencil.and.ellipsis") { showRenameAlert.toggle() }
 			}

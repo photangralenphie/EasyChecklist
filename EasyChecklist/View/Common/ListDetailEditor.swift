@@ -55,11 +55,11 @@ struct ListDetailEditor: View {
 			#endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", systemImage: "xmark", role: .cancel) { dismiss() }
+					Button(role: .cancel) { dismiss() }
                 }
 				
 				ToolbarItem(placement: .confirmationAction) {
-					Button(vm.buttonTitle, systemImage: "checkmark", role: .confirm, action: save)
+					Button(role: .confirm, action: save)
 						.disabled(vm.listName.isEmpty)
 				}
             }
