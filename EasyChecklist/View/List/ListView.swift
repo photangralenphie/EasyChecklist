@@ -142,14 +142,14 @@ struct ListView: View {
 			HStack {
 				TextField("Add an Item", text: $newEntryName.animation())
 					.padding(.horizontal)
-					.onSubmit(addNewEntry)
+					.onSubmit { vm.addNewEntry(duplicateAvoidance: duplicateAvoidance) }
 					.submitLabel(.continue)
 					.textFieldStyle(.plain)
 					.frame(height: 50)
 					.glassEffect()
 				
 				Image(systemName: "plus")
-					.onTapGesture { addNewEntry() }
+					.onTapGesture { addNewEntry(duplicateAvoidance: duplicateAvoidance) }
 					.tint(list.color.SwiftUIColor)
 					.frame(width: 50, height: 50)
 					.clipShape(.circle)
@@ -164,10 +164,10 @@ struct ListView: View {
 					TextField("Add an Item", text: Bindable(vm).newEntryName.animation())
 						.focused($isAddTextFieldFocused)
 						.padding(.horizontal)
-						.onSubmit(vm.addNewEntry)
+						.onSubmit { vm.addNewEntry(duplicateAvoidance: duplicateAvoidance) }
 						.submitLabel(.continue)
 					
-					Button("Add", systemImage: "plus", role: .confirm, action: vm.addNewEntry)
+					Button("Add", systemImage: "plus", role: .confirm) { vm.addNewEntry(duplicateAvoidance: duplicateAvoidance) }
 						.labelStyle(.iconOnly)
 						.tint(vm.list.color.SwiftUIColor)
 						.buttonStyle(.glassProminent)

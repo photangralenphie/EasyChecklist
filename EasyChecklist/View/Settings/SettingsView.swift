@@ -22,6 +22,7 @@ struct SettingsView: View {
     // List Entries
 	@AppStorage(PreferenceKeys.strikeCheckedEntries) private var strikeCheckedEntries: Bool = true
 	@AppStorage(PreferenceKeys.moveToBottom) private var moveToBottom: Bool = true
+	@AppStorage(PreferenceKeys.duplicateAvoidance) private var duplicateAvoidance: Bool = true
 	
 	@Environment(HomeVm.self) private var homeVm
 	
@@ -63,6 +64,10 @@ struct SettingsView: View {
 							.labelStyle(.centeredImage)
 					}
 					.listGlassCell()
+					
+					Toggle("Duplicate Avoidance", systemImage: "square.on.square", isOn: $duplicateAvoidance)
+						.labelStyle(.centeredImage)
+						.listGlassCell()
 				}
 							
 				#if os(iOS)

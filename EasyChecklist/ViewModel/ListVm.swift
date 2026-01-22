@@ -44,8 +44,13 @@ class ListVm {
 		self.list = list
 	}
 	
-	func addNewEntry() {
-		list.addNewEntry(contents: newEntryName)
+	func addNewEntry(duplicateAvoidance: Bool) {
+		if duplicateAvoidance, let duplicate = list.listEntries?.filter({ $0.name == newEntryName }).first {
+			withAnimation { duplicate.checked = false }
+		} else {
+			list.addNewEntry(contents: newEntryName)
+		}
+		
 		newEntryName = ""
 	}
 	

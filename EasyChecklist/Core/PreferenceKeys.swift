@@ -10,6 +10,7 @@ struct PreferenceKeys {
 	// Settings
 	public static var accentColorSchema: String = "accentColorSchema"
 	public static var colorScheme: String = "colorScheme"
+	public static var duplicateAvoidance: String = "duplicateAvoidance"
 	public static var showExhaustiveListDetails: String = "showExhaustiveListDetails"
 	public static var strikeCheckedEntries: String = "strikeCheckedEntries"
 	public static var moveToBottom: String = "moveToBottom"
