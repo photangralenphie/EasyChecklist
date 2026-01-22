@@ -55,9 +55,29 @@ class CustomList {
 	}
 }
 
-enum EntrySort: String, Codable {
+enum EntrySort: String, CaseIterable, Identifiable, Codable {
+	var id: Self { self }
+	
+	case alphabetically = "Alphabetically"
     case date = "Date"
-    case alphabetically = "Alphabetically"
+	
+	var name: LocalizedStringKey {
+		switch self {
+			case .date:
+				return "Date"
+			case .alphabetically:
+				return "Alphabetically"
+		}
+	}
+	
+	var icon: String {
+		switch self {
+			case .date:
+				return "clock"
+			case .alphabetically:
+				return "abc"
+		}
+	}
 }
 
 enum ListSort: String {

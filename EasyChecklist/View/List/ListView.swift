@@ -77,14 +77,12 @@ struct ListView: View {
 			}
 			
             ToolbarItem(id: "sort", placement: .secondaryAction) {
-				Picker(selection: Bindable(vm.list).sortBy.animation()) {
-                    Label("Alphabetical", systemImage: "abc")
-                        .tag(EntrySort.alphabetically)
-                    Label("Newest", systemImage: "clock")
-                        .tag(EntrySort.date)
-                } label: {
-                    Label("Sort", systemImage: "arrow.up.arrow.down")
-                }
+				ControlGroup("Sort") {
+					ForEach(EntrySort.allCases) { sort in
+						Button(sort.name, systemImage: sort.icon) { withAnimation { vm.list.sortBy = sort } }
+					}
+				}
+				.controlGroupStyle(.menu)
             }
             
             ToolbarItem(id: "edit", placement: .secondaryAction) {
